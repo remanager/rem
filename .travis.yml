@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+  - 2.1.2
+before_script:
+  - psql -c 'create database rem_test;' -U postgres
+notifications:
+  slack: rem:mYZwJyu5Eq7HzCTiZ6Mk9eSA
