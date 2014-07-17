@@ -15,15 +15,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def set_default_role
+    if current_user.role and current_user.role < ROLES[:owner]
+      self.role = current_user.role + 1
+    end
+  end
+
+  def admin?
+    self.role == ROLES[:admin]
+  end
+
   private
   def encrypt_password
     if password.present?
       self.password_digest = BCrypt::Engine.generate_salt
       self.auth_token = BCrypt::Engine.hash_secret(password, password_digest)
     end
-  end
-
-  def admin?
-    role == ROLES[:admin]
   end
 end

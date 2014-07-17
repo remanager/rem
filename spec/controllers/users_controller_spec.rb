@@ -2,8 +2,10 @@ require 'rails_helper'
 
 describe UsersController do
   describe 'new' do
+
     context 'as admin' do
       it 'renders #admin_new' do
+        allow_message_expectations_on_nil
         allow(controller.current_user).to receive(:role).and_return(ROLES[:admin])
 
         get :new
@@ -14,6 +16,7 @@ describe UsersController do
 
     context 'as agent' do
       it 'renders #agent_new' do
+        allow_message_expectations_on_nil
         allow(controller.current_user).to receive(:role).and_return(ROLES[:agent])
 
         get :new

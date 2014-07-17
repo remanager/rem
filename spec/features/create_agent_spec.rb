@@ -10,8 +10,10 @@ feature 'create new agent' do
     fill_in 'Email', with: 'agent@rem.com'
     fill_in 'Password', with: '1234test'
     fill_in 'Password confirmation', with: '1234test'
+    select 'agent', from: 'Role'
     #click_button 'Create'
     expect{ click_button 'Create' }.to change{ User.count }.by(1)
+    expect(User.last.role).to eq ROLES[:agent]
     expect(page).to have_css '.flash.notice', text: 'New agent created!'
   end
 
