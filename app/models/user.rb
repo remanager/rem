@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  ROLES = { admin: 1, agent: 2, owner: 3 }
 
   attr_accessor :password
   before_save :encrypt_password
@@ -16,10 +15,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  private
   def encrypt_password
     if password.present?
       self.password_digest = BCrypt::Engine.generate_salt
       self.auth_token = BCrypt::Engine.hash_secret(password, password_digest)
     end
+  end
+
+  def admin?
+    role == ROLES[:admin]
   end
 end

@@ -1,0 +1,17 @@
+%h1 Add new user
+
+= form_for @user do |f|
+  %p
+    = f.label :email, 'Email'
+    = f.text_field :email
+  %p
+    = f.label :password, 'Password'
+    = f.password_field :password
+  %p
+    = f.label :password_confirmation, 'Password confirmation'
+    = f.password_field :password_confirmation
+  %p
+    = f.label :role, 'Role'
+    = f.collection_select :role, ROLES, :last, :first
+
+  = f.submit 'Create'
