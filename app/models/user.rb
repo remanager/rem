@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  ROLES = { admin: 1, agent: 2, owner: 3 }
+
   attr_accessor :password
   before_save :encrypt_password
 
