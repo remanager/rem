@@ -1,0 +1,27 @@
+%h1 Listing properties
+
+%table
+  %tr
+    %th Ref
+    %th Town
+    %th User
+    %th Category
+    %th Detail
+    %th
+    %th
+    %th
+
+  - @properties.each do |property|
+    %tr
+      %td= property.ref
+      %td= property.town
+      %td= property.user
+      %td= property.category
+      %td= property.detail
+      %td= link_to 'Show', property
+      %td= link_to 'Edit', edit_property_path(property)
+      %td= link_to 'Destroy', property, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Property', new_property_path

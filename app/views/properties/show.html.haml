@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Ref:
+  = @property.ref
+%p
+  %b Town:
+  = @property.town
+%p
+  %b User:
+  = @property.user
+%p
+  %b Category:
+  = @property.category
+%p
+  %b Detail:
+  = @property.detail
+
+= link_to 'Edit', edit_property_path(@property)
+\|
+= link_to 'Back', properties_path

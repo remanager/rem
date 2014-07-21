@@ -1,0 +1,19 @@
+%h1 Listing details
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @details.each do |detail|
+    %tr
+      %td= detail.name
+      %td= link_to 'Show', detail
+      %td= link_to 'Edit', edit_detail_path(detail)
+      %td= link_to 'Destroy', detail, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Detail', new_detail_path

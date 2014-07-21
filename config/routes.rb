@@ -9,5 +9,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :properties
+    resources :details
+    resources :categories
+    resources :realestates
+    resources :towns
   end
 end
