@@ -1,6 +1,4 @@
-class UsersController < ApplicationController
-  before_filter :authorize
-
+class Admin::UsersController < AdminController
   def new
     @user = User.new
     if current_user.admin?
@@ -29,9 +27,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation, :role)
   end
 
-  def authorize
-    auth_roles = [:admin, :agent]
-    redirect_to root_path, alert: 'Not allowed.' unless auth_roles.include? current_user.role
+  def current_resource
+    @current_resource ||= current_user
   end
-
 end

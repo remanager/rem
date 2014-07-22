@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UsersController do
+describe Admin::UsersController do
   describe 'new' do
 
     context 'as admin' do
@@ -11,7 +11,9 @@ describe UsersController do
 
         get :new
 
-        expect(response).to render_template(:admin_new)
+        #require 'pry'; binding.pry
+        #expect(response).to have_http_status :success
+        expect(response).to render_template('admin/user/admin_new')
       end
     end
 
@@ -24,18 +26,6 @@ describe UsersController do
         get :new
 
         expect(response).to render_template(:agent_new)
-      end
-    end
-
-    context 'as owner' do
-      # authentication does that, not to test here
-      xit 'redirects to root' do
-        allow(controller.current_user).to receive(:role).and_return(:owner)
-        allow(controller.current_user).to receive(:admin?).and_return(false)
-
-        get :new
-
-        expect(response).to rendirect_to root_path
       end
     end
   end
