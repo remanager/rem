@@ -3,10 +3,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    if current_user.role == ROLES[:admin]
+    if current_user.admin?
       render :admin_new
     else
-      @user.role = ROLES[:owner]
+      @user.role = ROLES.index :owner
       render :agent_new
     end
   end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def authorize
-    auth_roles = [ROLES[:admin], ROLES[:agent]]
+    auth_roles = [:admin, :agent]
     redirect_to root_path, alert: 'Not allowed.' unless auth_roles.include? current_user.role
   end
 

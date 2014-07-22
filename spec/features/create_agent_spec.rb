@@ -13,7 +13,7 @@ feature 'create new agent' do
     select 'agent', from: 'Role'
     #click_button 'Create'
     expect{ click_button 'Create' }.to change{ User.count }.by(1)
-    expect(User.last.role).to eq ROLES[:agent]
+    expect(User.last.role).to eq :agent
     expect(page).to have_css '.flash.notice', text: 'New agent created!'
   end
 

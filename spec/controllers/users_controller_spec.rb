@@ -6,7 +6,8 @@ describe UsersController do
     context 'as admin' do
       it 'renders #admin_new' do
         allow_message_expectations_on_nil
-        allow(controller.current_user).to receive(:role).and_return(ROLES[:admin])
+        allow(controller.current_user).to receive(:role).and_return(:admin)
+        allow(controller.current_user).to receive(:admin?).and_return(true)
 
         get :new
 
@@ -17,7 +18,8 @@ describe UsersController do
     context 'as agent' do
       it 'renders #agent_new' do
         allow_message_expectations_on_nil
-        allow(controller.current_user).to receive(:role).and_return(ROLES[:agent])
+        allow(controller.current_user).to receive(:role).and_return(:agent)
+        allow(controller.current_user).to receive(:admin?).and_return(false)
 
         get :new
 
@@ -28,7 +30,8 @@ describe UsersController do
     context 'as owner' do
       # authentication does that, not to test here
       xit 'redirects to root' do
-        allow(controller.current_user).to receive(:role).and_return(ROLES[:owner])
+        allow(controller.current_user).to receive(:role).and_return(:owner)
+        allow(controller.current_user).to receive(:admin?).and_return(false)
 
         get :new
 
