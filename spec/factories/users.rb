@@ -5,5 +5,7 @@ FactoryGirl.define do
     password_confirmation 'password'
 
     trait(:admin) { role ROLES.index :admin }
+    trait(:agent) { role ROLES.index :agent }
+    trait(:owner) { role ROLES.index :owner }
   end
 end
