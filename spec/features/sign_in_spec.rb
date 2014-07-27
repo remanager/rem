@@ -1,4 +1,3 @@
-require 'rails_helper'
 require 'helpers/auth_helper'
 
 feature 'sign in' do

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'user reset its password' do
 
   background do

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe Admin::UsersController do
   describe 'new' do
 
