@@ -12,7 +12,7 @@ feature 'sign in' do
   end
   scenario 'shows message when credentials are wrong' do
     sign_in_with(@user.email, 'bad_password')
-    expect(page).to have_css '.flash.alert', text: 'Invalid credentials.'
+    expect(page).to have_css '.flash.alert', text: 'Invalid email or password.'
   end
 
 end
