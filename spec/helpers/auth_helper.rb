@@ -4,7 +4,7 @@
   end
 
   def sign_in_with(email, password)
-    visit log_in_path
+    visit login_path
     fill_in 'Email', with: email
     fill_in 'Password', with: password
     click_button 'Log in'

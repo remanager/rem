@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_format_of :email, with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
   has_secure_password
+  before_create { generate_token(:auth_token) }
 
   def set_default_role
     if current_user.role
@@ -24,7 +25,16 @@ class User < ActiveRecord::Base
     ROLES[self.attributes['role']] if self.attributes['role']
   end
 
- #def role=(role)
- #  self.attributes['role'] = ROLES.index role
- #end
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
 end
