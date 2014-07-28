@@ -9,7 +9,7 @@ class AdminController < ApplicationController
 
   private
   def authenticate_user!
-    redirect_to log_in_path, alert: 'You must log in!' if !current_user
+    redirect_to login_path, alert: 'You must log in!' if !current_user
   end
 
   def authorize_action?
