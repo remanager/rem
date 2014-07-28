@@ -13,7 +13,7 @@ class AdminController < ApplicationController
   end
 
   def authorize_action?
-    if current_permission.allow?(params[:controller], params[:action], current_resource)
+    if current_permission.allow?(params[:controller], params[:action], current_resource || current_user)
       current_permission.permit_params! params
     else
       redirect_to root_path, alert: 'Not authorized.'
