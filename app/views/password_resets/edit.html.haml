@@ -1,12 +1,12 @@
 %h1 Reset password
 
-= form_for @user do |f|
+= form_for @user, url: password_reset_path(params[:id]) do |f|
   %p
-    = f.label_tag :password
+    = f.label :password
     = f.text_field :password
 
   %p
-    = f.label_tag :password_confirmation
+    = f.label :password_confirmation
     = f.text_field :password_confirmation
-  %p= f.submit_tag 'Reset'
+  %p= f.submit 'Reset'
 
