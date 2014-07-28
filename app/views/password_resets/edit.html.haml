@@ -1,0 +1,12 @@
+%h1 Reset password
+
+= form_for @user do |f|
+  %p
+    = f.label_tag :password
+    = f.text_field :password
+
+  %p
+    = f.label_tag :password_confirmation
+    = f.text_field :password_confirmation
+  %p= f.submit_tag 'Reset'
+
