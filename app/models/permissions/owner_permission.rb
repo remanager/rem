@@ -1,7 +1,9 @@
 module Permissions
   class OwnerPermission < BasePermission
     def initialize(user)
-      allow :sessions, [:new]
+      allow :'admin/properties', [:show] do
+        current_user.id == current_resource.user_id
+      end
     end
   end
 end
