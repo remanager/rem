@@ -62,13 +62,17 @@ class Admin::TownsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_town
-      @town = Town.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_town
+    @town = Town.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def town_params
-      params.require(:town).permit(:postcode, :name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def town_params
+    params.require(:town).permit(:postcode, :name)
+  end
+
+  def current_resource
+    @current_resource ||= Town.find(params[:id]) if params[:id]
+  end
 end

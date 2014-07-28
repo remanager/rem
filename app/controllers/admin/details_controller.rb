@@ -62,13 +62,17 @@ class Admin::DetailsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_detail
-      @detail = Detail.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_detail
+    @detail = Detail.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def detail_params
-      params.require(:detail).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def detail_params
+    params.require(:detail).permit(:name)
+  end
+
+  def current_resource
+    @current_resource ||= Detail.find(params[:id]) if params[:id]
+  end
 end

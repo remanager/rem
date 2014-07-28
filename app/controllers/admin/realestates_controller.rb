@@ -62,13 +62,17 @@ class Admin::RealestatesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_realestate
-      @realestate = Realestate.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_realestate
+    @realestate = Realestate.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def realestate_params
-      params.require(:realestate).permit(:name, :description, :address, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def realestate_params
+    params.require(:realestate).permit(:name, :description, :address, :user_id)
+  end
+
+  def current_resource
+    @current_resource ||= Realestate.find(params[:id]) if params[:id]
+  end
 end
