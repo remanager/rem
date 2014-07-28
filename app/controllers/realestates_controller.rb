@@ -1,4 +1,4 @@
-class RealestatesController < ApplicationController
+class Admin::RealestatesController < AdminController
   before_action :set_realestate, only: [:show, :edit, :update, :destroy]
 
   # GET /realestates

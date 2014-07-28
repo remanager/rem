@@ -1,4 +1,4 @@
-class TownsController < ApplicationController
+class Admin::TownsController < AdminController
   before_action :set_town, only: [:show, :edit, :update, :destroy]
 
   # GET /towns

@@ -1,4 +1,4 @@
-class DetailsController < ApplicationController
+class Admin::DetailsController < AdminController
   before_action :set_detail, only: [:show, :edit, :update, :destroy]
 
   # GET /details

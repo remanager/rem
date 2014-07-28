@@ -1,4 +1,4 @@
-class PropertiesController < ApplicationController
+class Admin::PropertiesController < AdminController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   # GET /properties
