@@ -1,5 +1,11 @@
-require 'rails_helper'
+describe Realestate do
+  context 'validates' do
+    it 'name' do
+      expect(subject).not_to be_valid
+      expect(subject.errors.messages[:name]).not_to be_nil
 
-RSpec.describe Realestate, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+      subject.name = 'RealEstateName'
+      expect(subject).to be_valid
+    end
+  end
 end
