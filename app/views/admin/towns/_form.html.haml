@@ -1,4 +1,4 @@
-= form_for @town do |f|
+= form_for [:admin, @town] do |f|
   - if @town.errors.any?
     #error_explanation
       %h2= "#{pluralize(@town.errors.count, "error")} prohibited this town from being saved:"

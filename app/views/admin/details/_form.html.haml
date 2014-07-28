@@ -1,4 +1,4 @@
-= form_for @detail do |f|
+= form_for [:admin, @detail] do |f|
   - if @detail.errors.any?
     #error_explanation
       %h2= "#{pluralize(@detail.errors.count, "error")} prohibited this detail from being saved:"

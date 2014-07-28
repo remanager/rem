@@ -1,4 +1,4 @@
-= form_for @realestate do |f|
+= form_for [:admin, @realestate] do |f|
   - if @realestate.errors.any?
     #error_explanation
       %h2= "#{pluralize(@realestate.errors.count, "error")} prohibited this realestate from being saved:"
