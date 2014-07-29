@@ -28,7 +28,7 @@ class Admin::DetailsController < AdminController
 
     respond_to do |format|
       if @detail.save
-        format.html { redirect_to @detail, notice: 'Detail was successfully created.' }
+        format.html { redirect_to [:admin, @detail], notice: 'Detail was successfully created.' }
         format.json { render :show, status: :created, location: @detail }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::DetailsController < AdminController
   def update
     respond_to do |format|
       if @detail.update(detail_params)
-        format.html { redirect_to @detail, notice: 'Detail was successfully updated.' }
+        format.html { redirect_to [:admin, @detail], notice: 'Detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @detail }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::DetailsController < AdminController
   def destroy
     @detail.destroy
     respond_to do |format|
-      format.html { redirect_to details_url, notice: 'Detail was successfully destroyed.' }
+      format.html { redirect_to admin_details_path, notice: 'Detail was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
