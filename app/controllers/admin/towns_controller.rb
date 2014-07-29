@@ -28,7 +28,7 @@ class Admin::TownsController < AdminController
 
     respond_to do |format|
       if @town.save
-        format.html { redirect_to @town, notice: 'Town was successfully created.' }
+        format.html { redirect_to [:admin, @town], notice: 'Town was successfully created.' }
         format.json { render :show, status: :created, location: @town }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::TownsController < AdminController
   def update
     respond_to do |format|
       if @town.update(town_params)
-        format.html { redirect_to @town, notice: 'Town was successfully updated.' }
+        format.html { redirect_to [:admin, @town], notice: 'Town was successfully updated.' }
         format.json { render :show, status: :ok, location: @town }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::TownsController < AdminController
   def destroy
     @town.destroy
     respond_to do |format|
-      format.html { redirect_to towns_url, notice: 'Town was successfully destroyed.' }
+      format.html { redirect_to admin_towns_path, notice: 'Town was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
