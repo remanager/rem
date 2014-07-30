@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721054336) do
+ActiveRecord::Schema.define(version: 20140730060242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,16 +32,30 @@ ActiveRecord::Schema.define(version: 20140721054336) do
     t.string   "ref"
     t.integer  "town_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "properties", ["town_id"], name: "index_properties_on_town_id", using: :btree
+  add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
+
+  create_table "properties_categories", id: false, force: true do |t|
+    t.integer  "property_id"
     t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "properties_categories", ["property_id", "category_id"], name: "index_properties_categories_on_property_id_and_category_id", unique: true, using: :btree
+
+  create_table "properties_details", id: false, force: true do |t|
+    t.integer  "property_id"
     t.integer  "detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "properties", ["category_id"], name: "index_properties_on_category_id", using: :btree
-  add_index "properties", ["detail_id"], name: "index_properties_on_detail_id", using: :btree
-  add_index "properties", ["town_id"], name: "index_properties_on_town_id", using: :btree
-  add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
+  add_index "properties_details", ["property_id", "detail_id"], name: "index_properties_details_on_property_id_and_detail_id", unique: true, using: :btree
 
   create_table "realestates", force: true do |t|
     t.string   "name"
