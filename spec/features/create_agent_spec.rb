@@ -1,7 +1,6 @@
 require 'helpers/auth_helper'
 
 feature 'create new agent' do
-
   scenario 'admin can create user' do
     admin = create :user, :admin
     sign_in_as admin

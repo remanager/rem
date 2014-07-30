@@ -1,3 +1,4 @@
+# spec/helpers/auth_helper.rb
 
   def sign_in_as(user)
     sign_in_with(user.email, user.password)
