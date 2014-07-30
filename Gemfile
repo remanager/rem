@@ -19,6 +19,10 @@ group :test do
   gem 'database_cleaner'
 end
 
+group :development do
+  gem 'ruby_gntp'
+end
+
 group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -33,5 +37,4 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'factory_girl_rails'
-  gem 'ruby_gntp'
 end
