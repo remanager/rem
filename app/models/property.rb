@@ -10,4 +10,8 @@ class Property < ActiveRecord::Base
   alias_attribute :owner, :user
 
   validates_presence_of :ref, :town, :user
+
+  def to_s
+    ref
+  end
 end
