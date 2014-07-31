@@ -29,5 +29,7 @@ guard :rspec, cmd: 'spring rspec' do
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
-end
 
+  # GNTP notification rubydoc.info.com/github.com/guard/guard/master/Guard/Notifier/GNTP
+  notification :gntp, sticky: true, host: '10.0.2.2', password: 'mygntppassword'
+end
