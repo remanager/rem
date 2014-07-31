@@ -5,8 +5,6 @@
     %th Ref
     %th Town
     %th User
-    %th Category
-    %th Detail
     %th
     %th
     %th
@@ -16,8 +14,6 @@
       %td= property.ref
       %td= property.town
       %td= property.user
-      %td= property.category
-      %td= property.detail
       %td= link_to 'Show', [:admin, property]
       %td= link_to 'Edit', edit_admin_property_path(property)
       %td= link_to 'Destroy', [:admin, property], :method => :delete, :data => { :confirm => 'Are you sure?' }

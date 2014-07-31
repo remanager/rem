@@ -10,11 +10,11 @@
   %b User:
   = @property.user
 %p
-  %b Category:
-  = @property.category
+  %b Categories:
+  = @property.categories ? @property.categories.join(', ') : 'No categories'
 %p
-  %b Detail:
-  = @property.detail
+  %b Details:
+  = @property.details ? @property.details.join(', ') : 'No details'
 
 = link_to 'Edit', edit_admin_property_path(@property)
 \|
