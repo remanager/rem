@@ -7,6 +7,10 @@ describe User do
     end
   end
 
+  describe 'associations' do
+    it { is_expected.to respond_to(:realestate) }
+  end
+
   describe 'filters' do
     it 'generates auth_token before saving' do
       user = build :user
