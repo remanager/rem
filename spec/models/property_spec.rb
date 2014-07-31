@@ -30,19 +30,6 @@ describe Property do
         expect(subject.errors.messages[:town]).not_to be_nil
       end
     end
-
-    describe 'user' do
-      it 'should not have error' do
-        subject.user = user
-        subject.valid?
-        expect(subject.errors.messages[:user]).to be_nil
-      end
-
-      it 'should have error' do
-        subject.valid?
-        expect(subject.errors.messages[:user]).not_to be_nil
-      end
-    end
   end
 
   context 'associations' do

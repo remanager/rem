@@ -10,10 +10,16 @@
     = f.label :ref
     = f.text_field :ref
   .field
-    = f.label :town
-    = f.text_field :town
+    = f.label :town_id
+    = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
   .field
-    = f.label :user
-    = f.text_field :user
+    = f.label :user_id
+    = f.collection_select(:user_id, User.where(role: 2), :id, :email, prompt: true)
+  .field
+    = f.label :category_ids
+    = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
+  .field
+    = f.label :detail_ids
+    = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
   .actions
-    = f.submit 'Save'
+    = f.submit "#{params[:action].capitalize} Property"

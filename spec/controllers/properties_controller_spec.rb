@@ -47,11 +47,13 @@ describe Admin::PropertiesController do
       before :each do
         @town = create :town
         @user = create :user
+        @category = create :category
       end
       it "creates a new Property" do
         expect {
-          post :create, { property: valid_attributes.merge({ town_id: @town.id, user_id: @user.id }) }
+          post :create, { property: valid_attributes.merge({ town_id: @town.id, user_id: @user.id, category_ids: [@category] }) }
         }.to change(Property, :count).by(1)
+        expect(Property.last.categories).to eq([@category])
       end
 
       it "assigns a newly created property as @property" do
@@ -60,9 +62,9 @@ describe Admin::PropertiesController do
         expect(assigns(:property)).to be_persisted
       end
 
-      it "redirects to the created property" do
+      it "redirects to the properties index" do
         post :create, {property: valid_attributes.merge({ town_id: @town.id, user_id: @user.id }) }
-        expect(response).to redirect_to([:admin, Property.last])
+        expect(response).to redirect_to(admin_properties_path)
       end
     end
 

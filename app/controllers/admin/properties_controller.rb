@@ -4,7 +4,7 @@ class Admin::PropertiesController < AdminController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
+    @properties = Property.properties_for(current_user)
   end
 
   # GET /properties/1
@@ -25,10 +25,11 @@ class Admin::PropertiesController < AdminController
   # POST /properties.json
   def create
     @property = Property.new(property_params)
+    @property.realestate = current_user.realestate
 
     respond_to do |format|
       if @property.save
-        format.html { redirect_to [:admin, @property], notice: 'Property was successfully created.' }
+        format.html { redirect_to admin_properties_path, notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else
         format.html { render :new }
@@ -69,7 +70,7 @@ class Admin::PropertiesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    params.require(:property).permit(:ref, :town_id, :user_id, :category_id, :detail_id)
+    params.require(:property).permit(:ref, :town_id, :user_id, category_ids: [], detail_ids: [])
   end
 
   def current_resource

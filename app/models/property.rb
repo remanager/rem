@@ -9,7 +9,17 @@ class Property < ActiveRecord::Base
 
   alias_attribute :owner, :user
 
-  validates_presence_of :ref, :town, :user
+  validates_presence_of :ref, :town
+
+  def self.properties_for(user)
+    if user.admin?
+      all
+    elsif user.role == :agent
+      user.realestate.properties
+    else
+      user.properties
+    end
+  end
 
   def to_s
     ref
