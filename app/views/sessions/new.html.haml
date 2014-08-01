@@ -1,5 +1,7 @@
 %h1 Log in
 
+=render 'shared/messages'
+
 = form_tag sessions_path do
   %p
     = label_tag :email
@@ -10,4 +12,4 @@
   %p
     = check_box_tag :remember_me, 1, params[:remember_me]
     = label_tag :remember_me
-  %p= submit_tag 'Log in'
+  %p= submit_tag 'Log in', class: :button

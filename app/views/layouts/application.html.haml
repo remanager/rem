@@ -12,12 +12,13 @@
     = csrf_meta_tags
 
   %body
-    =render 'layouts/messages'
-    = yield
 
+    .row
+      .large-2.columns.text-center
+        %header.main
+          %h1#logo REM
 
-
-
-
-
+    .row
+      .large-12.columns
+        = yield
     = javascript_include_tag 'application'
