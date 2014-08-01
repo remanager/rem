@@ -11,7 +11,7 @@ class Admin::UsersController < AdminController
 
   def create
     user = User.new(user_params)
-    user.set_default_role unless current_user.admin?
+    user.set_default_role(current_user.role) unless current_user.admin?
 
     if user.save
       redirect_to root_path, notice: 'New agent created!'
