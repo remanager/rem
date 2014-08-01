@@ -12,12 +12,14 @@
 
   %body
 
+    =render 'shared/header'
+
     .row
-      .large-2.columns.text-center
-        %header.main
-          %h1#logo REM
+      .large-12.columns
+        =render 'shared/messages'
 
     .row
       .large-12.columns
         = yield
+
     = javascript_include_tag 'application'
