@@ -12,7 +12,7 @@ describe Admin::DashboardController do
 
       it 'renders index' do
         get :index
-        expect(response).to render_template(:index)
+        expect(response).to render_template(:index_admin)
       end
     end
 
@@ -28,7 +28,7 @@ describe Admin::DashboardController do
 
       it 'renders index' do
         get :index
-        expect(response).to render_template(:agent_index)
+        expect(response).to render_template(:index_agent)
       end
     end
 
@@ -44,7 +44,7 @@ describe Admin::DashboardController do
 
       it 'renders index' do
         get :index
-        expect(response).to render_template(:owner_index)
+        expect(response).to render_template(:index_owner)
       end
     end
   end

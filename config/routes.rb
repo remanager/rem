@@ -14,6 +14,6 @@ Rails.application.routes.draw do
     resources :categories
     resources :realestates
     resources :towns
-    get 'dashboard' => 'dashboard#index', as: 'dashboard'
+    resources :dashboard
   end
 end

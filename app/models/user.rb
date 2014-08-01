@@ -8,12 +8,12 @@ class User < ActiveRecord::Base
   has_secure_password
   before_create { generate_token(:auth_token) }
 
-  def set_default_role
-    if current_user.role
-      if current_user.role == :admin
-        self.role = ROLES.key :agent
-      elsif current_user.role == :agent
-        self.role = ROLES.key :owner
+  def set_default_role(current_role)
+    if current_role
+      if current_role == :admin
+        self.role = ROLES.index :agent
+      elsif current_role == :agent
+        self.role = ROLES.index :owner
       end
     end
   end

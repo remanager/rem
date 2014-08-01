@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bcrypt'
 gem 'haml-rails'
+gem 'foundation-rails'
 
 group :test do
   gem 'capybara'

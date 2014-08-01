@@ -1,9 +1,0 @@
-%h1 Dashboard
-%div= "As #{current_user.role}"
-
-%nav
-  = link_to 'Real Estate', edit_admin_realestate_path(current_user.realestate)
-  = link_to 'Properties', admin_properties_path
-  = link_to 'Categories', admin_categories_path
-
-%p Find me in app/views/admin/dashboard/agent_index.html.haml

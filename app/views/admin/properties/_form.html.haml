@@ -22,4 +22,4 @@
     = f.label :detail_ids
     = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
   .actions
-    = f.submit "#{params[:action].capitalize} Property"
+    = f.submit "#{params[:action].capitalize} Property", class: :button

@@ -5,14 +5,14 @@
     %meta{ :charset => "utf-8" }
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
 
-    %title= content_for?(:title) ? yield(:title) : 'Default title'
+    %title= content_for?(:title) ? yield(:title) : 'Admin area > Default title'
     = stylesheet_link_tag 'application'
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
 
   %body
 
-    =render 'shared/header'
+    =render 'admin/shared/header'
 
     .row
       .large-12.columns
