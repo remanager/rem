@@ -1,6 +1,8 @@
 %nav
+  - if current_user.realestate && allow?(:"admin/realestates", :edit, current_user.realestate)
+    = link_to 'Real Estate', edit_admin_realestate_path(current_user.realestate)
   - if allow? :"admin/realestates", :index
-    = link_to 'Real Estate', admin_realestates_path
+    = link_to 'Real Estates', admin_realestates_path
   - if allow? :"admin/properties", :index
     = link_to 'Properties', admin_properties_path
   - if allow? :"admin/categories", :index
