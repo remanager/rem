@@ -11,7 +11,7 @@ describe SessionsController do
       }
 
       expect(flash[:notice]).to eq('Logged in!')
-      expect(response).to redirect_to '/admin/dashboard'
+      expect(response).to redirect_to admin_dashboard_path
       expect(cookies[:auth_token]).to eq(subject.auth_token)
     end
 

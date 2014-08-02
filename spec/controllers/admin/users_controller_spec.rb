@@ -16,7 +16,7 @@ describe Admin::UsersController do
 
         get :index
 
-        expect(response).to redirect_to('/admin/dashboard')
+        expect(response).to redirect_to(admin_dashboard_path)
       end
     end
   end
