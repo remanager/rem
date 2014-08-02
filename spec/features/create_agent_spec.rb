@@ -30,6 +30,6 @@ feature 'user creation' do
     sign_in_as owner
     visit new_admin_user_path
     expect(page).to have_css '.flash.alert', text: 'Not authorized.'
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq('/admin/dashboard')
   end
 end

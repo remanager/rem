@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_secure_password
   before_create { generate_token(:auth_token) }
 
+  scope :same_realestate, ->(realestate_id) {  User.joins('INNER JOIN properties ON properties.user_id = users.id INNER JOIN realestates ON properties.realestate_id = realestates.id').where(['realestates.id = ?', realestate_id]) }
+
   ROLES = %w(owner agent admin)
 
   def set_default_role(current_role)
@@ -22,6 +24,15 @@ class User < ActiveRecord::Base
 
   def self.possible_roles(user_role)
     ROLES.select { |role| ROLES.index(role) <= ROLES.index(user_role)  }
+  end
+
+  def my_users
+    return User.all if admin?
+    User.same_realestate(self.realestate.id)
+  end
+
+  def admin?
+    self.role == :admin
   end
 
   def role?(base_role)

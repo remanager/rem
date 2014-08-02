@@ -41,4 +41,32 @@ describe User do
       expect(last_email.to).to include(subject.email)
     end
   end
+
+  describe '#my_users' do
+    context 'admin role' do
+      subject { create :user, :admin }
+
+      it 'gets all users' do
+        5.times { create :user, :agent }
+        3.times { create :user, :owner }
+
+        expect(subject.my_users).to eq(User.all)
+      end
+    end
+
+    context 'agent_role' do
+      subject { create :user, :agent }
+
+      it 'gets realestate users' do
+        another_agent = create :user, :agent
+        2.times { create :property, realestate: another_agent.realestate }
+        my_owners = []
+        3.times { my_owners << create(:property, realestate: subject.realestate) }
+        my_owners.map! { |p| p.user }
+
+        expect(subject.my_users).to contain_exactly(*my_owners)
+      end
+    end
+
+  end
 end

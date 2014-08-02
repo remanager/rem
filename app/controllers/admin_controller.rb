@@ -20,7 +20,7 @@ class AdminController < ApplicationController
     elsif current_user.nil?
       redirect_to login_path, alert: 'You must log in!'
     else
-      redirect_to root_path, alert: 'Not authorized.'
+      redirect_to '/admin/dashboard', alert: 'Not authorized.'
     end
   end
 

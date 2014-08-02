@@ -1,4 +1,8 @@
 class Admin::UsersController < AdminController
+  def index
+    @users = []
+  end
+
   def new
     @user = User.new
     if current_user.admin?
