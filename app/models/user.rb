@@ -8,22 +8,29 @@ class User < ActiveRecord::Base
   has_secure_password
   before_create { generate_token(:auth_token) }
 
+  ROLES = %w(owner agent admin)
+
   def set_default_role(current_role)
     if current_role
       if current_role == :admin
-        self.role = ROLES.index :agent
+        self.role = :agent
       elsif current_role == :agent
-        self.role = ROLES.index :owner
+        self.role = :owner
       end
     end
   end
 
-  def admin?
-    self.role == :admin
+  def self.possible_roles(user_role)
+    ROLES.select { |role| ROLES.index(role) <= ROLES.index(user_role)  }
   end
 
-  def role
-    ROLES[self.attributes['role']] if self.attributes['role']
+  def role?(base_role)
+    return false unless role
+    ROLES.index(base_role.to_s) <= ROLES.index(role)
+  end
+
+  def admin?
+    self.role.to_sym == :admin
   end
 
   def send_password_reset
