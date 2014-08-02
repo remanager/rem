@@ -25,7 +25,7 @@ feature 'user creation' do
       fill_in 'Password confirmation', with: '1234test'
       select 'owner', from: 'Role'
       click_button 'Edit'
-      expect(agent.reload.role).to eq :owner
+      expect(agent.reload.role.to_sym).to eq :owner
       expect(agent.email).to eq('owner@rem.com')
       expect(page).to have_css '.flash.notice', text: 'User updated!'
     end
@@ -50,8 +50,9 @@ feature 'user creation' do
     fill_in 'Password confirmation', with: '1234test'
     expect{ click_button 'Create' }.to change{ User.count }.by(1)
     expect(User.last.role.to_sym).to eq :owner
-    expect(page).to have_css '.flash.notice', text: 'New agent created!'
+    expect(page).to have_css '.flash.notice', text: 'New user created!'
   end
+
   scenario 'owner cannot create user' do
     owner = create :user, :owner
     sign_in_as owner
