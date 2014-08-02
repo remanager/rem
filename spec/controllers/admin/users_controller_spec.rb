@@ -29,7 +29,7 @@ describe Admin::UsersController do
         get :new
 
         expect(response).to have_http_status :success
-        expect(response).to render_template(:admin_new)
+        expect(response).to render_template(:new)
       end
     end
 
@@ -39,7 +39,7 @@ describe Admin::UsersController do
 
         get :new
 
-        expect(response).to render_template(:agent_new)
+        expect(response).to render_template(:new)
       end
     end
   end

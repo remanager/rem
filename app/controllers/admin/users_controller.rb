@@ -7,12 +7,6 @@ class Admin::UsersController < AdminController
 
   def new
     @user = User.new
-    if current_user.admin?
-      render :admin_new
-    else
-      @user.role = :owner
-      render :agent_new
-    end
   end
 
   def create
