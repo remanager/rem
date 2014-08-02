@@ -4,11 +4,11 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
 
-    trait(:admin) { role ROLES.index :admin }
+    trait(:admin) { role :admin }
     trait(:agent) {
-      role ROLES.index :agent
+      role :agent
       association :realestate
     }
-    trait(:owner) { role ROLES.index :owner }
+    trait(:owner) { role :owner }
   end
 end
