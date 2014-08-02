@@ -4,7 +4,7 @@ module Permissions
       all_actions = [:index, :new, :create, :show, :edit, :update, :destroy]
 
       allow :'admin/dashboard', [:index]
-      allow :'admin/users', [:new, :create]
+      allow :'admin/users', [:index, :new, :create]
       allow :'admin/realestates', [:show, :edit, :update] do |current_resource|
         user.realestate == current_resource
       end

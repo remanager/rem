@@ -15,7 +15,7 @@ feature 'dashboard' do
     sign_in_as agent
     expect(current_path).to eq('/admin/dashboard')
     expect(page).to have_css 'h1', text: 'Dashboard'
-    expect(page).not_to have_css 'nav', text: 'Users'
+    expect(page).to have_css 'nav', text: 'Users'
     expect(page).not_to have_css 'nav', text: 'Real Estates'
     expect(page).to have_css 'nav', text: 'Real Estate'
     expect(page).to have_css 'nav', text: 'Properties'
