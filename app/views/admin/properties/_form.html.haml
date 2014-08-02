@@ -14,7 +14,7 @@
     = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
   .field
     = f.label :user_id
-    = f.collection_select(:user_id, User.where(role: 2), :id, :email, prompt: true)
+    = f.collection_select(:user_id, User.where(role: :owner), :id, :email, prompt: true)
   .field
     = f.label :category_ids
     = f.collection_check_boxes(:category_ids, Category.all, :id, :name)

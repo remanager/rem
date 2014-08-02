@@ -12,6 +12,6 @@
     = f.password_field :password_confirmation
   %p
     = f.label :role, 'Role'
-    = f.collection_select :role, Hash[(0...ROLES.size).zip ROLES], :first, :last
+    = f.select  :role, User.possible_roles(current_user.role)
 
   = f.submit 'Create'

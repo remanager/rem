@@ -14,7 +14,7 @@ class Property < ActiveRecord::Base
   def self.properties_for(user)
     if user.admin?
       all
-    elsif user.role == :agent
+    elsif user.role.to_sym == :agent
       user.realestate.properties
     else
       user.properties

@@ -4,7 +4,7 @@ class Admin::UsersController < AdminController
     if current_user.admin?
       render :admin_new
     else
-      @user.role = ROLES.index :owner
+      @user.role = :owner
       render :agent_new
     end
   end
