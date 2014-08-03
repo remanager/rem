@@ -1,22 +1,24 @@
 %h1 Listing properties
 
 %table
-  %tr
-    %th Ref
-    %th Town
-    %th Owner
-    %th
-    %th
-    %th
-
-  - @properties.each do |property|
+  %thead
     %tr
-      %td= property.ref
-      %td= property.town
-      %td= property.user
-      %td= link_to 'Show', [:admin, property]
-      %td= link_to 'Edit', edit_admin_property_path(property)
-      %td= link_to 'Destroy', [:admin, property], :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Ref
+      %th Town
+      %th Owner
+      %th
+      %th
+      %th
+
+  %tbody
+    - @properties.each do |property|
+      %tr
+        %td= property.ref
+        %td= property.town
+        %td= property.user
+        %td= link_to 'Show', [:admin, property]
+        %td= link_to 'Edit', edit_admin_property_path(property)
+        %td= link_to 'Destroy', [:admin, property], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

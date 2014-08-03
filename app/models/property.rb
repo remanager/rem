@@ -11,15 +11,8 @@ class Property < ActiveRecord::Base
 
   validates_presence_of :ref, :town
 
-  def self.properties_for(user)
-    if user.admin?
-      all
-    elsif user.role.to_sym == :agent
-      user.realestate.properties
-    else
-      user.properties
-    end
-  end
+  scope :same_realestate, ->(realestate_id) { Property.where(realestate_id: realestate_id) }
+  scope :same_owner, ->(user_id) { Property.where(user_id: user_id) }
 
   def to_s
     ref

@@ -31,6 +31,16 @@ class User < ActiveRecord::Base
     User.same_realestate(self.realestate.id)
   end
 
+  def my_properties
+    if admin?
+      Property.all
+    elsif role.to_sym == :agent
+      Property.same_realestate(realestate.id)
+    else
+      Property.same_owner(id)
+    end
+  end
+
   def admin?
     self.role == :admin
   end

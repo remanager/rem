@@ -68,5 +68,18 @@ describe User do
       end
     end
 
+    describe '#my_properties' do
+      context 'admin role' do
+        it 'gets all properties'
+      end
+
+      context 'agent role' do
+        it 'gets realestate properties'
+      end
+
+      context 'owner role' do
+        it 'gets owned properties'
+      end
+    end
   end
 end

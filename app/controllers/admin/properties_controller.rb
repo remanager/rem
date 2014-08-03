@@ -4,7 +4,7 @@ class Admin::PropertiesController < AdminController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.properties_for(current_user)
+    @properties = current_user.my_properties
   end
 
   # GET /properties/1
