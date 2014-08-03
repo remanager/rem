@@ -18,4 +18,4 @@
         = f.label :role, 'Role'
         = f.select :role, User.possible_roles(current_user.role)
 
-  = f.submit (params[:action] == 'new') ? 'Create' : 'Edit'
+  = f.submit (params[:action] == 'new') ? 'Create' : 'Edit', class: :button
