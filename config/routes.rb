@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'sessions#new'
+  root 'admin/dashboard#index'
 
   get 'login' => 'sessions#new', as: 'login'
   get 'logout' => 'sessions#destroy', as: 'logout'
@@ -9,5 +9,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :properties
+    resources :details
+    resources :categories
+    resources :realestates
+    resources :towns
+    get 'dashboard' => 'dashboard#index', as: 'dashboard'
   end
 end

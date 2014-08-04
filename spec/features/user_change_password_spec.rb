@@ -1,11 +1,11 @@
 feature 'user reset its password' do
 
   background do
+    visit new_password_reset_path
   end
 
   scenario 'user doesn\'t exist' do
-    visit new_password_reset_path
-    fill_in 'Email', with: 'user@example.com'
+    fill_in 'Email', with: 'faked@example.com'
     click_button 'Reset password'
 
     expect(page).to have_css '.flash.alert', text: 'Email not registered.'
@@ -13,7 +13,6 @@ feature 'user reset its password' do
 
   scenario 'user exists' do
     agent = create :user, :agent
-    visit new_password_reset_path
     fill_in 'Email', with: agent.email
     click_button 'Reset password'
 

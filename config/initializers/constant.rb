@@ -1,2 +1,0 @@
-
-  ROLES = [:admin, :agent, :owner]

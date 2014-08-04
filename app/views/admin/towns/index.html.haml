@@ -1,0 +1,21 @@
+%h1 Listing towns
+
+%table
+  %tr
+    %th Postcode
+    %th Name
+    %th
+    %th
+    %th
+
+  - @towns.each do |town|
+    %tr
+      %td= town.postcode
+      %td= town.name
+      %td= link_to 'Show', [:admin, town]
+      %td= link_to 'Edit', edit_admin_town_path(town)
+      %td= link_to 'Destroy', [:admin, town], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Town', new_admin_town_path

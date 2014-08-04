@@ -7,6 +7,10 @@ describe User do
     end
   end
 
+  describe 'associations' do
+    it { is_expected.to respond_to(:realestate) }
+  end
+
   describe 'filters' do
     it 'generates auth_token before saving' do
       user = build :user
@@ -35,6 +39,71 @@ describe User do
     it 'delivers email to subject' do
       subject.send_password_reset
       expect(last_email.to).to include(subject.email)
+    end
+  end
+
+  describe '#my_users' do
+    context 'admin role' do
+      subject { create :user, :admin }
+
+      it 'gets all users' do
+        5.times { create :user, :agent }
+        3.times { create :user, :owner }
+
+        expect(subject.my_users).to eq(User.all)
+      end
+    end
+
+    context 'agent_role' do
+      subject { create :user, :agent }
+
+      it 'gets realestate users' do
+        another_agent = create :user, :agent
+        2.times { create :property, realestate: another_agent.realestate }
+        my_owners = []
+        3.times { my_owners << create(:property, realestate: subject.realestate) }
+        my_owners.map! { |p| p.user }
+
+        expect(subject.my_users).to contain_exactly(*my_owners)
+      end
+    end
+
+    describe '#my_properties' do
+      context 'admin role' do
+        it 'gets all properties' do
+          admin = create :user, :admin
+          agent1 = create :user, :agent
+          agent2 = create :user, :agent
+          2.times { create :property, realestate: agent1.realestate }
+          3.times { create :property, realestate: agent2.realestate }
+
+          expect(admin.my_properties.count).to eq(5)
+        end
+      end
+
+      context 'agent role' do
+        it 'gets realestate properties'do
+          agent1 = create :user, :agent
+          agent2 = create :user, :agent
+          2.times { create :property, realestate: agent1.realestate }
+          3.times { create :property, realestate: agent2.realestate }
+
+          expect(agent1.my_properties.count).to eq(2)
+          expect(agent2.my_properties.count).to eq(3)
+        end
+
+      end
+
+      context 'owner role' do
+        it 'gets owned properties'do
+          owner = create :user, :owner
+          agent1 = create :user, :agent
+          2.times { create :property, realestate: agent1.realestate }
+          property = create :property, realestate: agent1.realestate, user: owner
+
+          expect(owner.my_properties).to eq([property])
+        end
+      end
     end
   end
 end

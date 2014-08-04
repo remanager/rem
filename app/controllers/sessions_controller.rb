@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-      redirect_to root_path, notice: 'Logged in!'
+      redirect_to admin_dashboard_path, notice: 'Logged in!'
     else
       flash[:alert] = 'Invalid email or password.'
       render :new

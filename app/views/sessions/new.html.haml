@@ -1,13 +1,17 @@
 %h1 Log in
 
 = form_tag sessions_path do
-  %p
-    = label_tag :email
-    = text_field_tag :email, params[:email]
-  %p
-    = label_tag :password
-    = text_field_tag :password
-  %p
-    = check_box_tag :remember_me, 1, params[:remember_me]
-    = label_tag :remember_me
-  %p= submit_tag 'Log in'
+  .row
+    .large-12.columns
+      = label_tag :email
+      = text_field_tag :email, params[:email]
+  .row
+    .large-12.columns
+      = label_tag :password
+      = password_field_tag :password
+  .row
+    .large-12.columns
+      = check_box_tag :remember_me, 1, params[:remember_me]
+      = label_tag :remember_me
+
+  = submit_tag 'Log in', class: :button

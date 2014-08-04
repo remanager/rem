@@ -7,16 +7,20 @@ class AdminController < ApplicationController
   delegate :allow_param?, to: :current_permission
   helper_method :allow?, :allow_param?
 
+  layout "admin"
+
   private
   def authenticate_user!
-    redirect_to log_in_path, alert: 'You must log in!' if !current_user
+    redirect_to login_path, alert: 'You must log in!' if !current_user
   end
 
   def authorize_action?
     if current_permission.allow?(params[:controller], params[:action], current_resource)
       current_permission.permit_params! params
+    elsif current_user.nil?
+      redirect_to login_path, alert: 'You must log in!'
     else
-      redirect_to root_path, alert: 'Not authorized.'
+      redirect_to admin_dashboard_path, alert: 'Not authorized.'
     end
   end
 

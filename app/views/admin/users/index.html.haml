@@ -1,0 +1,22 @@
+%h2 User list
+
+- if @users.any?
+  %table
+    %thead
+      %tr
+        %th Email
+        %th Role
+        %th
+        %th
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.email
+          %td= user.role
+          %td= link_to 'Edit', edit_admin_user_path(user)
+          %td= link_to 'Delete', [:admin, user], method: :delete
+
+- else
+  %p No users.
+
+= link_to 'Add User', new_admin_user_path

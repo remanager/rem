@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @detail.name
+
+= link_to 'Edit', edit_admin_detail_path(@detail)
+\|
+= link_to 'Back', admin_details_path
