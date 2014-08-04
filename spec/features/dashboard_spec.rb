@@ -30,7 +30,7 @@ feature 'dashboard' do
     expect(page).not_to have_css 'nav', text: 'Users'
     expect(page).not_to have_css 'nav', text: 'Real Estates'
     expect(page).not_to have_css 'nav', text: 'Real Estate'
-    expect(page).not_to have_css 'nav', text: 'Properties'
+    expect(page).to have_css 'nav', text: 'Properties'
     expect(page).not_to have_css 'nav', text: 'Categories'
   end
 end

@@ -23,5 +23,12 @@ feature 'property listing' do
     expect(page.all('tbody tr').count).to eq(2)
   end
 
-  scenario 'owner role shows owned'
+  scenario 'owner role shows owned' do
+    owner = create :user, :owner
+    property = create :property, realestate: @agent.realestate, user: owner
+    sign_in_as owner
+    visit admin_properties_path
+    expect(page.all('tbody tr').count).to eq(1)
+    expect(page.body).to have_content(property.ref)
+  end
 end

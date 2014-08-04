@@ -70,15 +70,39 @@ describe User do
 
     describe '#my_properties' do
       context 'admin role' do
-        it 'gets all properties'
+        it 'gets all properties' do
+          admin = create :user, :admin
+          agent1 = create :user, :agent
+          agent2 = create :user, :agent
+          2.times { create :property, realestate: agent1.realestate }
+          3.times { create :property, realestate: agent2.realestate }
+
+          expect(admin.my_properties.count).to eq(5)
+        end
       end
 
       context 'agent role' do
-        it 'gets realestate properties'
+        it 'gets realestate properties'do
+          agent1 = create :user, :agent
+          agent2 = create :user, :agent
+          2.times { create :property, realestate: agent1.realestate }
+          3.times { create :property, realestate: agent2.realestate }
+
+          expect(agent1.my_properties.count).to eq(2)
+          expect(agent2.my_properties.count).to eq(3)
+        end
+
       end
 
       context 'owner role' do
-        it 'gets owned properties'
+        it 'gets owned properties'do
+          owner = create :user, :owner
+          agent1 = create :user, :agent
+          2.times { create :property, realestate: agent1.realestate }
+          property = create :property, realestate: agent1.realestate, user: owner
+
+          expect(owner.my_properties).to eq([property])
+        end
       end
     end
   end
