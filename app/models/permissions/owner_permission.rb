@@ -3,8 +3,8 @@ module Permissions
     def initialize(user)
       allow :'admin/dashboard', [:index]
       allow :'admin/properties', [:index]
-      allow :'admin/properties', [:show] do
-        current_user.id == current_resource.user_id
+      allow :'admin/properties', [:show] do |current_resource|
+        user.id == current_resource.user_id
       end
     end
   end
