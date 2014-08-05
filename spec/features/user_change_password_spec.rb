@@ -17,7 +17,7 @@ feature 'user reset its password' do
     click_button 'Reset password'
 
     expect(page).to have_css '.flash.notice', text: 'Email sent with password reset instructions.'
-    expect(current_path).to eq(login_path)
+    expect(current_path).to end_with(login_path)
     expect(last_email.to).to include(agent.email)
   end
 end

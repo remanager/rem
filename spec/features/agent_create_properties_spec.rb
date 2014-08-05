@@ -18,7 +18,7 @@ feature 'Add new properties' do
     check 'pool'
     click_on 'New Property'
 
-    expect(current_path).to eq(admin_properties_path)
+    expect(current_path).to end_with(admin_properties_path)
     other_property = create :property
     visit admin_properties_path
     expect(page).to have_content('nice_house')
