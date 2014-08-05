@@ -1,0 +1,12 @@
+# config/locales/views_en.yml
+en:
+  admin:
+    towns:
+      index:
+        title: 'List of towns'
+      edit:
+        title: 'Edit a town'
+      new:
+        title: 'Create a new town'
+      form:
+        save: 'Save'

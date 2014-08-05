@@ -1,12 +1,10 @@
-%p#notice= notice
-
 %p
-  %b Postcode:
+  %b= t('town.postcode') + ':'
   = @town.postcode
 %p
-  %b Name:
+  %b= t('town.name') + ':'
   = @town.name
 
-= link_to 'Edit', edit_admin_town_path(@town)
+= link_to t('common.edit'), edit_admin_town_path(@town)
 \|
-= link_to 'Back', admin_towns_path
+= link_to t('common.back'), admin_towns_path

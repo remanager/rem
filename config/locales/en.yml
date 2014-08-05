@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+  common:
+    back: 'Back'
+    show: 'Show'
+    destroy: 'Delete'
+    destroy?: 'Are you sure?'
+    edit: 'Edit'
+    save: 'Save'

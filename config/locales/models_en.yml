@@ -1,0 +1,11 @@
+# config/locales/models_en.yml
+en:
+  town:
+    name: &town_name 'Town name'
+    postcode: &town_postcode 'Postal code'
+    new: 'Create new town'
+  helpers:
+    label:
+      town:
+        name: *town_name
+        postcode: *town_postcode
