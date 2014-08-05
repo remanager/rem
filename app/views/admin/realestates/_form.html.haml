@@ -15,8 +15,9 @@
   .field
     = f.label :address
     = f.text_field :address
-  .field
-    = f.label :user
-    = f.text_field :user
+  - if current_user.admin?
+    .field
+      = f.label :user, 'Agent'
+      = f.collection_select(:user, User.where(role: :owner), :id, :email, prompt: true)
   .actions
     = f.submit 'Save', class: :button
