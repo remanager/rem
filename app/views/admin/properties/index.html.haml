@@ -1,11 +1,11 @@
-%h1 Listing properties
+%h1= t '.title'
 
 %table
   %thead
     %tr
-      %th Ref
-      %th Town
-      %th Owner
+      %th= t 'property.ref'
+      %th= t 'property.town'
+      %th= t 'property.user'
       %th
       %th
       %th
@@ -16,10 +16,10 @@
         %td= property.ref
         %td= property.town
         %td= property.user
-        %td= link_to 'Show', [:admin, property]
-        %td= link_to 'Edit', edit_admin_property_path(property)
-        %td= link_to 'Destroy', [:admin, property], :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to t('common.show'), [:admin, property]
+        %td= link_to t('common.edit'), edit_admin_property_path(property)
+        %td= link_to t('common.destroy'), [:admin, property], method: :delete, data: { confirm: t('common.destroy?') }
 
 %br
 
-= link_to 'New Property', new_admin_property_path
+= link_to t('property.new'), new_admin_property_path

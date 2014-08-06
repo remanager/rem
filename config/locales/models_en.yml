@@ -4,8 +4,24 @@ en:
     name: &town_name 'Town name'
     postcode: &town_postcode 'Postal code'
     new: 'Create new town'
+  property:
+    ref: &property_ref 'Reference'
+    town_id: *town_name
+    user_id: &property_owner 'Owner'
+    category_ids: &property_categories 'Categories'
+    detail_ids: &property_details 'Details'
+    new: 'Create new property'
+    no_categories: 'No categories'
+    no_details: 'No details'
   helpers:
     label:
       town:
         name: *town_name
         postcode: *town_postcode
+      property:
+        ref: *property_ref
+        town_id: *town_name
+        user_id: *property_owner
+        category_ids: *property_categories
+        detail_ids: *property_details
+

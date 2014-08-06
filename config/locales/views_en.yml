@@ -10,3 +10,12 @@ en:
         title: 'Create a new town'
       form:
         save: 'Save'
+    properties:
+      index:
+        title: 'List of properties'
+      edit:
+        title: 'Edit a property'
+      new:
+        title: 'Create a new property'
+      form:
+        save: 'Save'
