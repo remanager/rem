@@ -1,8 +1,8 @@
-%h1 Listing categories
+%h1= t('.title')
 
 %table
   %tr
-    %th Name
+    %th= t('category.name')
     %th
     %th
     %th
@@ -10,10 +10,10 @@
   - @categories.each do |category|
     %tr
       %td= category.name
-      %td= link_to 'Show', [:admin, category]
-      %td= link_to 'Edit', edit_admin_category_path(category)
-      %td= link_to 'Destroy', [:admin, category], :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to t('common.show'), [:admin, category]
+      %td= link_to t('common.edit'), edit_admin_category_path(category)
+      %td= link_to t('common.destroy'), [:admin, category], method: :delete, data: { confirm: t('common.destroy?') }
 
 %br
 
-= link_to 'New Category', new_admin_category_path
+= link_to t('category.new'), new_admin_category_path

@@ -19,3 +19,12 @@ en:
         title: 'Create a new property'
       form:
         save: 'Save'
+    categories:
+      index:
+        title: 'List of categories'
+      edit:
+        title: 'Edit a category'
+      new:
+        title: 'Create a new category'
+      form:
+        save: 'Save'

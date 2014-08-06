@@ -13,6 +13,9 @@ en:
     new: 'Create new property'
     no_categories: 'No categories'
     no_details: 'No details'
+  category:
+    name: &category_name 'Category name'
+    new: 'Create new category'
   helpers:
     label:
       town:
@@ -24,4 +27,6 @@ en:
         user_id: *property_owner
         category_ids: *property_categories
         detail_ids: *property_details
+      category:
+        name: *category_name
 
