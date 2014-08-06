@@ -5,6 +5,9 @@ module Permissions
 
       allow :'admin/dashboard', [:index]
       allow :'admin/users', [:index, :new, :create]
+      allow :'admin/users', [:edit, :update, :destroy] do |current_resource|
+        user == current_resource || user.my_users.include?(current_resource)
+      end
       allow :'admin/realestates', [:show, :edit, :update] do |current_resource|
         user.realestate == current_resource
       end
