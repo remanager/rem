@@ -28,3 +28,11 @@ en:
     destroy?: 'Are you sure?'
     edit: 'Edit'
     save: 'Save'
+
+  nav:
+    realestate: 'Real Estate'
+    realestates: 'Real Estates'
+    properties: 'Properties'
+    categories: 'Categories'
+    towns: 'Towns'
+    users: 'Users'
