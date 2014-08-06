@@ -21,8 +21,17 @@ en:
     description: &realestate_desc 'Description'
     address: &realestate_address 'Address'
     user_id: &realestate_user 'Agent'
+    new: 'Create new realestate'
   detail:
     name: &detail_name 'Detail name'
+    new: 'Create new detail'
+  user:
+    email: &user_email 'Email'
+    password: &user_pass 'Password'
+    password_confirmation: &user_pass2 'Password confirmation'
+    role: &user_role 'Role'
+    new: 'Create new user'
+    no_users: 'No users'
 
   helpers:
     label:
@@ -44,3 +53,8 @@ en:
         user_id: *realestate_user
       detail:
         name: *detail_name
+      user:
+        email: *user_email
+        password: *user_pass
+        password_confirmation: *user_pass2
+        role: *user_role

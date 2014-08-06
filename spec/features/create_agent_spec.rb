@@ -10,7 +10,7 @@ feature 'user creation' do
       fill_in 'Password', with: '1234test'
       fill_in 'Password confirmation', with: '1234test'
       select 'agent', from: 'Role'
-      expect{ click_button 'Create' }.to change{ User.count }.by(1)
+      expect{ click_button 'Save' }.to change{ User.count }.by(1)
       expect(User.last.role.to_sym).to eq :agent
       expect(page).to have_css '.flash.notice', text: 'New user created!'
     end
@@ -24,7 +24,7 @@ feature 'user creation' do
       fill_in 'Password', with: '1234test'
       fill_in 'Password confirmation', with: '1234test'
       select 'owner', from: 'Role'
-      click_button 'Edit'
+      click_button 'Save'
       expect(agent.reload.role.to_sym).to eq :owner
       expect(agent.email).to eq('owner@rem.com')
       expect(page).to have_css '.flash.notice', text: 'User updated!'
@@ -48,7 +48,7 @@ feature 'user creation' do
     fill_in 'Email', with: 'owner@rem.com'
     fill_in 'Password', with: '1234test'
     fill_in 'Password confirmation', with: '1234test'
-    expect{ click_button 'Create' }.to change{ User.count }.by(1)
+    expect{ click_button 'Save' }.to change{ User.count }.by(1)
     expect(User.last.role.to_sym).to eq :owner
     expect(page).to have_css '.flash.notice', text: 'New user created!'
   end

@@ -1,21 +1,21 @@
 = form_for [:admin, @user] do |f|
   .row
     .large-12.columns
-      = f.label :email, 'Email'
+      = f.label :email
       = f.text_field :email
   .row
     .large-12.columns
-      = f.label :password, 'Password'
+      = f.label :password
       = f.password_field :password
   .row
     .large-12.columns
-      = f.label :password_confirmation, 'Password confirmation'
+      = f.label :password_confirmation
       = f.password_field :password_confirmation
 
   - if current_user.admin?
     .row
       .large-12.columns
-        = f.label :role, 'Role'
+        = f.label :role
         = f.select(:role, User.possible_roles(current_user.role), prompt: true)
 
-  = f.submit (params[:action] == 'new') ? 'Create' : 'Edit', class: :button
+  = f.submit t('.save'), class: :button

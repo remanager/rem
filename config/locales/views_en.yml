@@ -37,12 +37,21 @@ en:
         title: 'Create a new realestate'
       form:
         save: 'Save'
-    detail:
+    details:
       index:
         title: 'List of details '
       edit:
         title: 'Edit a detail'
       new:
         title: 'Create a new detail'
+      form:
+        save: 'Save'
+    users:
+      index:
+        title: 'List of users'
+      edit:
+        title: 'Edit a user'
+      new:
+        title: 'Create a new user'
       form:
         save: 'Save'
