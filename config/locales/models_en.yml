@@ -21,6 +21,9 @@ en:
     description: &realestate_desc 'Description'
     address: &realestate_address 'Address'
     user_id: &realestate_user 'Agent'
+  detail:
+    name: &detail_name 'Detail name'
+
   helpers:
     label:
       town:
@@ -39,4 +42,5 @@ en:
         description: *realestate_desc
         address: *realestate_address
         user_id: *realestate_user
-
+      detail:
+        name: *detail_name
