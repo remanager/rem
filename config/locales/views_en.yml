@@ -28,3 +28,12 @@ en:
         title: 'Create a new category'
       form:
         save: 'Save'
+    realestates:
+      index:
+        title: 'List of realestates'
+      edit:
+        title: 'Edit a realestate'
+      new:
+        title: 'Create a new realestate'
+      form:
+        save: 'Save'

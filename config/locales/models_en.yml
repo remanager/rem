@@ -16,6 +16,11 @@ en:
   category:
     name: &category_name 'Category name'
     new: 'Create new category'
+  realestate:
+    name: &realestate_name 'Realestate name'
+    description: &realestate_desc 'Description'
+    address: &realestate_address 'Address'
+    user_id: &realestate_user 'Agent'
   helpers:
     label:
       town:
@@ -29,4 +34,9 @@ en:
         detail_ids: *property_details
       category:
         name: *category_name
+      realestate:
+        name: *realestate_name
+        description: *realestate_desc
+        address: *realestate_address
+        user_id: *realestate_user
 
