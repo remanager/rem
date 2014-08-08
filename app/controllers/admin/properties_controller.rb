@@ -19,6 +19,7 @@ class Admin::PropertiesController < AdminController
 
   # GET /properties/1/edit
   def edit
+    @category = @property.categories.build
   end
 
   # POST /properties

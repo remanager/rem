@@ -18,8 +18,14 @@
   .field
     = f.label :category_ids
     = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
+    %a{ href: '#', 'data-reveal-id' => 'AddCategoryModal' } Add category
   .field
     = f.label :detail_ids
     = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
   .actions
     = f.submit t('.save'), class: :button
+
+.reveal-modal{ id: 'AddCategoryModal', 'data-reveal' => true }
+  %h2 Add Category
+  = render 'admin/categories/form'
+  %a{ class: 'close-reveal-modal' } &#215;
