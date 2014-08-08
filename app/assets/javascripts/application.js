@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation/foundation
+//= require foundation/foundation.reveal.js
 //= require turbolinks
 //= require_tree .
 
