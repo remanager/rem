@@ -1,0 +1,57 @@
+# config/locales/views_en.yml
+en:
+  admin:
+    towns:
+      index:
+        title: 'List of towns'
+      edit:
+        title: 'Edit a town'
+      new:
+        title: 'Create a new town'
+      form:
+        save: 'Save'
+    properties:
+      index:
+        title: 'List of properties'
+      edit:
+        title: 'Edit a property'
+      new:
+        title: 'Create a new property'
+      form:
+        save: 'Save'
+    categories:
+      index:
+        title: 'List of categories'
+      edit:
+        title: 'Edit a category'
+      new:
+        title: 'Create a new category'
+      form:
+        save: 'Save'
+    realestates:
+      index:
+        title: 'List of realestates'
+      edit:
+        title: 'Edit a realestate'
+      new:
+        title: 'Create a new realestate'
+      form:
+        save: 'Save'
+    details:
+      index:
+        title: 'List of details '
+      edit:
+        title: 'Edit a detail'
+      new:
+        title: 'Create a new detail'
+      form:
+        save: 'Save'
+    users:
+      index:
+        title: 'List of users'
+      edit:
+        title: 'Edit a user'
+      new:
+        title: 'Create a new user'
+      form:
+        save: 'Save'

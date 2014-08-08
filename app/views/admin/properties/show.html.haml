@@ -1,21 +1,19 @@
-%p#notice= notice
-
 %p
-  %b Ref:
+  %b= t('property.ref') + ':'
   = @property.ref
 %p
-  %b Town:
+  %b= t('property.town') + ':'
   = @property.town
 %p
-  %b User:
+  %b= t('property.user') + ':'
   = @property.user
 %p
-  %b Categories:
-  = @property.categories.any? ? @property.categories.pluck(:name).join(', ') : 'No categories'
+  %b= t('property.categories') + ':'
+  = @property.categories.any? ? @property.categories.pluck(:name).join(', ') : t('property.no_categories')
 %p
-  %b Details:
-  = @property.details.any? ? @property.details.pluck(:name).join(', ') : 'No details'
+  %b= t('property.details') + ':'
+  = @property.details.any? ? @property.details.pluck(:name).join(', ') : t('property.no_details')
 
-= link_to 'Edit', edit_admin_property_path(@property)
+= link_to t('common.edit'), edit_admin_property_path(@property)
 \|
-= link_to 'Back', admin_properties_path
+= link_to t('common.back'), admin_properties_path

@@ -3,14 +3,21 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user
+  before_filter :set_locale
 
   def default_url_options
     {
-      host: 'localhost:3000'
+      host: 'localhost:3000',
+      locale: I18n.locale
     }
   end
+
   private
   def current_user
     @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] if params[:locale].present?
   end
 end

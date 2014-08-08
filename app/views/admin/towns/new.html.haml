@@ -1,5 +1,5 @@
-%h1 New town
+%h1= t '.title'
 
 = render 'form'
 
-= link_to 'Back', admin_towns_path
+= link_to t('common.back'), admin_towns_path

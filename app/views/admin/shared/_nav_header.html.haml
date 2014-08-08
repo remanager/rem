@@ -1,13 +1,13 @@
 %nav
   - if current_user.realestate && allow?(:"admin/realestates", :edit, current_user.realestate)
-    = link_to 'Real Estate', edit_admin_realestate_path(current_user.realestate)
+    = link_to t('nav.realestate'), edit_admin_realestate_path(current_user.realestate)
   - if allow? :"admin/realestates", :index
-    = link_to 'Real Estates', admin_realestates_path
+    = link_to t('nav.realestates'), admin_realestates_path
   - if allow? :"admin/properties", :index
-    = link_to 'Properties', admin_properties_path
+    = link_to t('nav.properties'), admin_properties_path
   - if allow? :"admin/categories", :index
-    = link_to 'Categories', admin_categories_path
+    = link_to t('nav.categories'), admin_categories_path
   - if allow? :"admin/towns", :index
-    = link_to 'Towns', admin_towns_path
+    = link_to t('nav.towns'), admin_towns_path
   - if allow? :"admin/users", :index
-    = link_to 'Users', admin_users_path
+    = link_to t('nav.users'), admin_users_path

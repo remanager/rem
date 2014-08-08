@@ -11,14 +11,14 @@ feature 'Add new properties' do
     visit admin_properties_path
     expect(page).not_to have_css 'tbody > tr'
 
-    click_on 'New Property'
+    click_on 'Create new property'
     fill_in 'Ref', with: 'nice_house'
     select 'pretty_town', from: 'Town'
     check 'awesome'
     check 'pool'
-    click_on 'New Property'
+    click_on 'Save'
 
-    expect(current_path).to eq(admin_properties_path)
+    expect(current_path).to end_with(admin_properties_path)
     other_property = create :property
     visit admin_properties_path
     expect(page).to have_content('nice_house')

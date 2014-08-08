@@ -1,9 +1,7 @@
-%p#notice= notice
-
 %p
-  %b Name:
+  %b= t('category.name') + ':'
   = @category.name
 
-= link_to 'Edit', edit_admin_category_path(@category)
+= link_to t('common.edit'), edit_admin_category_path(@category)
 \|
-= link_to 'Back', admin_categories_path
+= link_to t('common.back'), admin_categories_path
