@@ -30,9 +30,11 @@ class Admin::CategoriesController < AdminController
       if @category.save
         format.html { redirect_to [:admin, @category], notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
+        format.js { render json: @category, status: :created, location: [:admin, @category] }
       else
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js { render json: @category.errors.messages, status: :unprocessable_entity }
       end
     end
   end
