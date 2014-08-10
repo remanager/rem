@@ -12,11 +12,13 @@ feature 'Add new properties' do
     expect(page).not_to have_css 'tbody > tr'
 
     click_on 'Create new property'
-    fill_in 'Ref', with: 'nice_house'
-    select 'pretty_town', from: 'Town'
-    check 'awesome'
-    check 'pool'
-    click_on 'Save'
+    within('#new_property') do
+      fill_in 'Ref', with: 'nice_house'
+      select 'pretty_town', from: 'Town'
+      check 'awesome'
+      check 'pool'
+      click_on 'Save'
+    end
 
     expect(current_path).to end_with(admin_properties_path)
     other_property = create :property

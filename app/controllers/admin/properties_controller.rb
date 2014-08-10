@@ -15,6 +15,7 @@ class Admin::PropertiesController < AdminController
   # GET /properties/new
   def new
     @property = Property.new
+    @category = Category.new
   end
 
   # GET /properties/1/edit
