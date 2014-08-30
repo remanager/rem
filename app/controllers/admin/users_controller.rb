@@ -13,6 +13,10 @@ class Admin::UsersController < AdminController
     user = User.new(user_params)
     user.set_default_role(current_user.role) unless current_user.admin?
 
+    if user.role.to_sym == :agent
+      user.realestate = Realestate.new(name: "My Agency Profile")
+    end
+
     if user.save
       redirect_to admin_users_path, notice: 'New user created!'
     else
