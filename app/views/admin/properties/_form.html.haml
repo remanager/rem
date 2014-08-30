@@ -17,15 +17,16 @@
     = f.collection_select(:user_id, User.where(role: :owner), :id, :email, prompt: true)
   .field
     = f.label :category_ids
-    = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
-    %a{ href: '#', 'data-reveal-id' => 'AddCategoryModal' } Add category
+    #categories-list
+      = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
+    %a{ href: '#', 'data-reveal-id' => 'category-modal' } Add category
   .field
     = f.label :detail_ids
     = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
   .actions
     = f.submit t('.save'), class: :button
 
-.reveal-modal{ id: 'AddCategoryModal', 'data-reveal' => true }
+.reveal-modal{ id: 'category-modal', 'data-reveal' => true }
   %h2 Add Category
   = render 'admin/categories/form'
   %a{ class: 'close-reveal-modal' } &#215;
