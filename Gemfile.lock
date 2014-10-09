@@ -71,6 +71,7 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    ffaker (1.25.0)
     ffi (1.9.3)
     formatador (0.2.5)
     foundation-rails (5.3.1.0)
@@ -229,6 +230,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   factory_girl_rails
+  ffaker
   foundation-rails
   guard
   guard-livereload

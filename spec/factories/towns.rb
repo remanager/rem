@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :town do
-    postcode '01234'
-    sequence (:name) { |n| "Town_#{n}" }
+    sequence(:postcode, 10000)
+    name { Faker::Address.city }
   end
 end
