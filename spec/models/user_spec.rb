@@ -21,7 +21,7 @@ describe User do
   end
 
   describe '#send_password_reset' do
-    subject { create :user, :agent }
+    subject { create :user_agent_with_realestate }
 
     it 'generates a unique password_reset_token each time' do
       subject.send_password_reset
@@ -44,21 +44,21 @@ describe User do
 
   describe '#my_users' do
     context 'admin role' do
-      subject { create :user, :admin }
+      subject { create :user_admin }
 
       it 'gets all users' do
-        5.times { create :user, :agent }
-        3.times { create :user, :owner }
+        5.times { create :user_agent_with_realestate }
+        3.times { create :user }
 
         expect(subject.my_users).to eq(User.all)
       end
     end
 
     context 'agent_role' do
-      subject { create :user, :agent }
+      subject { create :user_agent_with_realestate }
 
       it 'gets realestate users' do
-        another_agent = create :user, :agent
+        another_agent = create :user_agent_with_realestate
         2.times { create :property, realestate: another_agent.realestate }
         my_owners = []
         3.times { my_owners << create(:property, realestate: subject.realestate) }
@@ -71,9 +71,9 @@ describe User do
     describe '#my_properties' do
       context 'admin role' do
         it 'gets all properties' do
-          admin = create :user, :admin
-          agent1 = create :user, :agent
-          agent2 = create :user, :agent
+          admin = create :user_admin
+          agent1 = create :user_agent_with_realestate
+          agent2 = create :user_agent_with_realestate
           2.times { create :property, realestate: agent1.realestate }
           3.times { create :property, realestate: agent2.realestate }
 
@@ -83,8 +83,8 @@ describe User do
 
       context 'agent role' do
         it 'gets realestate properties'do
-          agent1 = create :user, :agent
-          agent2 = create :user, :agent
+          agent1 = create :user_agent_with_realestate
+          agent2 = create :user_agent_with_realestate
           2.times { create :property, realestate: agent1.realestate }
           3.times { create :property, realestate: agent2.realestate }
 
@@ -96,8 +96,8 @@ describe User do
 
       context 'owner role' do
         it 'gets owned properties'do
-          owner = create :user, :owner
-          agent1 = create :user, :agent
+          owner = create :user
+          agent1 = create :user_agent_with_realestate
           2.times { create :property, realestate: agent1.realestate }
           property = create :property, realestate: agent1.realestate, user: owner
 

@@ -2,7 +2,7 @@ require 'helpers/auth_helper'
 
 feature 'Add new properties' do
   scenario 'new property is added in her realestate' do
-    agent = create :user, :agent
+    agent = create :user_agent_with_realestate
     town = create :town, name: 'pretty_town'
     create :category, name: 'awesome'
     ['pool', 'fontain'].each { |n| create :detail, name: n }

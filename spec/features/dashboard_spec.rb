@@ -2,7 +2,7 @@ require 'helpers/auth_helper'
 
 feature 'dashboard' do
   scenario 'admin user' do
-    admin = create :user, :admin
+    admin = create :user_admin
     sign_in_as admin
     expect(current_path).to end_with(admin_dashboard_path)
     expect(page).to have_css 'h1', text: 'Dashboard'
@@ -11,7 +11,7 @@ feature 'dashboard' do
   end
 
   scenario 'agent user' do
-    agent = create :user, :agent
+    agent = create :user_agent_with_realestate
     sign_in_as agent
     expect(current_path).to end_with(admin_dashboard_path)
     expect(page).to have_css 'h1', text: 'Dashboard'
@@ -23,7 +23,7 @@ feature 'dashboard' do
   end
 
   scenario 'owner user' do
-    owner = create :user, :owner
+    owner = create :user
     sign_in_as owner
     expect(current_path).to end_with(admin_dashboard_path)
     expect(page).to have_css 'h1', text: 'Dashboard'

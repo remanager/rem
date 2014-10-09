@@ -2,7 +2,7 @@ require 'helpers/auth_helper'
 
 feature 'property listing' do
   background do
-    @agent = create :user, :agent
+    @agent = create :user_agent_with_realestate
     realestate = @agent.realestate
     2.times { create :property, realestate: realestate }
     other_agent = create :user, :agent
@@ -24,7 +24,7 @@ feature 'property listing' do
   end
 
   scenario 'owner role shows owned' do
-    owner = create :user, :owner
+    owner = create :user
     property = create :property, realestate: @agent.realestate, user: owner
     sign_in_as owner
     visit admin_properties_path
