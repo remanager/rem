@@ -21,8 +21,8 @@ class DatabaseSeedFiller
     create_details
     create_towns
     create_categories
-    # create_properties
-    # create_owners
+    create_properties
+    create_owners
     true
   end
 
@@ -61,6 +61,30 @@ class DatabaseSeedFiller
     logging 'Creating categories...'
     @category_number.times do
       FactoryGirl.create(:category)
+    end
+  end
+
+  def create_properties
+    logging 'Creating properties...'
+
+    town_offset = Town.first.id
+    category_offset = Category.first.id
+    detail_offset = Detail.first.id
+
+    @property_number.times do
+      property = FactoryGirl.create(:property, town: Town.find(town_offset + rand(Town.count)))
+      category_ids = Category.pluck(:id).shuffle
+      rand(3).times { property.category_ids << category_ids.pop }
+      property_ids = Property.pluck(:id).shuffle
+      rand(5).times { property.detail_ids << property_ids.pop }
+    end
+  end
+
+  def create_owners
+    logging 'Creating owners...'
+    property_ids = Property.pluck(:id).shuffle
+    rand(property_ids.size).times do
+      Property.find(property_ids.pop).user = FactoryGirl.create(:user)
     end
   end
 
