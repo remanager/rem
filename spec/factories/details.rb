@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :detail do
-    sequence (:name) { |n| "Detail_#{n}" }
+    name { Faker::Product.product }
   end
 end

@@ -4,9 +4,9 @@ FactoryGirl.define do
     association :town
     association :user
 
-    after(:create) do |property|
-      property.categories << create(:category)
-      property.details << create(:detail)
-    end
+    # after(:create) do |property|
+    #   property.categories << create(:category)
+    #   property.details << create(:detail)
+    # end
   end
 end

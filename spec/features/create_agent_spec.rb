@@ -3,7 +3,7 @@ require 'helpers/auth_helper'
 feature 'user creation' do
   context 'admin role' do
     scenario 'can create' do
-      admin = create :user, :admin
+      admin = create :user_admin
       sign_in_as admin
       visit new_admin_user_path
       fill_in 'Email', with: 'agent@rem.com'
@@ -16,8 +16,8 @@ feature 'user creation' do
     end
 
     scenario 'can update' do
-      admin = create :user, :admin
-      agent = create :user, :agent
+      admin = create :user_admin
+      agent = create :user_agent_with_realestate
       sign_in_as admin
       visit edit_admin_user_path(id: agent.id)
       fill_in 'Email', with: 'owner@rem.com'
@@ -31,8 +31,8 @@ feature 'user creation' do
     end
 
     scenario 'can delete' do
-      admin = create :user, :admin
-      owner = create :user, :owner
+      admin = create :user_admin
+      owner = create :user
       sign_in_as admin
       visit admin_users_path
       expect{ page.find("tbody tr:contains('#{owner.email}') a:contains('Delete')").click }.to change{ User.count }.by(-1)
@@ -42,7 +42,7 @@ feature 'user creation' do
   end
 
   scenario 'agent can create owner' do
-    agent = create :user, :agent
+    agent = create :user_agent_with_realestate
     sign_in_as agent
     visit new_admin_user_path
     fill_in 'Email', with: 'owner@rem.com'
@@ -54,7 +54,7 @@ feature 'user creation' do
   end
 
   scenario 'owner cannot create user' do
-    owner = create :user, :owner
+    owner = create :user
     sign_in_as owner
     visit new_admin_user_path
     expect(page).to have_css '.flash.alert', text: 'Not authorized.'
