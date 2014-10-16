@@ -1,0 +1,4 @@
+%h1= 'Realestates'
+- @realestates.each do |realestate|
+  .realestate
+    %h3= link_to realestate.name, realestate
