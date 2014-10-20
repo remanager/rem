@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get 'public/index'
     get '/:id', to: 'public#show', as: 'realestate'
     get '/:realestate_id/:id', to: 'public#property', as: 'property'
+    get '/:realestate_id/category/:id', to: 'public#category', as: 'category'
 
     root 'public#index'
   end
