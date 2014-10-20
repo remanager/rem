@@ -1,0 +1,12 @@
+%h1
+  %strong= @property.ref
+
+.details
+  %h5 Detail list
+  - @property.details.each do |detail|
+    %ul.detail
+      %li= detail.name
+  %h5 Category list
+  -@property.categories.each do |category|
+    %ul.category
+      %li= category.name
