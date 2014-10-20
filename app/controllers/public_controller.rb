@@ -12,8 +12,16 @@ class PublicController < ApplicationController
   end
 
   def property
-    # @realestate = Realestate.find(params[:realestate_id])
+    @realestate = Realestate.find(params[:realestate_id])
     @property = Property.find(params[:id])
     render_404 unless @property
+  end
+
+  def category
+    @realestate = Realestate.find(params[:realestate_id])
+    @category = Category.find(params[:id])
+    @properties = @category.properties
+
+    redirect_to @realestate, notice: 'The category doesn\'t exist.' unless @category
   end
 end

@@ -1,0 +1,6 @@
+%h1= "Category #{ @category.name.upcase }"
+%br
+%h3 List of properties
+%ul
+  - @properties.each do |property|
+    %li= link_to property.ref, property_path(@realestate, property)
