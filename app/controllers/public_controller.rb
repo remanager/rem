@@ -24,4 +24,12 @@ class PublicController < ApplicationController
 
     redirect_to @realestate, notice: 'The category doesn\'t exist.' unless @category
   end
+
+  def search
+    @realestate = Realestate.find(params[:realestate_id])
+    property_params = params.require(:property).permit(:ref, :town_id, :categoriy_ids, :detail_ids)
+    @properties = @realestate.search(property_params)
+
+    redirect_to @realestate, notice: 'No property have been found.' unless @properties
+  end
 end
