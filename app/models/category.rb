@@ -6,4 +6,8 @@ class Category < ActiveRecord::Base
   def to_s
     name
   end
+
+  def to_param
+    permalink
+  end
 end
