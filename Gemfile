@@ -19,6 +19,11 @@ group :test do
   gem 'database_cleaner'
 end
 
+group :development do
+  gem 'ruby_gntp'
+  gem 'rails-erd'
+end
+
 group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
