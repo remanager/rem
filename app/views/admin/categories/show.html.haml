@@ -1,0 +1,7 @@
+%p
+  %b= t('category.name') + ':'
+  = @category.name
+
+= link_to t('common.edit'), edit_admin_category_path(@category)
+\|
+= link_to t('common.back'), admin_categories_path

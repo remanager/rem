@@ -1,0 +1,60 @@
+# config/locales/models_en.yml
+en:
+  town:
+    name: &town_name 'Town name'
+    postcode: &town_postcode 'Postal code'
+    new: 'Create new town'
+  property:
+    ref: &property_ref 'Reference'
+    town_id: *town_name
+    user_id: &property_owner 'Owner'
+    category_ids: &property_categories 'Categories'
+    detail_ids: &property_details 'Details'
+    new: 'Create new property'
+    no_categories: 'No categories'
+    no_details: 'No details'
+  category:
+    name: &category_name 'Category name'
+    new: 'Create new category'
+  realestate:
+    name: &realestate_name 'Realestate name'
+    description: &realestate_desc 'Description'
+    address: &realestate_address 'Address'
+    user_id: &realestate_user 'Agent'
+    new: 'Create new realestate'
+  detail:
+    name: &detail_name 'Detail name'
+    new: 'Create new detail'
+  user:
+    email: &user_email 'Email'
+    password: &user_pass 'Password'
+    password_confirmation: &user_pass2 'Password confirmation'
+    role: &user_role 'Role'
+    new: 'Create new user'
+    no_users: 'No users'
+
+  helpers:
+    label:
+      town:
+        name: *town_name
+        postcode: *town_postcode
+      property:
+        ref: *property_ref
+        town_id: *town_name
+        user_id: *property_owner
+        category_ids: *property_categories
+        detail_ids: *property_details
+      category:
+        name: *category_name
+      realestate:
+        name: *realestate_name
+        description: *realestate_desc
+        address: *realestate_address
+        user_id: *realestate_user
+      detail:
+        name: *detail_name
+      user:
+        email: *user_email
+        password: *user_pass
+        password_confirmation: *user_pass2
+        role: *user_role

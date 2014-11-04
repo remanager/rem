@@ -1,0 +1,10 @@
+%p
+  %b= t('town.postcode') + ':'
+  = @town.postcode
+%p
+  %b= t('town.name') + ':'
+  = @town.name
+
+= link_to t('common.edit'), edit_admin_town_path(@town)
+\|
+= link_to t('common.back'), admin_towns_path

@@ -1,0 +1,7 @@
+%h1= t '.title'
+
+= render 'form'
+
+= link_to t('common.show'), [:admin, @category]
+\|
+= link_to t('common.back'), admin_categories_path

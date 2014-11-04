@@ -1,56 +1,24 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+    get 'login' => 'sessions#new', as: 'login'
+    get 'logout' => 'sessions#destroy', as: 'logout'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+    resources :sessions, only:  [:new, :create, :destroy]
+    resources :password_resets, only: [:new, :create, :edit, :update]
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+    namespace :admin do
+      resources :users
+      resources :properties
+      resources :details
+      resources :categories
+      resources :realestates
+      resources :towns
+      get 'dashboard' => 'dashboard#index', as: 'dashboard'
+    end
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  root 'admin/dashboard#index'
+  end
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  match '/*locale/admin/*path', to: redirect("/#{I18n.default_locale}/admin/%{path}"), via: :all
+  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with?(I18n.default_locale) }, via: :all
 end

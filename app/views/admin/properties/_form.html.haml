@@ -1,0 +1,25 @@
+= form_for [:admin, @property] do |f|
+  - if @property.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
+      %ul
+        - @property.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :ref
+    = f.text_field :ref
+  .field
+    = f.label :town_id
+    = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
+  .field
+    = f.label :user_id
+    = f.collection_select(:user_id, User.where(role: :owner), :id, :email, prompt: true)
+  .field
+    = f.label :category_ids
+    = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
+  .field
+    = f.label :detail_ids
+    = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
+  .actions
+    = f.submit t('.save'), class: :button

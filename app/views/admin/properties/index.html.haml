@@ -1,0 +1,25 @@
+%h1= t '.title'
+
+%table
+  %thead
+    %tr
+      %th= t 'property.ref'
+      %th= t 'property.town'
+      %th= t 'property.user'
+      %th
+      %th
+      %th
+
+  %tbody
+    - @properties.each do |property|
+      %tr
+        %td= property.ref
+        %td= property.town
+        %td= property.user
+        %td= link_to t('common.show'), [:admin, property]
+        %td= link_to t('common.edit'), edit_admin_property_path(property)
+        %td= link_to t('common.destroy'), [:admin, property], method: :delete, data: { confirm: t('common.destroy?') }
+
+%br
+
+= link_to t('property.new'), new_admin_property_path

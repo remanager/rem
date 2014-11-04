@@ -1,0 +1,21 @@
+%h1= t '.title'
+
+%table
+  %tr
+    %th= t 'town.postcode'
+    %th= t 'town.name'
+    %th
+    %th
+    %th
+
+  - @towns.each do |town|
+    %tr
+      %td= town.postcode
+      %td= town.name
+      %td= link_to t('common.show'), [:admin, town]
+      %td= link_to t('common.edit'), edit_admin_town_path(town)
+      %td= link_to t('common.destroy'), [:admin, town], :method => :delete, :data => { :confirm => t('common.destroy?')}
+
+%br
+
+= link_to t('town.new'), new_admin_town_path

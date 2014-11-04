@@ -1,0 +1,19 @@
+%h1= t '.title'
+
+%table
+  %tr
+    %th= t('detail.name')
+    %th
+    %th
+    %th
+
+  - @details.each do |detail|
+    %tr
+      %td= detail.name
+      %td= link_to t('common.show'), [:admin, detail]
+      %td= link_to t('common.edit'), edit_admin_detail_path(detail)
+      %td= link_to t('common.destroy'), [:admin, detail], method: :delete, data: { confirm: t('common.destroy?') }
+
+%br
+
+= link_to t('detail.new'), new_admin_detail_path

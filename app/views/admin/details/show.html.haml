@@ -1,0 +1,7 @@
+%p
+  %b= t('detail.name') + ':'
+  = @detail.name
+
+= link_to t('common.show'), edit_admin_detail_path(@detail)
+\|
+= link_to t('common.back'), admin_details_path

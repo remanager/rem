@@ -1,0 +1,16 @@
+%p
+  %b= t('realestate.name') + ':'
+  = @realestate.name
+%p
+  %b= t('realestate.desc') + ':'
+  = @realestate.description
+%p
+  %b= t('realestate.address') + ':'
+  = @realestate.address
+%p
+  %b= t('realestate.user') + ':'
+  = @realestate.user
+
+= link_to t('common.edit'), edit_admin_realestate_path(@realestate)
+\|
+= link_to t('common.back'), admin_realestates_path

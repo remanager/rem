@@ -1,0 +1,19 @@
+%p
+  %b= t('property.ref') + ':'
+  = @property.ref
+%p
+  %b= t('property.town') + ':'
+  = @property.town
+%p
+  %b= t('property.user') + ':'
+  = @property.user
+%p
+  %b= t('property.categories') + ':'
+  = @property.categories.any? ? @property.categories.pluck(:name).join(', ') : t('property.no_categories')
+%p
+  %b= t('property.details') + ':'
+  = @property.details.any? ? @property.details.pluck(:name).join(', ') : t('property.no_details')
+
+= link_to t('common.edit'), edit_admin_property_path(@property)
+\|
+= link_to t('common.back'), admin_properties_path

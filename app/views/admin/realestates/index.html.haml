@@ -1,0 +1,25 @@
+%h1= t '.title'
+
+%table
+  %tr
+    %th= t('realestate.name')
+    %th= t('realestate.desc')
+    %th= t('realestate.address')
+    %th= t('realestate.user')
+    %th
+    %th
+    %th
+
+  - @realestates.each do |realestate|
+    %tr
+      %td= realestate.name
+      %td= realestate.description
+      %td= realestate.address
+      %td= realestate.user
+      %td= link_to t('common.show'), [:admin, realestate]
+      %td= link_to t('common.edit'), edit_admin_realestate_path(realestate)
+      %td= link_to t('common.destroy'), [:admin, realestate], method: :delete, data: { confirm: t('common.destroy?') }
+
+%br
+
+= link_to t('realestate.new'), new_admin_realestate_path
