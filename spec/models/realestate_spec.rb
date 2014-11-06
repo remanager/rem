@@ -32,7 +32,7 @@ describe Realestate do
 
         expect(result1.size).to eq(2)
         expect(result2.size).to eq(1)
-        expect(result2.first.id).to eq(property2.id)
+        expect(result2.first.id).to eq(property1.id)
       end
     end
   end
