@@ -30,8 +30,8 @@ describe Realestate do
         result1 = realestate.search(detail_ids: [details.last.id])
         result2 = realestate.search(detail_ids: [details.first.id, details.last.id])
 
-        expect(result1.size).to eq(2)
-        expect(result2.size).to eq(1)
+        expect(result1.to_a.size).to eq(2)
+        expect(result2.to_a.size).to eq(1)
         expect(result2.first.id).to eq(property1.id)
       end
     end
