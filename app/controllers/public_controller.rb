@@ -27,9 +27,11 @@ class PublicController < ApplicationController
 
   def search
     @realestate = Realestate.find(params[:realestate_id])
-    property_params = params.require(:property).permit(:ref, :town_id, :categoriy_ids, :detail_ids)
+    property_params = params.require(:property).permit(:ref, :town_id, :category_ids, :detail_ids)
     @properties = @realestate.search(property_params)
 
-    redirect_to @realestate, notice: 'No property have been found.' unless @properties
+    return redirect_to @realestate, notice: 'No property have been found.' unless @properties
+    return redirect_to property_path(@realestate, @properties.first) if @properties.size == 1
+    redirect_to realestate_path(@realestate)
   end
 end

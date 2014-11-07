@@ -1,0 +1,15 @@
+- if @realestate
+  = form_for Property.new , url: search_path(realestate_id: @realestate.id) do |f|
+    Ref.:
+    = f.text_field :ref
+    %br
+    Town:
+    = f.collection_select :town, Town.all, :id, :name, prompt: true
+    %br
+    Categories:
+    = f.collection_check_boxes :categories, Category.all, :id, :name
+    %br
+    Details:
+    = f.collection_check_boxes :details, Detail.all, :id, :name
+    %br
+    = f.submit
