@@ -9,26 +9,27 @@ class Realestate < ActiveRecord::Base
     name
   end
 
-  def search(params)
+  def search(args = {})
     q = properties
 
-    property = q.find_by(ref: params[:ref])
+    property = q.find_by(ref: args[:ref])
     return property if property
 
-    if params[:category_ids]
-      q = q.joins(properties_categories: :property)
-           .where(properties_categories: { category_id: params[:category_ids] })
+    if args[:town_id]
+      q = q.where(town: args[:town_id])
     end
 
-    if params[:detail_ids]
+    if args[:category_ids]
+      q = q.joins(properties_categories: :property)
+           .where(properties_categories: { category_id: args[:category_ids] })
+    end
+
+    if args[:detail_ids]
       q = q.joins(properties_details: :property)
-           .where(properties_details: { detail_id: params[:detail_ids] })
-           .group('properties.id').having(count: params[:detail_ids].size)
+           .where(properties_details: { detail_id: args[:detail_ids] })
+           .group('properties.id').having(count: args[:detail_ids].size)
     end
 
     q.distinct
-    # q = 'select p.* from properties p inner join properties_categories pc on p.id = pc.property_id where p.realestate_id = ? and pc.category_id = ?',
-    #   id, params[:category_ids]
-    # Property.find_by_sql(q)
   end
 end

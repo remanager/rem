@@ -54,6 +54,16 @@ describe Realestate do
 
         expect(realestate.search(ref: property1.ref).id).to eq(property1.id)
       end
+
+      it 'should find by town' do
+        town = FactoryGirl.create(:town)
+        property = FactoryGirl.create(:property, realestate: realestate, town: town)
+        FactoryGirl.create(:property, realestate: realestate)
+        result = realestate.search(town_id: town.id)
+
+        expect(result.size).to eq(1)
+        expect(result.first.id).to eq(property.id)
+      end
     end
   end
 end
