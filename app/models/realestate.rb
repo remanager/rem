@@ -12,7 +12,7 @@ class Realestate < ActiveRecord::Base
   def search(args = {})
     q = properties
 
-    property = q.where(ref: args[:ref])
+    property = q.find_by(ref: args[:ref])
     return property if property
 
     if args[:town_id]
