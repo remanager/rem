@@ -12,6 +12,9 @@ class Realestate < ActiveRecord::Base
   def search(params)
     q = properties
 
+    property = q.find_by(ref: params[:ref])
+    return property if property
+
     if params[:category_ids]
       q = q.joins(properties_categories: :property)
            .where(properties_categories: { category_id: params[:category_ids] })

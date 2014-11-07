@@ -47,6 +47,13 @@ describe Realestate do
         expect(result1.first.id).to eq(property1.id)
         expect(result2.to_a.size).to eq(0)
       end
+
+      it 'should return a property found by ref' do
+        property1 = FactoryGirl.create(:property, realestate: realestate)
+        FactoryGirl.create_list(:property, 2, realestate: realestate)
+
+        expect(realestate.search(ref: property1.ref).id).to eq(property1.id)
+      end
     end
   end
 end
