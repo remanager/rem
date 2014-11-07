@@ -34,6 +34,19 @@ describe Realestate do
         expect(result2.to_a.size).to eq(1)
         expect(result2.first.id).to eq(property1.id)
       end
+
+      it 'should find by category & details' do
+        property1 = FactoryGirl.create(:property, realestate: realestate,
+                                       categories: [categories.first], details: details)
+        property2 = FactoryGirl.create(:property, realestate: realestate, details: [details.last])
+        result1 = realestate.search(category_ids: [categories.first.id], detail_ids: [details.last.id])
+        result2 = realestate.search(category_ids: [categories.last.id], 
+                                    detail_ids: [details.first.id, details.last.id])
+
+        expect(result1.to_a.size).to eq(1)
+        expect(result1.first.id).to eq(property1.id)
+        expect(result2.to_a.size).to eq(0)
+      end
     end
   end
 end
