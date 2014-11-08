@@ -1,5 +1,5 @@
 - if @realestate
-  = form_for Property.new , url: search_path(realestate_id: @realestate.id) do |f|
+  = form_for Property.new, url: search_path(realestate_id: @realestate.id) do |f|
     Ref.:
     = f.text_field :ref
     %br
