@@ -39,9 +39,11 @@ describe PublicController do
     end
 
     context 'when it has no results' do
-      it 'should render show view' do
-        get :search, realestate_id: realestate.id, town: 'lazy-town'
+      xit 'should render show view' do
+        town = FactoryGirl.create(:town)
+        get :search, realestate_id: realestate.id, town_id: town.id
 
+        expect(assigns(@properties).size).to eq(0)
         expect(response).to render_template(:show)
       end
     end
