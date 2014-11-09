@@ -11,8 +11,8 @@ class Property < ActiveRecord::Base
 
   alias_attribute :owner, :user
 
-  validates_presence_of :ref, :town
-  after_create -> { update_attribute(:permalink, get_permalink(:id, :name)) }
+  validates_presence_of :ref, :title, :town
+  after_create -> { update_attribute(:permalink, get_permalink(:id, :title)) }
 
   scope :same_realestate, ->(realestate_id) { Property.where(realestate_id: realestate_id) }
   scope :same_owner, ->(user_id) { Property.where(user_id: user_id) }
