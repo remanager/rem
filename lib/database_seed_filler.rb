@@ -70,9 +70,13 @@ class DatabaseSeedFiller
     town_offset = Town.first.id
     category_offset = Category.first.id
     detail_offset = Detail.first.id
+    towns = Town.all.to_a
+    realestates = Realestate.all.to_a
 
     @property_number.times do
-      property = FactoryGirl.create(:property, town: Town.find(town_offset + rand(Town.count)))
+      towns.shuffle!
+      realestates.shuffle!
+      property = FactoryGirl.create(:property, town: towns.first, realestate: realestates.first)
       category_ids = Category.pluck(:id).shuffle
       rand(3).times { property.categories << Category.find(category_ids.pop) }
       detail_ids = Detail.pluck(:id).shuffle
