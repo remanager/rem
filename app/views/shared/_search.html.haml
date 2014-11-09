@@ -1,15 +1,15 @@
 - if @realestate
-  = form_for Property.new, url: search_path(realestate_id: @realestate.id) do |f|
+  = form_tag search_dirty_path(realestate_id: @realestate.id) do
     Ref.:
-    = f.text_field :ref
+    = text_field_tag :ref
     %br
     Town:
-    = f.collection_select :town, Town.all, :id, :name, prompt: true
+    = select_tag :town_id, options_from_collection_for_select(Town.all, :id, :name), prompt: 'Select one...'
     %br
     Categories:
-    = f.collection_check_boxes :categories, Category.all, :id, :name
+    = select_tag :category_ids, options_from_collection_for_select(Category.all, :id, :name), multiple: true
     %br
     Details:
-    = f.collection_check_boxes :details, Detail.all, :id, :name
+    = select_tag :detail_ids, options_from_collection_for_select(Detail.all, :id, :name), multiple: true
     %br
-    = f.submit
+    = submit_tag 'Search'
