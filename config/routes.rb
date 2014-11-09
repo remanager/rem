@@ -17,10 +17,12 @@ Rails.application.routes.draw do
     end
 
     get 'public/index'
+    get '/:realestate_id/search', to: 'public#search', as: 'search'
+    post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
+
     get '/:id', to: 'public#show', as: 'realestate'
     get '/:realestate_id/:id', to: 'public#property', as: 'property'
     get '/:realestate_id/category/:id', to: 'public#category', as: 'category'
-    match '/:realestate_id/search', to: 'public#search', as: 'search', via: [:get, :post]
 
     root 'public#index'
   end
