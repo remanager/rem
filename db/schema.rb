@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104151643) do
+ActiveRecord::Schema.define(version: 20141109123831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(version: 20141104151643) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink",  limit: 40
   end
+
+  add_index "details", ["permalink"], name: "index_details_on_permalink", unique: true, using: :btree
 
   create_table "properties", force: true do |t|
     t.string   "ref"
@@ -38,8 +41,11 @@ ActiveRecord::Schema.define(version: 20141104151643) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "realestate_id"
+    t.string   "permalink",     limit: 40
+    t.string   "title",         limit: 100
   end
 
+  add_index "properties", ["permalink", "realestate_id"], name: "index_properties_on_permalink_and_realestate_id", unique: true, using: :btree
   add_index "properties", ["realestate_id"], name: "index_properties_on_realestate_id", using: :btree
   add_index "properties", ["town_id"], name: "index_properties_on_town_id", using: :btree
   add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
@@ -70,8 +76,10 @@ ActiveRecord::Schema.define(version: 20141104151643) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink",   limit: 40
   end
 
+  add_index "realestates", ["permalink"], name: "index_realestates_on_permalink", unique: true, using: :btree
   add_index "realestates", ["user_id"], name: "index_realestates_on_user_id", using: :btree
 
   create_table "towns", force: true do |t|
@@ -79,11 +87,14 @@ ActiveRecord::Schema.define(version: 20141104151643) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink",  limit: 40
   end
+
+  add_index "towns", ["permalink"], name: "index_towns_on_permalink", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
-    t.integer  "role"
+    t.string   "role",                   default: "owner"
     t.string   "password_digest"
     t.string   "auth_token"
     t.string   "password_reset_token"

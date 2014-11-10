@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
   include ApplicationHelper
 
   validates_presence_of :name
-  before_save -> { write_attribute(:permalink, generate_permalink(id, name)) }
+  after_create -> { update_attribute(:permalink, get_permalink(:id, :name)) }
 
   def to_s
     name

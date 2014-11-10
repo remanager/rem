@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def generate_permalink(*args)
-    args.map(&:to_s).join('-').downcase.gsub(/\s+/, '-').gsub(/-+/, '-')
+  def get_permalink(*args)
+    args.map { |arg| self.send(arg).to_s }.join('-').gsub(/\s+/, '-').gsub(/-+/, '-')
   end
 end
