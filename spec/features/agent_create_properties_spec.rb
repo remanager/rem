@@ -13,6 +13,7 @@ feature 'Add new properties' do
 
     click_on 'Create new property'
     fill_in 'Ref', with: 'nice_house'
+    fill_in 'Title', with: Faker::Lorem.word
     select 'pretty_town', from: 'Town'
     check 'awesome'
     check 'pool'
