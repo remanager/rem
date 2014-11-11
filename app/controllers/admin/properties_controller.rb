@@ -67,6 +67,11 @@ class Admin::PropertiesController < AdminController
     end
   end
 
+  def unpublish_picture
+    @property = Property.find(params[:property_id])
+    @property.pictures.find(params[:picture_id]).update_attribute(:published, false)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_property
