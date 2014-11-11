@@ -1,4 +1,4 @@
-= form_for [:admin, @property] do |f|
+= form_for [:admin, @property], html: { multipart: true } do |f|
   - if @property.errors.any?
     #error_explanation
       %h2= "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
@@ -21,5 +21,11 @@
   .field
     = f.label :detail_ids
     = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
+  .field
+    = file_field_tag 'pictures[]', type: 'file', multiple: true
+  -# .field
+  -#   = f.fields_for :pictures do |pictures|
+  -#     = pictures.file_field :image
+  -#     = pictures.text_field :description
   .actions
     = f.submit t('.save'), class: :button
