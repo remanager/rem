@@ -69,7 +69,7 @@ class Admin::RealestatesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def realestate_params
-    params.require(:realestate).permit(:name, :description, :address, :user_id)
+    params.require(:realestate).permit(:name, :description, :address, :user_id, :logo)
   end
 
   def current_resource

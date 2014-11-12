@@ -1,4 +1,4 @@
-= form_for [:admin, @realestate] do |f|
+= form_for [:admin, @realestate], html: { multipart: true } do |f|
   - if @realestate.errors.any?
     #error_explanation
       %h2= "#{pluralize(@realestate.errors.count, "error")} prohibited this realestate from being saved:"
@@ -19,5 +19,11 @@
     .field
       = f.label :user
       = f.collection_select(:user, User.where(role: :owner), :id, :email, prompt: true)
+  - if @realestate.logo.present?
+    .field
+      = image_tag @realestate.logo.url(:thumb)
+  .field
+    = f.label :logo
+    = f.file_field :logo
   .actions
     = f.submit t('common.save'), class: :button

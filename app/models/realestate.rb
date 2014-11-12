@@ -5,6 +5,7 @@ class Realestate < ActiveRecord::Base
   alias_attribute :agent, :user
 
   validates_presence_of :name
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
 
   def to_s
     name
