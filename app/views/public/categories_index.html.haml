@@ -1,0 +1,4 @@
+%h2= 'Categories'
+.row
+  - @categories.each do |category|
+    .large-6.columns= link_to category.name, category_path(realestate_id: @realestate.id, id: category.id)

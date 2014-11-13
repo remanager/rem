@@ -1,6 +1,10 @@
 .row
-  .large-2.columns.text-center
+  .large-7.columns.text-center
     %header.main
-      %h1#logo REM
-  .large-10.columns
+      %h1#logo= @realestate ? @realestate.name : 'REM'
+
+  .large-5.columns
+    = render 'shared/search'
+
+  .large-12.columns
     = render 'shared/nav_header'

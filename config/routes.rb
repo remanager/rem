@@ -22,9 +22,10 @@ Rails.application.routes.draw do
     get '/:realestate_id/search', to: 'public#search', as: 'search'
     post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
 
-    get '/:id', to: 'public#show', as: 'realestate'
+    get '/:realestate_id', to: 'public#show', as: 'realestate'
+    get '/:realestate_id/categories/:id', to: 'public#categories_show', as: 'category'
+    get '/:realestate_id/categories', to: 'public#categories_index', as: 'categories'
     get '/:realestate_id/:id', to: 'public#property', as: 'property'
-    get '/:realestate_id/category/:id', to: 'public#category', as: 'category'
 
     root 'public#index'
   end
