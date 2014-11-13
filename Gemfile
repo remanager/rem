@@ -23,6 +23,7 @@ end
 
 group :development do
   gem 'ruby_gntp'
+  gem 'rails-erd'
 end
 
 group :development, :test do

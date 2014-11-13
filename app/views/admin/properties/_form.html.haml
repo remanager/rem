@@ -10,6 +10,9 @@
     = f.label :ref
     = f.text_field :ref
   .field
+    = f.label :title
+    = f.text_field :title
+  .field
     = f.label :town_id
     = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
   .field

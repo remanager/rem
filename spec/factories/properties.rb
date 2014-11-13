@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :property do
     sequence (:ref) { |n| "Ref_#{n}" }
+    title { Faker::Lorem.word }
     association :town
     association :user
 
