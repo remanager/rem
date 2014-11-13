@@ -80,7 +80,7 @@ class Admin::PropertiesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    valid_params = [:ref, :town_id, :user_id, category_ids: [], detail_ids: [],
+    valid_params = [:ref, :title, :town_id, :user_id, category_ids: [], detail_ids: [],
                     picture_attributes: [:image, :description]]
     params.require(:property).permit(valid_params)
   end
