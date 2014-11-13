@@ -42,7 +42,7 @@ class PublicController < ApplicationController
   private
 
   def rest_params
-    [:ref, :town_id, :category_ids, :detail_ids].inject({realestate_id: @realestate.id}) do |hash, key|
+    [:ref, :town_id, :category_ids, :detail_ids].inject(realestate_id: @realestate.id) do |hash, key|
       hash[key] = params[key] if params[key].present?
       hash
     end

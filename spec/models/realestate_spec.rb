@@ -17,7 +17,7 @@ describe Realestate do
     context 'with valid params' do
       it 'should find by category' do
         property1 = FactoryGirl.create(:property, realestate: realestate, categories: categories)
-        property2 = FactoryGirl.create(:property, realestate: realestate, categories: [categories.last])
+        FactoryGirl.create(:property, realestate: realestate, categories: [categories.last])
         result = realestate.search(category_ids: [categories.first.id])
 
         expect(result.size).to eq(1)
@@ -26,7 +26,7 @@ describe Realestate do
 
       it 'should find by details' do
         property1 = FactoryGirl.create(:property, realestate: realestate, details: details)
-        property2 = FactoryGirl.create(:property, realestate: realestate, details: [details.last])
+        FactoryGirl.create(:property, realestate: realestate, details: [details.last])
         result1 = realestate.search(detail_ids: [details.last.id])
         result2 = realestate.search(detail_ids: [details.first.id, details.last.id])
 
@@ -38,9 +38,9 @@ describe Realestate do
       it 'should find by category & details' do
         property1 = FactoryGirl.create(:property, realestate: realestate,
                                        categories: [categories.first], details: details)
-        property2 = FactoryGirl.create(:property, realestate: realestate, details: [details.last])
+        FactoryGirl.create(:property, realestate: realestate, details: [details.last])
         result1 = realestate.search(category_ids: [categories.first.id], detail_ids: [details.last.id])
-        result2 = realestate.search(category_ids: [categories.last.id], 
+        result2 = realestate.search(category_ids: [categories.last.id],
                                     detail_ids: [details.first.id, details.last.id])
 
         expect(result1.to_a.size).to eq(1)
