@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :users
-      resources :properties
+      resources :properties do
+        delete '/destroy_picture/:picture_id' => 'properties#unpublish_picture', as: 'destroy_picture'
+      end
       resources :details
       resources :categories
       resources :realestates

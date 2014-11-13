@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109123831) do
+ActiveRecord::Schema.define(version: 20141111221410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 20141109123831) do
   end
 
   add_index "details", ["permalink"], name: "index_details_on_permalink", unique: true, using: :btree
+
+  create_table "pictures", force: true do |t|
+    t.integer  "property_id"
+    t.string   "description"
+    t.boolean  "published",          default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
 
   create_table "properties", force: true do |t|
     t.string   "ref"
@@ -76,7 +88,11 @@ ActiveRecord::Schema.define(version: 20141109123831) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "permalink",   limit: 40
+    t.string   "permalink",         limit: 40
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   add_index "realestates", ["permalink"], name: "index_realestates_on_permalink", unique: true, using: :btree

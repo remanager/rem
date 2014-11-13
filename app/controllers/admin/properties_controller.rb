@@ -43,6 +43,11 @@ class Admin::PropertiesController < AdminController
   def update
     respond_to do |format|
       if @property.update(property_params)
+        if params[:pictures]
+          params[:pictures].each do |picture|
+            @property.pictures.create(image: picture)
+          end
+        end
         format.html { redirect_to [:admin, @property], notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else
@@ -62,6 +67,11 @@ class Admin::PropertiesController < AdminController
     end
   end
 
+  def unpublish_picture
+    @property = Property.find(params[:property_id])
+    @property.pictures.find(params[:picture_id]).update_attribute(:published, false)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_property
@@ -70,7 +80,9 @@ class Admin::PropertiesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    params.require(:property).permit(:ref, :title, :town_id, :user_id, category_ids: [], detail_ids: [])
+    valid_params = [:ref, :title, :town_id, :user_id, category_ids: [], detail_ids: [],
+                    picture_attributes: [:image, :description]]
+    params.require(:property).permit(valid_params)
   end
 
   def current_resource

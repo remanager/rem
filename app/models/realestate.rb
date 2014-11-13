@@ -3,9 +3,11 @@ class Realestate < ActiveRecord::Base
 
   belongs_to :user
   has_many :properties
+  has_attached_file :logo, styles: { thumb: '100>' }
   alias_attribute :agent, :user
 
   validates_presence_of :name
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
   after_create -> { update_attribute(:permalink, get_permalink(:id, :name)) }
 
   def to_s

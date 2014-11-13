@@ -40,4 +40,7 @@ Rails.application.configure do
   if defined? BetterErrors
     BetterErrors::Middleware.allow_ip! '10.0.2.2/8'
   end
+
+  # Paperclip
+  Paperclip.options[:command_path] = '/usr/bin'
 end

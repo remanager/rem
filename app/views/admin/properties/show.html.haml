@@ -13,6 +13,12 @@
 %p
   %b= t('property.details') + ':'
   = @property.details.any? ? @property.details.pluck(:name).join(', ') : t('property.no_details')
+- if @property.pictures.size > 0
+  %p Images
+  - @property.pictures.each do |picture|
+    = image_tag picture.image.url(:thumb)
+    %small= picture.description if picture.description.present?
+    %br
 
 = link_to t('common.edit'), edit_admin_property_path(@property)
 \|
