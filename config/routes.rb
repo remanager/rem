@@ -16,7 +16,15 @@ Rails.application.routes.draw do
       get 'dashboard' => 'dashboard#index', as: 'dashboard'
     end
 
-  root 'admin/dashboard#index'
+    get 'public/index'
+    get '/:realestate_id/search', to: 'public#search', as: 'search'
+    post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
+
+    get '/:id', to: 'public#show', as: 'realestate'
+    get '/:realestate_id/:id', to: 'public#property', as: 'property'
+    get '/:realestate_id/category/:id', to: 'public#category', as: 'category'
+
+    root 'public#index'
   end
 
   match '/*locale/admin/*path', to: redirect("/#{I18n.default_locale}/admin/%{path}"), via: :all
