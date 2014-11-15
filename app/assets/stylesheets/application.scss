@@ -30,3 +30,27 @@
   font-weight: bold;
 }
 
+.property {
+  background-color: $secondary-color;
+  padding: 7px;
+  radius: 3px;
+  header {
+    background-color: $primary-color;
+    a {
+      color: white;
+      font-weight: 66666600;
+    }
+  }
+  h1 {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  .likers {
+    font-size: 3rem;
+    padding: 5px;
+  }
+}
+
+.foundicon-heart {
+  color: red;
+}

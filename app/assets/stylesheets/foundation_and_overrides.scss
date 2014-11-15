@@ -60,7 +60,7 @@ $body-font-weight: $font-weight-normal;
 
 // We use these as default colors throughout
 $primary-color: #008CBA;
-// $secondary-color: #e7e7e7;
+$secondary-color: #E7E7E7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
@@ -75,7 +75,7 @@ $primary-color: #008CBA;
 // $shiny-edge-color: rgba(#fff, .5);
 // $shiny-edge-active-color: rgba(#000, .2);
 
-// $column-gutter: rem-calc(30);
+$column-gutter: rem-calc(60);
 
 // Media Query Ranges
 // $small-range: (0em, 40em);
