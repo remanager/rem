@@ -1,13 +1,27 @@
-%nav
-  - if current_user.realestate && allow?(:"admin/realestates", :edit, current_user.realestate)
-    = link_to t('nav.realestate'), edit_admin_realestate_path(current_user.realestate)
-  - if allow? :"admin/realestates", :index
-    = link_to t('nav.realestates'), admin_realestates_path
-  - if allow? :"admin/properties", :index
-    = link_to t('nav.properties'), admin_properties_path
-  - if allow? :"admin/categories", :index
-    = link_to t('nav.categories'), admin_categories_path
-  - if allow? :"admin/towns", :index
-    = link_to t('nav.towns'), admin_towns_path
-  - if allow? :"admin/users", :index
-    = link_to t('nav.users'), admin_users_path
+%nav.top-bar{ 'data-topbar' => '', role: 'navigation' }
+  %ul.title-area
+    %li.name
+      %h1= link_to current_realestate || 'REM', admin_dashboard_path
+
+    %li.toggle-topbar.menu-icon
+      %a{ href: '#' }
+        %span Menu
+
+  %section.top-bar-section
+    %ul.left
+      - if current_realestate && allow?(:"admin/realestates", :edit, current_user.realestate)
+        %li= link_to t('nav.realestate'), edit_admin_realestate_path(current_user.realestate)
+      - if allow? :"admin/realestates", :index
+        %li= link_to t('nav.realestates'), admin_realestates_path
+      - if allow? :"admin/properties", :index
+        %li= link_to t('nav.properties'), admin_properties_path
+      - if allow? :"admin/categories", :index
+        %li= link_to t('nav.categories'), admin_categories_path
+      - if allow? :"admin/towns", :index
+        %li= link_to t('nav.towns'), admin_towns_path
+      - if allow? :"admin/users", :index
+        %li= link_to t('nav.users'), admin_users_path
+
+    %ul.right.icon-bar
+      %li=link_to " #{ current_user.email }", edit_admin_user_path(current_user), class: 'general foundicon-settings', title: 'Edit profile'
+      %li=link_to ' Logout', logout_path, class: 'general foundicon-unlock', title: 'Logout'
