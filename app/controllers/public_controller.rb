@@ -21,6 +21,9 @@ class PublicController < ApplicationController
   def categories_show
     @category = @realestate.categories.find(params[:id])
     @properties = @category.properties.where(realestate: @realestate)
+    @title = "Properties on #{ @category.name }"
+
+    render :show
   end
 
   def search
