@@ -10,24 +10,23 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require foundation_and_overrides
-
  */
 
+@import 'foundation_and_overrides';
+@import 'general_foundicons';
+@import 'social_foundicons';
 
 .main {
-  height:60px;
-  margin-bottom:30px;
+  height: 60px;
+  margin-bottom: 30px;
 }
 
 #logo {
-  margin:0;
-  padding:5px 0;
+  margin: 0;
+  padding: 5px 0;
   background: #000;
   color: #fff;
-  font-size:2rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
