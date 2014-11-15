@@ -24,6 +24,7 @@ end
 group :development do
   gem 'ruby_gntp'
   gem 'rails-erd'
+  gem 'xray-rails' # Ctrl+Shift+X
 end
 
 group :development, :test do
