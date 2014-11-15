@@ -75,7 +75,7 @@ $secondary-color: #E7E7E7;
 // $shiny-edge-color: rgba(#fff, .5);
 // $shiny-edge-active-color: rgba(#000, .2);
 
-$column-gutter: rem-calc(60);
+// $column-gutter: rem-calc(60);
 
 // Media Query Ranges
 // $small-range: (0em, 40em);
@@ -1322,11 +1322,11 @@ $sub-nav-active-cursor: default;
 
 
 
-@import   "foundation/components/forms",
-          "foundation/components/buttons",
-          "foundation/components/grid",
-          "foundation/components/type",
-          "foundation/components/visibility";
+@import "foundation/components/grid",
+        "foundation/components/forms",
+        "foundation/components/buttons",
+        "foundation/components/type",
+        "foundation/components/visibility";
 /*
 "foundation/components/block-grid",
 "foundation/components/accordion",
