@@ -1,0 +1,44 @@
+-# public/_property.html.haml
+
+%article{ id: property.id }
+  %header.row
+    .large-12.columns
+      %h1= link_to property.ref, property_path(@realestate, property)
+  %section.row
+    .large-12.columns
+      %article.row
+        .large-12.columns
+          %h1 Description
+          %p Description not implemented yet in model Property.
+      %article.row
+        .large-12.columns
+          %h1 Category
+          - property.categories.each do |category|
+            %p= link_to category.name, category_path(@realestate, category)
+      %article.row
+        .large-12.columns
+          %h1 Details
+          - property.details.each do |detail|
+            %p= link_to detail.name, '#'
+
+    .large-12.columns
+      .row.center.likers
+        .small-3.columns
+          %i.general.foundicon-heart
+        .small-3.columns
+          %i.large.social.foundicon-facebook
+        .small-3.columns
+          %i.social.foundicon-twitter
+        .small-3.columns
+          %i.general.foundicon-mail
+
+-# %h3= link_to property.ref.upcase, property_path(@realestate.id, property)
+-# .details
+-#   %h5 Detail list
+-#   - property.details.each do |detail|
+-#     .detail
+-#       %p= detail.name
+-#   %h5 Category list
+-#   -property.categories.each do |category|
+-#     .category
+-#       %p= category.name
