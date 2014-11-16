@@ -24,6 +24,8 @@ end
 group :development do
   gem 'ruby_gntp'
   gem 'rails-erd'
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
 end
 
 group :development, :test do
