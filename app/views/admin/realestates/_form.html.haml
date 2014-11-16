@@ -1,29 +1,47 @@
 = form_for [:admin, @realestate], html: { multipart: true } do |f|
-  - if @realestate.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@realestate.errors.count, "error")} prohibited this realestate from being saved:"
-      %ul
-        - @realestate.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'admin/shared/errors'
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :address
-    = f.text_field :address
   - if current_user.admin?
-    .field
-      = f.label :user
-      = f.collection_select(:user, User.where(role: :owner), :id, :email, prompt: true)
-  - if @realestate.logo.present?
-    .field
-      = image_tag @realestate.logo.url(:thumb)
-  .field
-    = f.label :logo
-    = f.file_field :logo
-  .actions
-    = f.submit t('common.save'), class: :button
+    .row
+      .medium-2.columns
+        = f.label :user
+      .medium-4.columns
+        = f.collection_select(:user, User.where(role: :owner), :id, :email, prompt: true)
+      .medium-1.columns.medium-offset-2.small-1.text-right
+        -# = f.check_box :published
+        = check_box_tag 'publishd'
+      .medium-1.columns.small-6.left
+        -# = f.label :published
+        published
+
+  .row
+    .medium-2.columns
+      = f.label :name
+    .medium-10.columns
+      = f.text_field :name
+
+  .row
+    .medium-2.columns
+      = f.label :description
+    .medium-10.columns
+      = f.text_area :description
+
+  .row
+    .medium-2.columns
+      = f.label :address
+    .medium-10.columns
+      = f.text_field :address
+
+  .row
+    - if @realestate.logo.present?
+      .medium-5.columns= image_tag @realestate.logo.url(:thumb)
+    .medium-3.columns.small-7
+      = f.label :logo, 'Add or change the logotype'
+    .medium-3.columns.small-5.left
+      = f.file_field :logo
+
+  .row
+    .small-12.columns.text-center
+      = f.submit t('common.save'), class: 'button'
+      - if current_user.admin?
+        = link_to 'Cancel', admin_realestates_path, class: 'button'
