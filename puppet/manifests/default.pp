@@ -103,6 +103,10 @@ class { 'memcached': }
 
 # --- Packages -----------------------------------------------------------------
 
+package { 'imagemagick':
+  ensure => installed
+}
+
 package { 'curl':
   ensure => installed
 }
