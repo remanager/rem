@@ -10,17 +10,23 @@
   %section.top-bar-section
     %ul.left
       - if current_realestate && allow?(:"admin/realestates", :edit, current_user.realestate)
-        %li= link_to t('nav.realestate'), edit_admin_realestate_path(current_user.realestate)
+        %li{class: ('active' if @active['admin/realestate'])}
+          = link_to t('nav.realestate'), edit_admin_realestate_path(current_user.realestate)
       - if allow? :"admin/realestates", :index
-        %li= link_to t('nav.realestates'), admin_realestates_path
+        %li{class: ('active' if @active['admin/realestates'])}
+          = link_to t('nav.realestates'), admin_realestates_path
       - if allow? :"admin/properties", :index
-        %li= link_to t('nav.properties'), admin_properties_path
+        %li{class: ('active' if @active['admin/properties'])}
+          = link_to t('nav.properties'), admin_properties_path
       - if allow? :"admin/categories", :index
-        %li= link_to t('nav.categories'), admin_categories_path
+        %li{class: ('active' if @active['admin/categories'])}
+          = link_to t('nav.categories'), admin_categories_path
       - if allow? :"admin/towns", :index
-        %li= link_to t('nav.towns'), admin_towns_path
+        %li{class: ('active' if @active['admin/towns'])}
+          = link_to t('nav.towns'), admin_towns_path
       - if allow? :"admin/users", :index
-        %li= link_to t('nav.users'), admin_users_path
+        %li{class: ('active' if @active['admin/users'])}
+          = link_to t('nav.users'), admin_users_path
 
     %ul.right.icon-bar
       %li=link_to " #{ current_user.email }", edit_admin_user_path(current_user), class: 'general foundicon-settings', title: 'Edit profile'
