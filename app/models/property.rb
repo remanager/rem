@@ -4,7 +4,7 @@ class Property < ActiveRecord::Base
   belongs_to :town
   belongs_to :user
   belongs_to :realestate
-  has_many :pictures
+  has_many :pictures #order by order =$
   has_many :properties_categories, class_name: 'PropertiesCategories'
   has_many :categories, through: :properties_categories
   has_many :properties_details, class_name: 'PropertiesDetails'
@@ -20,5 +20,9 @@ class Property < ActiveRecord::Base
 
   def to_s
     ref
+  end
+
+  def picture_url size
+    pictures.first.try(:image).try(:url, size)
   end
 end

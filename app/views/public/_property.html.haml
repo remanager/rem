@@ -3,9 +3,12 @@
 %article{ id: property.id }
   %header.row
     .large-12.columns
-      %h1= link_to property.ref, property_path(@realestate, property)
+      %h1= link_to property.title || property.ref, property_path(@realestate, property)
   %section.row
     .large-12.columns
+      %article.row
+        .large-12.columns
+          %img{src: (property.picture_url(:medium) || 'http://lorempixel.com/300/150')}
       %article.row
         .large-12.columns
           %h1 Description
