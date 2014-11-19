@@ -1,5 +1,5 @@
 = form_for [:admin, @realestate], html: { multipart: true } do |f|
-  = render 'admin/shared/errors'
+  = render 'admin/shared/errors', model: @realestate
 
   - if current_user.admin?
     .row
