@@ -3,8 +3,10 @@
     = @title || 'List of properties'
     %small= "(#{ @properties.count })"
 
-  .list.row
-    - @properties.each do |property|
+  .list
+    - @properties.each_with_index do |property, i|
+      - if i % 3 == 0
+        .row
       .large-4.columns
         .property
           = render 'property', property: property
