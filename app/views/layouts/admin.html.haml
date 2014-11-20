@@ -7,6 +7,7 @@
     %title= content_for?(:title) ? yield(:title) : 'REM [Admin area] -- Realestate Manager'
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'vendor/modernizr'
+    = javascript_include_tag 'https://code.jquery.com/jquery-2.1.1.min.js'
     = csrf_meta_tags
 
   %body
