@@ -35,19 +35,24 @@
     .small-11.columns
       = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
 
+  .row
+    .small-12.columns
+      %h4 Images
+
   - if @property.pictures.size > 0
     .row
       - @property.pictures.each do |picture|
-        .medium-4.columns.text-center
+        .medium-4.columns.text-center.left
           = image_tag picture.image.url(:medium)
           %br
-          = link_to 'DELETE', admin_property_destroy_picture_path(property_id: @property.id, picture_id: picture.id),
-            method: :delete, remote: true
+          - if picture.published
+            = link_to 'DELETE', admin_property_destroy_picture_path(property_id: @property.id, picture_id: picture.id),
+              method: :delete, remote: true
+
   .row
     .small-2.columns
-      .general.foundicon-plus{title: 'Add image'}
+      #property-add-icon.general.foundicon-add-doc{title: 'Add image'}
     .small-10.columns.pictures-form
-    = file_field_tag 'pictures[]', type: 'file', multiple: true
   -# .field
   -#   = f.fields_for :pictures do |pictures|
   -#     = pictures.file_field :image
@@ -56,8 +61,6 @@
     = f.submit t('.save'), class: 'button'
     = link_to 'Cancel', admin_properties_path, class: 'button'
 
--# :coffee
-  -# alert 'test'
-  -# $ ->
-  -#   $('.foundicon-plus').click, ->
-  -#     alert 'click'
+:coffee
+  $('#property-add-icon').click ->
+    $('.pictures-form').append $("#{ j render('admin/shared/picture') }")

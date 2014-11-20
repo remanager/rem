@@ -50,9 +50,17 @@
   }
 }
 
-.icon-bar {
+.icon-bar, #property-add-icon {
   font-size: 3rem;
 }
+
+#property-add-icon.foundicon-add-doc {
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
 .foundicon-heart:hover {
   color: #dd4b39;
 }
