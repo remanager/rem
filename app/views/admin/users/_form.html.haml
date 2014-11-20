@@ -1,5 +1,5 @@
 = form_for [:admin, @user] do |f|
-  = render 'admin/shared/errors'
+  = render 'admin/shared/errors', model: @user
 
   .row
     .medium-1.columns
