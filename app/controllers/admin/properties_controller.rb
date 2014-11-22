@@ -26,6 +26,7 @@ class Admin::PropertiesController < AdminController
   def create
     @property = Property.new(property_params)
     @property.realestate = current_user.realestate
+    @property.realestate_id = params[:property][:realestate_id] if current_user.admin?
 
     respond_to do |format|
       if @property.save
@@ -44,8 +45,9 @@ class Admin::PropertiesController < AdminController
   def update
     respond_to do |format|
       if @property.update(property_params)
+        @property.update_attribute(:realestate_id, params[:property][:realestate_id]) if current_user.admin?
         add_pictures
-        format.html { redirect_to [:admin, @property], notice: 'Property was successfully updated.' }
+        format.html { redirect_to admin_property_path(@property), notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else
         format.html { render :edit }

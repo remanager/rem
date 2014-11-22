@@ -4,9 +4,16 @@
   .row
     .medium-1.columns
       = f.label :title
-    .medium-5.columns
+    .medium-4.columns
       = f.text_field :title
-    .medium-1.medium-offset-2.columns
+    - if current_user.admin?
+      .medium-1.columns
+        = f.label :realestate_id
+      .medium-2.columns
+        = f.collection_select(:realestate_id, Realestate.all, :id, :name, prompt: true)
+    - else
+      .medium-3.columns
+    .medium-1.columns
       = f.label :ref
     .medium-3.columns
       = f.text_field :ref

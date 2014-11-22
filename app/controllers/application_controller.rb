@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     {
-      host: 'localhost:3000',
       locale: I18n.locale
     }
   end
