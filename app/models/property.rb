@@ -13,6 +13,7 @@ class Property < ActiveRecord::Base
   alias_attribute :owner, :user
 
   validates_presence_of :ref, :title, :town
+  validates :description, length: { maximum: 2000 }
   after_create -> { update_attribute(:permalink, get_permalink(:id, :title)) }
 
   scope :same_realestate, ->(realestate_id) { Property.where(realestate_id: realestate_id) }
@@ -22,7 +23,7 @@ class Property < ActiveRecord::Base
     ref
   end
 
-  def picture_url size
+  def picture_url(size = :medium)
     pictures.first.try(:image).try(:url, size)
   end
 end

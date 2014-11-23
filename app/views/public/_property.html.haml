@@ -12,22 +12,46 @@
       %article.row
         .large-12.columns
           %h1 Description
-          %p Description not implemented yet in model Property.
-      - if property.categories.present?
-        %article.row
-          .large-12.columns
-            %h1 Category
-            - property.categories.each do |category|
-              %p= link_to category.name, category_path(@realestate, category)
+          %p= truncate(property.description, 500)
+
+      - if property.price_sale.present?
+        .row
+          .small-8.columns
+            %h1 Sale
+          .small-4.columns
+            = "#{ property.price_sale } €"
+
+      - if property.price_rent.present?
+        .row
+          .small-8.columns
+            %h1 Rent
+          .small-4.columns
+            = "#{ property.price_rent } € / month"
+
+      %article.row
+        .small-4.columns
+          %h1 Size
+        .small-2.columns.left
+          = property.size || '---'
+        .small-4.columns
+          %h1 Rooms
+        .small-2.columns.left
+          = property.nrooms || '---'
+      -# - if property.categories.present?
+      -#   %article.row
+      -#     .large-12.columns
+      -#       %h1 Category
+      -#       - property.categories.each do |category|
+      -#         %p= link_to category.name, category_path(@realestate, category)
       - if property.details.present?
         %article.row
           .large-12.columns
-            %h1 Details
+            -# %h1 Details
             - property.details.each do |detail|
               .row
                 .large-1.columns
                   .general.foundicon-checkmark
-                .large-10.columns{ style: 'float: left;' }= detail.name
+                .large-10.columns.left= detail.name
 
     .large-12.columns
       .row.center.icon-bar.likers

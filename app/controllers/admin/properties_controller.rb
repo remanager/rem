@@ -84,7 +84,7 @@ class Admin::PropertiesController < AdminController
   end
 
   def picture_params
-    params.require(:picture).permit(:image, :description)
+    params.require(:picture).permit(:image, :description, :order)
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -94,7 +94,8 @@ class Admin::PropertiesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    valid_params = [:ref, :title, :town_id, :user_id, category_ids: [], detail_ids: []]
+    valid_params = [:ref, :title, :town_id, :user_id, :price_sale, :price_rent, :nrooms,
+                    :description, category_ids: [], detail_ids: []]
     params.require(:property).permit(valid_params)
   end
 

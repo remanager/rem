@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       resources :users
       resources :properties do
         delete '/destroy_picture/:picture_id' => 'properties#unpublish_picture', as: 'destroy_picture'
+        member do
+          get 'publish'
+        end
       end
       resources :details
       resources :categories

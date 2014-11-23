@@ -5,8 +5,8 @@
     .medium-1.columns
       = f.label :title
     .medium-4.columns
-      = f.text_field :title
-    - if current_user.admin?
+      = f.text_field :title, placeholder: 'Set a title'
+    - if @current_user.admin?
       .medium-1.columns
         = f.label :realestate_id
       .medium-2.columns
@@ -16,19 +16,45 @@
     .medium-1.columns
       = f.label :ref
     .medium-3.columns
-      = f.text_field :ref
+      = f.text_field :ref, placeholder: 'Set a reference'
 
   .row
     .medium-1.columns
       = f.label :town_id, 'Town'
     .medium-3.columns.left
       = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
+    .medium-3.columns.left
+      .button.tiny{ onclick: 'addTown()' } Add new
 
   .row
     .medium-1.columns
-      = f.label :user_id
+      = f.label :user_id, 'Owner'
     .medium-3.columns.left
       = f.collection_select(:user_id, User.where(role: :owner), :id, :email, prompt: true)
+    .medium-3.columns.left
+      .button.tiny{ onclick: 'addOwner()' } Add new
+
+  .row
+    .medium-1.columns
+      = f.label :size, 'Size (m2)'
+    .medium-2.columns.left
+      = f.number_field :size, placeholder: '12000'
+
+    .medium-1.medium-offset-1.columns
+      = f.label :price_sale, 'Sale (€)'
+    .medium-2.columns.left
+      = f.number_field :price_sale, placeholder: 'Sale price in €'
+
+    .medium-1.medium-offset-1.columns
+      = f.label :price_rent, 'Rent (€)'
+    .medium-2.columns.left
+      = f.number_field :price_rent, placeholder: 'Rent price in €/month'
+
+  .row
+    .medium-1.columns
+      = f.label :description
+    .medium-11.columns
+      = f.text_area :description, placeholder: 'Insert a sort of description...', rows: '5'
 
   .row
     .small-1.columns
@@ -67,6 +93,7 @@
   .row.text-center
     = f.submit t('.save'), class: 'button'
     = link_to 'Cancel', admin_properties_path, class: 'button'
+    = link_to 'Publish', publish_admin_property_path(@property), remote: true, class: 'button'
 
 :coffee
   $('#property-add-icon').click ->
