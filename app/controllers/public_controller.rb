@@ -30,7 +30,7 @@ class PublicController < ApplicationController
     @properties = @realestate.search(rest_params)
 
     return render :show, notice: 'No property have been found.' unless @properties
-    return redirect_to property_path(@realestate, @properties) if @properties.class == Property
+    return redirect_to property_path(@realestate, @properties) if @properties.is_a? Property
     render :show
   end
 
