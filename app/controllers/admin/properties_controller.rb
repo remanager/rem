@@ -74,6 +74,10 @@ class Admin::PropertiesController < AdminController
     end
   end
 
+  def publish_property
+    @property.update_attribute(:published, true)
+  end
+
   private
   def add_pictures
     if params[:pictures]
