@@ -1,5 +1,7 @@
 # Category seeds
 
-%w(Ofertas 'Cerca del mar' 'Obra nueva').each do |cat_name|
+puts 'Seeding Category'
+
+%w(Ofertas Mar Montaña Obra-Nueva).each do |cat_name|
   Category.create(name: cat_name)
 end

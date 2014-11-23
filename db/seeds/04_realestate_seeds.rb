@@ -1,5 +1,7 @@
 # Realestate seeds
 
+puts 'Seeding Realestate'
+
 agent = User.find_by(role: 'agent')
 
 description = <<EOF
