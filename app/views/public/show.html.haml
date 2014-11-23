@@ -1,7 +1,7 @@
 %section{ id: 'property-list' }
   %h1
     = @title || 'List of properties'
-    %small= "(#{ @properties.count })"
+    %small= "(#{ @properties.size  })"
 
   .list
     - @properties.each_with_index do |property, i|
