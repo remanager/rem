@@ -12,7 +12,7 @@
       %article.row
         .large-12.columns
           %h1 Description
-          %p= truncate(property.description, 500)
+          %p= truncate(property.description, length: 500)
 
       - if property.price_sale.present?
         .row
