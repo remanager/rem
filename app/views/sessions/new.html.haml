@@ -1,17 +1,22 @@
 %h1 Log in
 
-= form_tag sessions_path do
-  .row
-    .large-12.columns
-      = label_tag :email
-      = text_field_tag :email, params[:email]
-  .row
-    .large-12.columns
-      = label_tag :password
-      = password_field_tag :password
-  .row
-    .large-12.columns
-      = check_box_tag :remember_me, 1, params[:remember_me]
-      = label_tag :remember_me
-
-  = submit_tag 'Log in', class: :button
+#login-box
+  = form_tag sessions_path do
+    .row
+      .medium-4.columns
+        = label_tag :email
+      .medium-8.columns.left
+        = text_field_tag :email, params[:email]
+    .row
+      .medium-4.columns
+        = label_tag :password
+      .medium-8.columns.left
+        = password_field_tag :password
+    .row
+      .small-1.small-offset-2.columns
+        = check_box_tag :remember_me, 1, params[:remember_me]
+      .small-8.columns.left.text-left
+        = label_tag :remember_me
+    .row
+      .small-12.columns.text-center
+        = submit_tag 'Log in', class: :button
