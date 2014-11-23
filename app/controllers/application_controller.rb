@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_realestate
-    Realestate.find(params[:realestate_id])
+    Realestate.find_by(id: params[:realestate_id])
   end
 
   def set_locale

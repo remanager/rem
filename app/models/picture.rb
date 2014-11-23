@@ -5,5 +5,5 @@ class Picture < ActiveRecord::Base
   scope :published, -> { where(published: true) }
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
-  validates_attachment_size :image, size: { less_than: 1.megabytes }
+  validates_attachment_size :image, less_than: 1.megabytes
 end
