@@ -12,31 +12,32 @@
       %article.row
         .large-12.columns
           %h1 Description
-          %p= truncate(property.description, length: 500)
+          %p= truncate(property.description, length: 100, separator: ' ')
 
       - if property.price_sale.present?
         .row
-          .small-8.columns
+          .small-7.columns
             %h1 Sale
-          .small-4.columns
+          .small-5.columns
             = "#{ property.price_sale } €"
 
       - if property.price_rent.present?
         .row
-          .small-8.columns
+          .small-6.columns
             %h1 Rent
-          .small-4.columns
+          .small-6.columns
             = "#{ property.price_rent } € / month"
 
       %article.row
-        .small-4.columns
+        .small-3.columns
           %h1 Size
-        .small-2.columns.left
+        .small-4.columns.left
           = property.size || '---'
-        .small-4.columns
+          m2
+        .small-3.columns
           %h1 Rooms
         .small-2.columns.left
-          = property.nrooms || '---'
+          = property.nrooms
       -# - if property.categories.present?
       -#   %article.row
       -#     .large-12.columns

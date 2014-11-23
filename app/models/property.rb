@@ -23,6 +23,10 @@ class Property < ActiveRecord::Base
     ref
   end
 
+  def to_param
+    permalink || id
+  end
+
   def picture_url(size = :medium)
     pictures.first.try(:image).try(:url, size)
   end
