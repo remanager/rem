@@ -84,6 +84,7 @@
 
   .row
     .small-2.columns
+      #property-edit-icon.general.foundicon-edit{title: 'Edit images'}
       #property-add-icon.general.foundicon-add-doc{title: 'Add image'}
     .small-10.columns.pictures-form
   -# .field
@@ -96,5 +97,4 @@
     = link_to 'Publish', publish_admin_property_path(@property), remote: true, class: 'button'
 
 :coffee
-  $('#property-add-icon').click ->
-    $('.pictures-form').append $("#{ j render('admin/shared/picture') }")
+  window.picture_form = "#{ j render('admin/shared/picture') }"

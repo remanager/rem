@@ -50,11 +50,12 @@
   }
 }
 
-.icon-bar, #property-add-icon {
+.icon-bar {
   font-size: 3rem;
 }
 
-#property-add-icon.foundicon-add-doc {
+#property-add-icon, #property-edit-icon {
+  font-size: 3rem;
   cursor: pointer;
   &:hover {
     color: $primary-color;
