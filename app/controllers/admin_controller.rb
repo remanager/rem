@@ -3,13 +3,18 @@ class AdminController < ApplicationController
   before_filter :authenticate_user!
   # Authorization
   before_filter :authorize_action?
+  before_filter -> { @active = { request[:controller] => true } }
   delegate :allow?, to: :current_permission
   delegate :allow_param?, to: :current_permission
-  helper_method :allow?, :allow_param?
+  helper_method :allow?, :allow_param?, :current_realestate
 
-  layout "admin"
+  layout 'admin'
 
   private
+  def current_realestate
+    current_user.realestate
+  end
+
   def authenticate_user!
     redirect_to login_path, alert: 'You must log in!' if !current_user
   end

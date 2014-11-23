@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111221410) do
+ActiveRecord::Schema.define(version: 20141123092411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,9 +55,16 @@ ActiveRecord::Schema.define(version: 20141111221410) do
     t.integer  "realestate_id"
     t.string   "permalink",     limit: 40
     t.string   "title",         limit: 100
+    t.integer  "price_sale"
+    t.integer  "price_rent"
+    t.integer  "nrooms",                     default: 1
+    t.integer  "size"
+    t.boolean  "published",                  default: false
+    t.string   "description",   limit: 2000
   end
 
   add_index "properties", ["permalink", "realestate_id"], name: "index_properties_on_permalink_and_realestate_id", unique: true, using: :btree
+  add_index "properties", ["published", "nrooms", "size"], name: "index_properties_on_published_and_nrooms_and_size", using: :btree
   add_index "properties", ["realestate_id"], name: "index_properties_on_realestate_id", using: :btree
   add_index "properties", ["town_id"], name: "index_properties_on_town_id", using: :btree
   add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree

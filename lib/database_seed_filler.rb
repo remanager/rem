@@ -1,5 +1,3 @@
-require 'ffaker'
-
 class DatabaseSeedFiller
   def initialize(opt = {})
     @tables_to_empty = opt[:tables_to_empty] || []
@@ -15,8 +13,9 @@ class DatabaseSeedFiller
   def run
     return false unless development?
 
+    require 'ffaker'
+
     clean_database
-    create_admin
     create_realestates
     create_details
     create_towns
@@ -29,11 +28,6 @@ class DatabaseSeedFiller
   def clean_database
     logging 'Cleaning database...'
     @tables_to_empty.each { |table| table.constantize.delete_all }
-  end
-
-  def create_admin
-    logging 'Creating admin user...'
-    User.create(email: 'admin@test.com', role: :admin, password: @users_pw, password_confirmation: @users_pw)
   end
 
   def create_realestates

@@ -7,4 +7,8 @@ class Town < ActiveRecord::Base
   def to_s
     name
   end
+
+  def to_param
+    permalink || id
+  end
 end

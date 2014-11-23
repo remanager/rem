@@ -10,24 +10,81 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require foundation_and_overrides
-
  */
 
+@import 'foundation_and_overrides';
+@import 'general_foundicons';
+@import 'social_foundicons';
 
 .main {
-  height:60px;
-  margin-bottom:30px;
+  height: 60px;
+  margin-bottom: 30px;
 }
 
 #logo {
-  margin:0;
-  padding:5px 0;
+  margin: 0;
+  padding: 5px 0;
   background: #000;
   color: #fff;
-  font-size:2rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
+#login-box {
+  width: 350px;
+  margin: 0 auto;
+  background-color: beige;
+  padding: 20px 20px 0 20px;
+}
+
+.property {
+  background-color: $secondary-color;
+  padding: 7px;
+  radius: 3px;
+  header {
+    background-color: $primary-color;
+    a {
+      color: white;
+      font-weight: 66666600;
+    }
+  }
+  h1 {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  .likers {
+    padding: 5px;
+  }
+}
+
+.icon-bar {
+  font-size: 3rem;
+}
+
+#property-add-icon, #property-edit-icon {
+  font-size: 3rem;
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.foundicon-heart:hover {
+  color: #dd4b39;
+}
+.foundicon-facebook:hover {
+  color: #3b5998;
+}
+.foundicon-twitter:hover {
+  color: #9ae4e8;
+}
+.foundicon-mail:hover {
+  color: orange;
+}
+.foundicon-checkmark {
+  color: green;
+}
+
+.top-bar {
+  overflow: hidden;
+}

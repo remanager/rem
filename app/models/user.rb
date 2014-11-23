@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_one :realestate
-  validates_confirmation_of :password
+  validates_confirmation_of :password, on: :create
   validates_presence_of :password, on: :create
   validates_presence_of :email
   validates_uniqueness_of :email
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_secure_password
   before_create { generate_token(:auth_token) }
 
-  scope :same_realestate, ->(realestate_id) {  User.joins('INNER JOIN properties ON properties.user_id = users.id INNER JOIN realestates ON properties.realestate_id = realestates.id').where(['realestates.id = ?', realestate_id]) }
+  scope :same_realestate, ->(id) { User.joins(realestate: :properties).where('realestates.id = ?', id).distinct }
 
   ROLES = %w(owner agent admin)
 

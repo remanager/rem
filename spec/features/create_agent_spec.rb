@@ -9,7 +9,7 @@ feature 'user creation' do
       fill_in 'Email', with: 'agent@rem.com'
       fill_in 'Password', with: '1234test'
       fill_in 'Password confirmation', with: '1234test'
-      select 'agent', from: 'Role'
+      select 'agent', from: 'user_role'
       expect{ click_button 'Save' }.to change{ User.count }.by(1)
       expect(User.last.role.to_sym).to eq :agent
       expect(page).to have_css '.flash.notice', text: 'New user created!'
@@ -23,7 +23,7 @@ feature 'user creation' do
       fill_in 'Email', with: 'owner@rem.com'
       fill_in 'Password', with: '1234test'
       fill_in 'Password confirmation', with: '1234test'
-      select 'owner', from: 'Role'
+      select 'owner', from: 'user_role'
       click_button 'Save'
       expect(agent.reload.role.to_sym).to eq :owner
       expect(agent.email).to eq('owner@rem.com')

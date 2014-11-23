@@ -1,3 +1,5 @@
+return unless Rails.env.development?
+
 require Rails.root.join('lib', 'database_seed_filler.rb')
 
 database_models = %w(

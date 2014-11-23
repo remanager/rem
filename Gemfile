@@ -26,6 +26,7 @@ group :development do
   gem 'rails-erd'
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
+  gem 'xray-rails' # Ctrl+Shift+X
 end
 
 group :development, :test do
