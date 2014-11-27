@@ -59,12 +59,12 @@ describe User do
 
       it 'gets realestate users' do
         another_agent = create :user_agent_with_realestate
-        2.times { create :property, realestate: another_agent.realestate }
+        FactoryGirl.create_list(:property, 2, realestate: another_agent.realestate)
         my_owners = []
         3.times { my_owners << create(:property, realestate: subject.realestate) }
-        my_owners.map! { |p| p.user }
+        my_owners.map! { |p| p.user.id }
 
-        expect(subject.my_users).to contain_exactly(*my_owners)
+        expect(subject.my_users.pluck(:id)).to contain_exactly(*my_owners)
       end
     end
 

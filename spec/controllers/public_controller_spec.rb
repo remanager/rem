@@ -26,7 +26,7 @@ describe PublicController do
 
         get :search, realestate_id: realestate.id, ref: 'im_unique'
 
-        expect(response).to redirect_to(property_path(realestate_id: realestate.id, id: property.id))
+        expect(response).to redirect_to(property_path(realestate_id: realestate, id: property))
       end
     end
 
