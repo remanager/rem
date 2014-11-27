@@ -94,7 +94,7 @@
   .row.text-center
     = f.submit t('.save'), class: 'button'
     = link_to 'Cancel', admin_properties_path, class: 'button'
-    = link_to 'Publish', publish_admin_property_path(@property), remote: true, class: 'button'
+    -# = link_to 'Publish', publish_admin_property_path(id: @property.id), remote: true, class: 'button'
 
 :coffee
   window.picture_form = "#{ j render('admin/shared/picture') }"

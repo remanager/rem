@@ -2,7 +2,7 @@ class Town < ActiveRecord::Base
   include ApplicationHelper
 
   validates_presence_of :name, :postcode
-  after_create -> { update_attribute(:permalink, get_permalink(:postcode, :name)) }
+  after_create -> { update_attribute(:permalink, get_permalink(:id, :name)) }
 
   def to_s
     name

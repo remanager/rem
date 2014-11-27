@@ -9,9 +9,10 @@ feature 'sign in' do
     sign_in_as @agent
     expect(page).to have_css '.flash.notice', text: 'Logged in!'
   end
+
   scenario 'shows message when credentials are wrong' do
     sign_in_with(@agent.email, 'bad_password')
-    expect(page).to have_css '.flash.alert', text: 'Invalid email or password.'
+    expect(page).to have_css '.flash.notice', text: 'Invalid email or password.'
   end
 
 end

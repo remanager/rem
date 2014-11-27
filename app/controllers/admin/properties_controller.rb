@@ -74,7 +74,7 @@ class Admin::PropertiesController < AdminController
     end
   end
 
-  def publish_property
+  def publish
     @property.update_attribute(:published, true)
   end
 
