@@ -10,7 +10,8 @@ class PublicController < ApplicationController
     @user.role = :agent
 
     if @user.save
-      flash.now[:notice] = 'You will receive an email when you\'ve got accepted'
+      flash.now[:notice] = "You will receive an email on #{ @user.email } when you've got accepted"
+      @user = User.new
     else
       flash.now[:alert] = 'Some errors happened.'
     end
