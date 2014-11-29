@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   scope :same_realestate, ->(id) { User.joins(properties: :realestate).where('realestates.id = ?', id).distinct }
   scope :pending, -> { where(status: STATUS_PENDING) }
+  scope :valid, -> { where(status: STATUS_OK) }
 
   ROLES = %w(owner agent admin)
   STATUS_BANNED = -1

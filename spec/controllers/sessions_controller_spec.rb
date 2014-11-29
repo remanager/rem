@@ -14,7 +14,7 @@ describe SessionsController do
       post :create, email: subject.email, password: 'wrong_password', remember_me: 0
 
       expect(flash[:alert]).to eq('Invalid email or password.')
-      expect(response).to render_template('new')
+      expect(response).to redirect_to login_path
       expect(cookies[:auth_token]).to be_nil
     end
   end
