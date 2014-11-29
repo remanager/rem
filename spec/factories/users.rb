@@ -3,7 +3,12 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password '123456'
     password_confirmation '123456'
+    name { Faker::Name.first_name }
+    surname { Faker::Name.last_name }
+    address { Faker::Address.street_address }
+    status User::STATUS_OK
 
+    trait(:pending) { status User::STATUS_PENDING }
     trait(:admin) { role :admin }
     trait(:agent) { role :agent }
     trait(:with_realestate) { association :realestate }

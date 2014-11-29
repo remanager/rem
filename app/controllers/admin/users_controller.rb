@@ -10,31 +10,23 @@ class Admin::UsersController < AdminController
   end
 
   def create
-    user = User.new(user_params)
-    user.set_default_role(current_user.role) unless current_user.admin?
+    @user = User.new(user_params)
+    @user.set_default_role(current_user.role) unless current_user.admin?
 
-    if user.role.to_sym == :agent
-      user.realestate = Realestate.new(name: "My Agency Profile")
-    end
+    return redirect_to admin_users_path, notice: 'New user created!' if @user.save
 
-    if user.save
-      redirect_to admin_users_path, notice: 'New user created!'
-    else
-      flash[:alert] = 'Some errors happened.'
-      render :new
-    end
+    flash[:alert] = 'Some errors happened.'
+    render :new
   end
 
   def edit
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: 'User updated!'
-    else
-      flash[:alert] = 'Error updating.'
-      render :edit
-    end
+    return redirect_to admin_users_path, notice: 'User updated!' if @user.update(user_params)
+
+    flash[:alert] = 'Error updating.'
+    render :edit
   end
 
   def destroy

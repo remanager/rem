@@ -13,7 +13,7 @@ describe SessionsController do
     it 'fails authenticating user' do
       post :create, email: subject.email, password: 'wrong_password', remember_me: 0
 
-      expect(flash[:notice]).to eq('Invalid email or password.')
+      expect(flash[:alert]).to eq('Invalid email or password.')
       expect(response).to render_template('new')
       expect(cookies[:auth_token]).to be_nil
     end

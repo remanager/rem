@@ -5,7 +5,7 @@
     = f.label :email
   .medium-9.columns.left
     = f.text_field :email
-  - if current_user.try(:admin?)
+  - if params[:controller].starts_with?('admin') && current_user
     .medium-2.columns
       = f.select(:role, User.possible_roles(current_user.role), prompt: true)
 
@@ -38,7 +38,7 @@
 .row
   .small-12.columns.text-center
     = f.submit 'Save', class: 'button'
-    - if current_user.try(:admin?)
+    - if params[:controller].starts_with?('admin') && current_user.try(:admin?) && @user.persisted?
       = link_to 'Approve', approve_admin_user_path(id: @user), class: 'button success' if @user.status != User::STATUS_OK
       = link_to 'Ban', ban_admin_user_path(id: @user), class: 'button alert' if @user.status != User::STATUS_BANNED
     = link_to 'Cancel', cancel_path, class: 'button' if cancel_path ||= cancel_path
