@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :properties
   validates_confirmation_of :password, on: :create
   validates_presence_of :password, on: :create
-  validates_presence_of :email
+  validates_presence_of :email, :name, :surname, :address
   validates_uniqueness_of :email
   validates_format_of :email, with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
   has_secure_password
@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   scope :same_realestate, ->(id) { User.joins(properties: :realestate).where('realestates.id = ?', id).distinct }
 
   ROLES = %w(owner agent admin)
+  STATUS_BANNED = -1
+  STATUS_PENDING = 0
+  STATUS_OK = 1
 
   def set_default_role(current_role)
     if current_role

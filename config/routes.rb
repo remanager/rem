@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
 
     get 'public/index'
+    post '/create_agent', to: 'public#create_agent', as: 'create_agent'
     get '/:realestate_id/search', to: 'public#search', as: 'search'
     post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
 

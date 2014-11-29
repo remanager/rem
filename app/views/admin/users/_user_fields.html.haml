@@ -1,0 +1,41 @@
+= render 'admin/shared/errors', model: @user
+
+.row
+  .medium-1.columns
+    = f.label :email
+  .medium-9.columns.left
+    = f.text_field :email
+  - if current_user.try(:admin?)
+    .medium-2.columns
+      = f.select(:role, User.possible_roles(current_user.role), prompt: true)
+
+.row
+  .medium-1.columns
+    = f.label :password
+  .medium-5.columns.left
+    = f.password_field :password
+  .medium-1.columns
+    = f.label :password_confirmation
+  .medium-5.columns.left
+    = f.password_field :password_confirmation
+
+.row
+  .medium-1.columns
+    = f.label :name
+  .medium-5.columns.left
+    = f.text_field :name
+  .medium-1.columns
+    = f.label :surname
+  .medium-5.columns.left
+    = f.text_field :surname
+
+.row
+  .medium-1.columns
+    = f.label :address
+  .medium-11.columns.left
+    = f.text_field :address
+
+.row
+  .small-12.columns.text-center
+    = f.submit 'Save', class: 'button'
+    = link_to 'Cancel', cancel_path, class: 'button' if cancel_path ||= cancel_path

@@ -1,4 +1,8 @@
-%h1= 'Realestates'
-- @realestates.each do |realestate|
-  .realestate
-    %h3= link_to realestate.name, realestate
+%h1= 'REM - Realestate Manager'
+
+%article
+  .row
+    %h3 Ask for an account.
+  .row
+    = form_for @user, url: create_agent_path do |f|
+      = render 'admin/users/user_fields', f: f
