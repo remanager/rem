@@ -6,9 +6,10 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
 
     if !user
-      flash[:notice] = 'Invalid email or password.'
-      return render('new', notice: 'Invalid email or password.')
+      flash.now[:alert] = 'Invalid email or password.'
+      return render 'new'
     end
+
     if params[:remember_me]
       cookies.permanent[:auth_token] = user.auth_token
     else

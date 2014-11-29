@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy, :approve, :ban]
 
   def index
     @users = current_user.my_users
@@ -43,6 +43,16 @@ class Admin::UsersController < AdminController
     else
       redirect_to admin_users_path, alert: 'Error deleting.'
     end
+  end
+
+  def approve
+    @user.update_attribute(:status, User::STATUS_OK)
+    redirect_to edit_admin_user_path(id: @user)
+  end
+
+  def ban
+    @user.update_attribute(:status, User::STATUS_BANNED)
+    redirect_to edit_admin_user_path(id: @user)
   end
 
   private

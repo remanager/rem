@@ -37,6 +37,18 @@
   padding: 20px 20px 0 20px;
 }
 
+#pending-users {
+  background-color: beige;
+  padding: 20px;
+  h5 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+  .row {
+    margin-bottom: 1.2rem;
+  }
+}
+
 .property {
   background-color: $secondary-color;
   padding: 7px;

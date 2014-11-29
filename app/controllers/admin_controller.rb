@@ -6,11 +6,15 @@ class AdminController < ApplicationController
   before_filter -> { @active = { request[:controller] => true } }
   delegate :allow?, to: :current_permission
   delegate :allow_param?, to: :current_permission
-  helper_method :allow?, :allow_param?, :current_realestate
+  helper_method :current_user, :allow?, :allow_param?, :current_realestate
 
   layout 'admin'
 
   private
+  def current_user
+    @current_user ||= User.find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
+  end
+
   def current_realestate
     current_user.realestate
   end

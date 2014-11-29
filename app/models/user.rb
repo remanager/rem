@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
 
   scope :same_realestate, ->(id) { User.joins(properties: :realestate).where('realestates.id = ?', id).distinct }
+  scope :pending, -> { where(status: STATUS_PENDING) }
 
   ROLES = %w(owner agent admin)
   STATUS_BANNED = -1
@@ -44,8 +45,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def admin?
-    self.role == :admin
+  def name_complete
+    "#{ name } #{ surname }"
   end
 
   def role?(base_role)

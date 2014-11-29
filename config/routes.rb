@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     resources :password_resets, only: [:new, :create, :edit, :update]
 
     namespace :admin do
-      resources :users
+      resources :users, except: [:show] do
+        member do
+          get :approve
+          get :ban
+        end
+      end
       resources :properties do
         delete '/destroy_picture/:picture_id' => 'properties#unpublish_picture', as: 'destroy_picture'
         member do
