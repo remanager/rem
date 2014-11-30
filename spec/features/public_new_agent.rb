@@ -16,10 +16,8 @@ describe 'new agent from public site' do
     visit '/admin'
     expect(current_path).to eq(login_path(locale: :en))
 
-    fill_in 'Email', with: 'ramonet@example.com'
-    fill_in 'Password', with: '123456'
-    click_button 'Log in'
-    # expect(current_path).to eq(login_path(locale: :en))
+    sign_in_with 'ramonet@example.com', '123456'
+    expect(current_path).to eq(login_path(locale: :en))
     expect(page).to have_css('.alert', text: 'You user, is still approval pending.')
 
     sign_in_as admin
@@ -28,10 +26,7 @@ describe 'new agent from public site' do
     expect(User.find_by(email: 'ramonet@example.com').status).to eq(User::STATUS_OK)
 
     visit logout_path
-    visit login_path
-    fill_in 'Email', with: 'ramonet@example.com'
-    fill_in 'Password', with: '123456'
-    click_button 'Log in'
+    sign_in_with 'ramonet@example.com', '123456'
     expect(current_path).to eq(admin_dashboard_path(locale: :en))
     expect(page).to have_css('.notice', text: 'Logged in')
   end
