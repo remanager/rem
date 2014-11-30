@@ -39,11 +39,12 @@ class Admin::UsersController < AdminController
 
   def approve
     @user.update_attribute(:status, User::STATUS_OK)
+    @user.create_realestate(name: "#{ @user.name }'s Realestate", email: @user.email, address: @user.address)
     redirect_to edit_admin_user_path(id: @user)
   end
 
   def ban
-    @user.update_attribute(:status, User::STATUS_BANNED)
+    @user.update_attribute(status: User::STATUS_BANNED, auth_token: nil)
     redirect_to edit_admin_user_path(id: @user)
   end
 
