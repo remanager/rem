@@ -23,11 +23,21 @@ describe 'new agent from public site' do
     sign_in_as admin
     expect(page).to have_content 'Ramonet El monet - ramonet@example.com'
     click_link 'Accept'
-    expect(User.find_by(email: 'ramonet@example.com').status).to eq(User::STATUS_OK)
+    ramonet = User.find_by(email: 'ramonet@example.com')
+    expect(ramonet.status).to eq(User::STATUS_OK)
+    expect(ramonet.realestate).not_to be_nil
 
     visit logout_path
     sign_in_with 'ramonet@example.com', '123456'
-    expect(current_path).to eq(admin_dashboard_path(locale: :en))
+    expect(current_path).to eq(edit_admin_realestate_path(locale: :en, id: ramonet.realestate))
     expect(page).to have_css('.notice', text: 'Logged in')
+
+    fill_in 'Realestate name', with: 'Nice Your House'
+    fill_in 'Phone', with: '902202122'
+    click_button 'Save'
+    expect(ramonet.reload.realestate.name).to eq 'Nice Your House'
+    click_link 'Publish'
+    expect(ramonet.reload.realestate).to be_published
+    expect(current_path).to eq admin_dashboard_path(locale: :en)
   end
 end

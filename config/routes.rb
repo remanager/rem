@@ -21,7 +21,12 @@ Rails.application.routes.draw do
       end
       resources :details
       resources :categories
-      resources :realestates
+      resources :realestates do
+        member do
+          get 'publish'
+          get 'unpublish'
+        end
+      end
       resources :towns
       get '/' => 'dashboard#index', as: 'dashboard'
     end

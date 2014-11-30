@@ -6,31 +6,43 @@
       .medium-2.columns
         = f.label :user
       .medium-4.columns
-        = f.collection_select(:user, User.where(role: :owner), :id, :email, prompt: true)
+        = f.collection_select(:user, User.where(role: :agent), :id, :email, prompt: true)
       .medium-1.columns.medium-offset-2.small-1.text-right
-        -# = f.check_box :published
-        = check_box_tag 'publishd'
+        = f.check_box :published
       .medium-1.columns.small-6.left
-        -# = f.label :published
-        published
+        = f.label :published
 
   .row
     .medium-2.columns
       = f.label :name
-    .medium-10.columns
+    .medium-5.columns
       = f.text_field :name
+    .medium-1.columns
+      = f.label :email
+    .medium-4.columns
+      = f.email_field :email
 
   .row
     .medium-2.columns
       = f.label :description
     .medium-10.columns
-      = f.text_area :description
+      = f.text_area :description, rows: 5
 
   .row
     .medium-2.columns
       = f.label :address
     .medium-10.columns
       = f.text_field :address
+
+  .row
+    .medium-2.columns
+      = f.label :phone
+    .medium-4.columns
+      = f.phone_field :phone
+    .medium-2.columns
+      = f.label :mobile
+    .medium-4.columns
+      = f.phone_field :mobile
 
   .row
     - if @realestate.logo.present?
@@ -45,3 +57,7 @@
       = f.submit t('common.save'), class: 'button'
       - if current_user.admin?
         = link_to 'Cancel', admin_realestates_path, class: 'button'
+      - elsif @realestate.unpublished
+        = link_to 'Publish', publish_admin_realestate_path, class: 'button success'
+      - else
+        = link_to 'Unpublish', unpublish_admin_realestate_path, class: 'button alert'
