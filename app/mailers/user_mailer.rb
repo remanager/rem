@@ -1,5 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'mailer.rem@gmail.com'
+
+  def test(email)
+    mail to: email, subject: 'testing'
+  end
 
   def password_reset(user)
     @user = user

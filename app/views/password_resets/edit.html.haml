@@ -1,6 +1,6 @@
 %h1 Reset password
 
-= form_for @user, url: password_reset_path(params[:id]) do |f|
+= form_for @user, url: password_resets_url(locale: :en, id: params[:id]) do |f|
   %p
     = f.label :password
     = f.text_field :password
