@@ -29,6 +29,34 @@
   font-weight: bold;
 }
 
+#search-box {
+  margin-top: 12px;
+  background-color: beige;
+  padding: 20px 20px 0 20px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+navbar {
+  ul {
+    display: inline;
+    background-color: #007095;
+  }
+  li {
+    display: inline;
+  }
+  a {
+    padding: 10px 20px;
+    background-color: #008cba;
+    color: white;
+    font-weight: 300;
+    &:hover {
+      background-color: #007095;
+      color: white;
+    }
+  }
+}
+
 #login-box {
   max-width: 350px;
   margin: 0 auto;
