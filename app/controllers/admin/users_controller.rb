@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy, :approve, :ban]
 
   def index
     @users = current_user.my_users
@@ -10,31 +10,23 @@ class Admin::UsersController < AdminController
   end
 
   def create
-    user = User.new(user_params)
-    user.set_default_role(current_user.role) unless current_user.admin?
+    @user = User.new(user_params)
+    @user.set_default_role(current_user.role) unless current_user.admin?
 
-    if user.role.to_sym == :agent
-      user.realestate = Realestate.new(name: "My Agency Profile")
-    end
+    return redirect_to admin_users_path, notice: 'New user created!' if @user.save
 
-    if user.save
-      redirect_to admin_users_path, notice: 'New user created!'
-    else
-      flash[:alert] = 'Some errors happened.'
-      render :new
-    end
+    flash[:alert] = 'Some errors happened.'
+    render :new
   end
 
   def edit
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: 'User updated!'
-    else
-      flash[:alert] = 'Error updating.'
-      render :edit
-    end
+    return redirect_to admin_users_path, notice: 'User updated!' if @user.update(user_params)
+
+    flash[:alert] = 'Error updating.'
+    render :edit
   end
 
   def destroy
@@ -45,13 +37,24 @@ class Admin::UsersController < AdminController
     end
   end
 
+  def approve
+    @user.update_attribute(:status, User::STATUS_OK)
+    @user.create_realestate(name: "#{ @user.name }'s Realestate", email: @user.email, address: @user.address)
+    redirect_to edit_admin_user_path(id: @user)
+  end
+
+  def ban
+    @user.update_attribute(status: User::STATUS_BANNED, auth_token: nil)
+    redirect_to edit_admin_user_path(id: @user)
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :name, :surname, :address)
   end
 
   def current_resource

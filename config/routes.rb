@@ -7,24 +7,39 @@ Rails.application.routes.draw do
     resources :password_resets, only: [:new, :create, :edit, :update]
 
     namespace :admin do
-      resources :users
+      resources :users, except: [:show] do
+        member do
+          get :approve
+          get :ban
+        end
+      end
       resources :properties do
         delete '/destroy_picture/:picture_id' => 'properties#unpublish_picture', as: 'destroy_picture'
+        member do
+          get 'publish'
+        end
       end
       resources :details
       resources :categories
-      resources :realestates
+      resources :realestates do
+        member do
+          get 'publish'
+          get 'unpublish'
+        end
+      end
       resources :towns
-      get 'dashboard' => 'dashboard#index', as: 'dashboard'
+      get '/' => 'dashboard#index', as: 'dashboard'
     end
 
     get 'public/index'
+    post '/create_agent', to: 'public#create_agent', as: 'create_agent'
     get '/:realestate_id/search', to: 'public#search', as: 'search'
     post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
 
-    get '/:id', to: 'public#show', as: 'realestate'
+    get '/:realestate_id', to: 'public#show', as: 'realestate'
+    get '/:realestate_id/categories/:id', to: 'public#categories_show', as: 'category'
+    get '/:realestate_id/categories', to: 'public#categories_index', as: 'categories'
     get '/:realestate_id/:id', to: 'public#property', as: 'property'
-    get '/:realestate_id/category/:id', to: 'public#category', as: 'category'
 
     root 'public#index'
   end

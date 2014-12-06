@@ -26,9 +26,11 @@ class Admin::PropertiesController < AdminController
   def create
     @property = Property.new(property_params)
     @property.realestate = current_user.realestate
+    @property.realestate_id = params[:property][:realestate_id] if current_user.admin?
 
     respond_to do |format|
       if @property.save
+        add_pictures
         format.html { redirect_to admin_properties_path, notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else
@@ -43,12 +45,9 @@ class Admin::PropertiesController < AdminController
   def update
     respond_to do |format|
       if @property.update(property_params)
-        if params[:pictures]
-          params[:pictures].each do |picture|
-            @property.pictures.create(image: picture)
-          end
-        end
-        format.html { redirect_to [:admin, @property], notice: 'Property was successfully updated.' }
+        @property.update_attribute(:realestate_id, params[:property][:realestate_id]) if current_user.admin?
+        add_pictures
+        format.html { redirect_to admin_property_path(@property), notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else
         format.html { render :edit }
@@ -70,9 +69,28 @@ class Admin::PropertiesController < AdminController
   def unpublish_picture
     @property = Property.find(params[:property_id])
     @property.pictures.find(params[:picture_id]).update_attribute(:published, false)
+    respond_to do |format|
+      format.js { head :no_content }
+    end
+  end
+
+  def publish
+    @property.update_attribute(:published, true)
   end
 
   private
+  def add_pictures
+    if params[:pictures]
+      params[:pictures].each do |picture|
+        @property.pictures.create(picture.permit(:image, :description)) if picture[:image].present?
+      end
+    end
+  end
+
+  def picture_params
+    params.require(:picture).permit(:image, :description, :order)
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_property
     @property = Property.find(params[:id])
@@ -80,8 +98,8 @@ class Admin::PropertiesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    valid_params = [:ref, :title, :town_id, :user_id, category_ids: [], detail_ids: [],
-                    picture_attributes: [:image, :description]]
+    valid_params = [:ref, :title, :town_id, :user_id, :price_sale, :size, :price_rent, :nrooms,
+                    :description, category_ids: [], detail_ids: []]
     params.require(:property).permit(valid_params)
   end
 

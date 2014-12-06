@@ -9,10 +9,13 @@ feature 'user creation' do
       fill_in 'Email', with: 'agent@rem.com'
       fill_in 'Password', with: '1234test'
       fill_in 'Password confirmation', with: '1234test'
-      select 'agent', from: 'Role'
+      fill_in 'Name', with: 'Vicent'
+      fill_in 'Surname', with: 'Van Goool!!!'
+      fill_in 'Address', with: 'Calle del suspiro, 33 - Alli'
+      select 'agent', from: 'user_role'
       expect{ click_button 'Save' }.to change{ User.count }.by(1)
       expect(User.last.role.to_sym).to eq :agent
-      expect(page).to have_css '.flash.notice', text: 'New user created!'
+      expect(page).to have_css '.alert-box.notice', text: 'New user created!'
     end
 
     scenario 'can update' do
@@ -23,11 +26,11 @@ feature 'user creation' do
       fill_in 'Email', with: 'owner@rem.com'
       fill_in 'Password', with: '1234test'
       fill_in 'Password confirmation', with: '1234test'
-      select 'owner', from: 'Role'
+      select 'owner', from: 'user_role'
       click_button 'Save'
       expect(agent.reload.role.to_sym).to eq :owner
       expect(agent.email).to eq('owner@rem.com')
-      expect(page).to have_css '.flash.notice', text: 'User updated!'
+      expect(page).to have_css '.alert-box.notice', text: 'User updated!'
     end
 
     scenario 'can delete' do
@@ -37,7 +40,7 @@ feature 'user creation' do
       visit admin_users_path
       expect{ page.find("tbody tr:contains('#{owner.email}') a:contains('Delete')").click }.to change{ User.count }.by(-1)
       expect(current_path).to end_with(admin_users_path)
-      expect(page).to have_css '.flash.notice', text: 'User deleted!'
+      expect(page).to have_css '.alert-box.notice', text: 'User deleted!'
     end
   end
 
@@ -48,16 +51,19 @@ feature 'user creation' do
     fill_in 'Email', with: 'owner@rem.com'
     fill_in 'Password', with: '1234test'
     fill_in 'Password confirmation', with: '1234test'
+    fill_in 'Name', with: 'Vicent'
+    fill_in 'Surname', with: 'Van Goool!!!'
+    fill_in 'Address', with: 'Calle del suspiro, 33 - Alli'
     expect{ click_button 'Save' }.to change{ User.count }.by(1)
     expect(User.last.role.to_sym).to eq :owner
-    expect(page).to have_css '.flash.notice', text: 'New user created!'
+    expect(page).to have_css '.alert-box.notice', text: 'New user created!'
   end
 
   scenario 'owner cannot create user' do
     owner = create :user
     sign_in_as owner
     visit new_admin_user_path
-    expect(page).to have_css '.flash.alert', text: 'Not authorized.'
+    expect(page).to have_css '.alert-box.alert', text: 'Not authorized.'
     expect(current_path).to end_with(admin_dashboard_path)
   end
 end

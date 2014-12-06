@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111221410) do
+ActiveRecord::Schema.define(version: 20141130104605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,9 +55,16 @@ ActiveRecord::Schema.define(version: 20141111221410) do
     t.integer  "realestate_id"
     t.string   "permalink",     limit: 40
     t.string   "title",         limit: 100
+    t.integer  "price_sale"
+    t.integer  "price_rent"
+    t.integer  "nrooms",                     default: 1
+    t.integer  "size"
+    t.boolean  "published",                  default: false
+    t.string   "description",   limit: 2000
   end
 
   add_index "properties", ["permalink", "realestate_id"], name: "index_properties_on_permalink_and_realestate_id", unique: true, using: :btree
+  add_index "properties", ["published", "nrooms", "size"], name: "index_properties_on_published_and_nrooms_and_size", using: :btree
   add_index "properties", ["realestate_id"], name: "index_properties_on_realestate_id", using: :btree
   add_index "properties", ["town_id"], name: "index_properties_on_town_id", using: :btree
   add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
@@ -93,6 +100,9 @@ ActiveRecord::Schema.define(version: 20141111221410) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.boolean  "published",                    default: false
+    t.string   "phone",             limit: 15
+    t.string   "mobile",            limit: 15
   end
 
   add_index "realestates", ["permalink"], name: "index_realestates_on_permalink", unique: true, using: :btree
@@ -117,8 +127,13 @@ ActiveRecord::Schema.define(version: 20141111221410) do
     t.datetime "password_reset_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",                 default: 0
+    t.string   "name"
+    t.string   "surname"
+    t.string   "address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["status", "email"], name: "index_users_on_status_and_email", using: :btree
 
 end

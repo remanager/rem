@@ -1,17 +1,12 @@
-%h1
-  Properties from
-  %strong= @realestate.name
+%section{ id: 'property-list' }
+  %h1
+    = @title || 'List of properties'
+    %small= "(#{ @properties.size  })"
 
-%p= "(#{ @properties.count })"
-- @properties.each do |property|
-  .property
-    %h3= link_to property.ref.upcase, property_path(@realestate.id, property)
-    .details
-      %h5 Detail list
-      - property.details.each do |detail|
-        .detail
-          %p= detail.name
-      %h5 Category list
-      -property.categories.each do |category|
-        .category
-          %p= category.name
+  .list
+    - @properties.each_with_index do |property, i|
+      - if i % 3 == 0
+        .row
+      .large-4.columns.left
+        .property
+          = render 'property', property: property

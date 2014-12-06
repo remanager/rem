@@ -11,8 +11,8 @@ feature 'Add new properties' do
     visit admin_properties_path
     expect(page).not_to have_css 'tbody > tr'
 
-    click_on 'Create new property'
-    fill_in 'Ref', with: 'nice_house'
+    click_link 'Create new property'
+    fill_in 'Reference', with: 'nice_house'
     fill_in 'Title', with: Faker::Lorem.word
     select 'pretty_town', from: 'Town'
     check 'awesome'

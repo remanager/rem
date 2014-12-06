@@ -1,0 +1,6 @@
+- if model.errors.any?
+  #error_explanation
+    %h4= "#{pluralize(model.errors.count, "error")} prohibited this realestate from being saved:"
+    %ul
+      - model.errors.full_messages.each do |msg|
+        %li= msg

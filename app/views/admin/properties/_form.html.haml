@@ -1,39 +1,100 @@
 = form_for [:admin, @property], html: { multipart: true } do |f|
-  - if @property.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
-      %ul
-        - @property.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'admin/shared/errors', model: @property
 
-  .field
-    = f.label :ref
-    = f.text_field :ref
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :town_id
-    = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
-  .field
-    = f.label :user_id
-    = f.collection_select(:user_id, User.where(role: :owner), :id, :email, prompt: true)
-  .field
-    = f.label :category_ids
-    = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
-  .field
-    = f.label :detail_ids
-    = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
-  - @property.pictures.published.each do |picture|
-    .field
-      = image_tag picture.image.url(:thumb)
-      = link_to 'DELETE', admin_property_destroy_picture_path(property_id: @property.id, picture_id: picture.id), method: :delete, remote: true
-  .field
-    Add picture
-    = file_field_tag 'pictures[]', type: 'file', multiple: true
+  .row
+    .medium-1.columns
+      = f.label :title
+    .medium-4.columns
+      = f.text_field :title, placeholder: 'Set a title'
+    - if @current_user.admin?
+      .medium-1.columns
+        = f.label :realestate_id
+      .medium-2.columns
+        = f.collection_select(:realestate_id, Realestate.all, :id, :name, prompt: true)
+    - else
+      .medium-3.columns
+    .medium-1.columns
+      = f.label :ref
+    .medium-3.columns
+      = f.text_field :ref, placeholder: 'Set a reference'
+
+  .row
+    .medium-1.columns
+      = f.label :town_id, 'Town'
+    .medium-3.columns.left
+      = f.collection_select(:town_id, Town.all, :id, :name, prompt: true)
+    .medium-3.columns.left
+      .button.tiny{ onclick: 'addTown()' } Add new
+
+  .row
+    .medium-1.columns
+      = f.label :user_id, 'Owner'
+    .medium-3.columns.left
+      = f.collection_select(:user_id, User.where(role: :owner), :id, :email, prompt: true)
+    .medium-3.columns.left
+      .button.tiny{ onclick: 'addOwner()' } Add new
+
+  .row
+    .medium-1.columns
+      = f.label :size, 'Size (m2)'
+    .medium-2.columns.left
+      = f.number_field :size, placeholder: '12000'
+
+    .medium-1.medium-offset-1.columns
+      = f.label :price_sale, 'Sale (€)'
+    .medium-2.columns.left
+      = f.number_field :price_sale, placeholder: 'Sale price in €'
+
+    .medium-1.medium-offset-1.columns
+      = f.label :price_rent, 'Rent (€)'
+    .medium-2.columns.left
+      = f.number_field :price_rent, placeholder: 'Rent price in €/month'
+
+  .row
+    .medium-1.columns
+      = f.label :description
+    .medium-11.columns
+      = f.text_area :description, placeholder: 'Insert a sort of description...', rows: '5'
+
+  .row
+    .small-1.columns
+      = f.label :category_ids
+    .small-11.columns
+      = f.collection_check_boxes(:category_ids, Category.all, :id, :name)
+
+  .row
+    .small-1.columns
+      = f.label :detail_ids
+    .small-11.columns
+      = f.collection_check_boxes(:detail_ids, Detail.all, :id, :name)
+
+  .row
+    .small-12.columns
+      %h4 Images
+
+  - if @property.pictures.size > 0
+    .row
+      - @property.pictures.each do |picture|
+        .medium-4.columns.text-center.left
+          = image_tag picture.image.url(:medium)
+          %br
+          - if picture.published
+            = link_to 'DELETE', admin_property_destroy_picture_path(property_id: @property.id, picture_id: picture.id),
+              method: :delete, remote: true
+
+  .row
+    .small-2.columns
+      #property-edit-icon.general.foundicon-edit{title: 'Edit images'}
+      #property-add-icon.general.foundicon-add-doc{title: 'Add image'}
+    .small-10.columns.pictures-form
   -# .field
   -#   = f.fields_for :pictures do |pictures|
   -#     = pictures.file_field :image
   -#     = pictures.text_field :description
-  .actions
-    = f.submit t('.save'), class: :button
+  .row.text-center
+    = f.submit t('.save'), class: 'button'
+    = link_to 'Cancel', admin_properties_path, class: 'button'
+    -# = link_to 'Publish', publish_admin_property_path(id: @property.id), remote: true, class: 'button'
+
+:coffee
+  window.picture_form = "#{ j render('admin/shared/picture') }"

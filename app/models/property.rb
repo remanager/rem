@@ -4,7 +4,7 @@ class Property < ActiveRecord::Base
   belongs_to :town
   belongs_to :user
   belongs_to :realestate
-  has_many :pictures
+  has_many :pictures #order by order =$
   has_many :properties_categories, class_name: 'PropertiesCategories'
   has_many :categories, through: :properties_categories
   has_many :properties_details, class_name: 'PropertiesDetails'
@@ -13,6 +13,7 @@ class Property < ActiveRecord::Base
   alias_attribute :owner, :user
 
   validates_presence_of :ref, :title, :town
+  validates :description, length: { maximum: 2000 }
   after_create -> { update_attribute(:permalink, get_permalink(:id, :title)) }
 
   scope :same_realestate, ->(realestate_id) { Property.where(realestate_id: realestate_id) }
@@ -20,5 +21,13 @@ class Property < ActiveRecord::Base
 
   def to_s
     ref
+  end
+
+  def to_param
+    permalink || id
+  end
+
+  def picture_url(size = :medium)
+    pictures.first.try(:image).try(:url, size)
   end
 end

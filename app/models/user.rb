@@ -1,16 +1,22 @@
 class User < ActiveRecord::Base
   has_one :realestate
-  validates_confirmation_of :password
+  has_many :properties
+  validates_confirmation_of :password, on: :create
   validates_presence_of :password, on: :create
-  validates_presence_of :email
+  validates_presence_of :email, :name, :surname, :address
   validates_uniqueness_of :email
   validates_format_of :email, with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
   has_secure_password
   before_create { generate_token(:auth_token) }
 
-  scope :same_realestate, ->(realestate_id) {  User.joins('INNER JOIN properties ON properties.user_id = users.id INNER JOIN realestates ON properties.realestate_id = realestates.id').where(['realestates.id = ?', realestate_id]) }
+  scope :same_realestate, ->(id) { User.joins(properties: :realestate).where('realestates.id = ?', id).distinct }
+  scope :pending, -> { where(status: STATUS_PENDING) }
+  scope :valid, -> { where(status: STATUS_OK) }
 
   ROLES = %w(owner agent admin)
+  STATUS_BANNED = -1
+  STATUS_PENDING = 0
+  STATUS_OK = 1
 
   def set_default_role(current_role)
     if current_role
@@ -27,8 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def my_users
-    return User.all if admin?
-    User.same_realestate(self.realestate.id)
+    admin? ? User.all : User.same_realestate(realestate.id)
   end
 
   def my_properties
@@ -41,8 +46,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def admin?
-    self.role == :admin
+  def name_complete
+    "#{ name } #{ surname }"
   end
 
   def role?(base_role)
@@ -52,6 +57,10 @@ class User < ActiveRecord::Base
 
   def admin?
     self.role.to_sym == :admin
+  end
+
+  def agent?
+    self.role.to_sym == :agent
   end
 
   def send_password_reset

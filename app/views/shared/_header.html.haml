@@ -1,6 +1,14 @@
 .row
-  .large-2.columns.text-center
+  .large-7.columns.text-center
     %header.main
-      %h1#logo REM
-  .large-10.columns
+      %h1#logo
+        - if @realestate.logo
+          = link_to image_tag(@realestate.logo.url), realestate_path
+        - else
+          = @realestate ? @realestate.name : 'REM'
+
+  .large-5.columns
+    = render 'shared/search'
+
+  .large-12.columns
     = render 'shared/nav_header'

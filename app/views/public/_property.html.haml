@@ -1,0 +1,66 @@
+-# public/_property.html.haml
+
+%article{ id: property.id }
+  %header.row
+    .large-12.columns
+      %h1= link_to property.title || property.ref, property_path(@realestate, property)
+  %section.row
+    .large-12.columns
+      %article.row
+        .large-12.columns
+          %img{src: (property.picture_url(:medium) || 'http://lorempixel.com/300/150')}
+      %article.row
+        .large-12.columns
+          %h1 Description
+          %p= truncate(property.description, length: 100, separator: ' ')
+
+      - if property.price_sale.present?
+        .row
+          .small-7.columns
+            %h1 Sale
+          .small-5.columns
+            = "#{ property.price_sale } €"
+
+      - if property.price_rent.present?
+        .row
+          .small-6.columns
+            %h1 Rent
+          .small-6.columns
+            = "#{ property.price_rent } € / month"
+
+      %article.row
+        .small-3.columns
+          %h1 Size
+        .small-4.columns.left
+          = property.size || '---'
+          m2
+        .small-3.columns
+          %h1 Rooms
+        .small-2.columns.left
+          = property.nrooms
+      -# - if property.categories.present?
+      -#   %article.row
+      -#     .large-12.columns
+      -#       %h1 Category
+      -#       - property.categories.each do |category|
+      -#         %p= link_to category.name, category_path(@realestate, category)
+      - if property.details.present?
+        %article.row
+          .large-12.columns
+            -# %h1 Details
+            - property.details.each do |detail|
+              .row
+                .large-1.columns
+                  .general.foundicon-checkmark
+                .large-10.columns.left= detail.name
+
+    .large-12.columns
+      .row.center.icon-bar.likers
+        .small-3.columns
+          %i.general.foundicon-heart
+        .small-3.columns
+          %i.large.social.foundicon-facebook
+        .small-3.columns
+          %i.social.foundicon-twitter
+        .small-3.columns
+          %i.general.foundicon-mail

@@ -1,12 +1,77 @@
-%h1
-  %strong= @property.ref
+.row
+  .medium-12.columns
+    %h1
+      = @property.title
+      %small= "Ref: #{ @property.ref }"
 
-.details
-  %h5 Detail list
-  - @property.details.each do |detail|
-    %ul.detail
-      %li= detail.name
-  %h5 Category list
-  -@property.categories.each do |category|
-    %ul.category
-      %li= link_to category.name, category_path(@realestate, category)
+.row
+  .medium-12.columns
+    %h4 Description
+  .medium-12.columns
+    = @property.description
+
+- if @property.pictures
+  .row
+    .medium-12.columns
+      %h4 Pictures
+    .medium-12.columns
+      %ul.clearing-thumbs.small-block-grid-4{ data: { clearing: '' }}
+        - @property.pictures.each do |picture|
+          %li= link_to image_tag(picture.image.url(:medium),
+            data: { caption: picture.description }), picture.image.url(:large)
+
+.row
+  .medium-4.columns
+    - if @property.price_sale.present?
+      .row
+        .medium-6.columns
+          %h4 Sale
+        .medium-6.columns.left.text-left
+          %h4= "#{ @property.price_sale } €"
+
+    - if @property.price_rent.present?
+      .row
+        .medium-6.columns
+          %h4 Rent
+        .medium-6.columns.left.text-left
+          %h4= "#{ @property.price_rent } € / month"
+
+    - if @property.size
+      .row
+        .medium-6.columns
+          %h4 Size
+        .medium-6.columns.left
+          %h4= "#{ @property.size } m2"
+    .row
+      .medium-6.columns
+        %h4 Rooms
+      .medium-6.columns.left
+        %h4= @property.nrooms
+
+    - if @property.details.present?
+      .row
+        .small-12.columns
+          %h4 Details
+          - @property.details.each do |detail|
+            .row
+              .small-1.columns
+                .general.foundicon-checkmark
+              .small-10.columns.left= detail.name
+
+  #contact-box.medium-8.columns
+    .row
+      .medium-12.columns
+        %h4 Contact
+    .row
+      .small-3.columns
+        Email
+      .small-9.columns
+        = text_field_tag :email
+    .row
+      .small-3.columns
+        Comment
+      .small-9.columns
+        = text_area_tag :comment
+    .row
+      .small-12.columns.text-right
+        .button.sucess Send

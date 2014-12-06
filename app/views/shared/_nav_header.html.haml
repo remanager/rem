@@ -1,3 +1,16 @@
-Some public menu
-TEST
-= render 'shared/search'
+%navbar
+  %ul
+    -# staticpages here
+    - @realestate.categories.in_menu.each do |cat|
+      %li= link_to cat.name, category_path(realestate_id: @realestate, id: cat)
+    %li
+      = link_to 'Categories', categories_path(realestate_id: @realestate)
+    %li= link_to 'Contact', "mailto:#{ @realestate.email }", class: 'rigth'
+-# .row
+  -# staticpages here
+  .large-4.columns
+    = link_to 'About', '/'
+  .large-4.columns
+    = link_to 'Categories', categories_path(realestate_id: @realestate.id)
+  .large-4.columns
+    = link_to 'Contact', '/'
