@@ -53,4 +53,11 @@ namespace :deploy do
       # end
     end
   end
+
+  desc 'Symlink shared files'
+  task :symlink_config, roles: :app do
+    run "ln -nfs #{ shared_path }/config/secrets.yml #{ release_path }/config/secrets.yml"
+  end
+
+  after 'deploy:finalize_update', 'deploy:symlink_config'
 end
