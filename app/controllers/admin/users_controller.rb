@@ -40,6 +40,7 @@ class Admin::UsersController < AdminController
   def approve
     @user.update_attribute(:status, User::STATUS_OK)
     @user.create_realestate(name: "#{ @user.name }'s Realestate", email: @user.email, address: @user.address)
+    UserMailer.approved(@user).deliver
     redirect_to edit_admin_user_path(id: @user)
   end
 
