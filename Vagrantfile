@@ -19,7 +19,8 @@ Vagrant.configure('2') do |config|
     v.customize ['set', :id, '--on-window-close', 'keep-running']
   end
 
-  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 3000, host: 3000 # web app
+  config.vm.network :forwarded_port, guest: 1080, host: 1080 # mailcatcher
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = 'puppet/manifests'
