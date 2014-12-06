@@ -19,7 +19,7 @@ class PublicController < ApplicationController
   end
 
   def show
-    @properties = @realestate.properties.includes(:details, :categories)
+    @properties = @realestate.properties.includes(:details, :categories, :pictures)
   end
 
   def property
