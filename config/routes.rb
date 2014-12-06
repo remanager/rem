@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     resources :password_resets, only: [:new, :create, :edit, :update]
 
     namespace :admin do
-      resources :users
+      resources :users, except: [:show] do
+        member do
+          get :approve
+          get :ban
+        end
+      end
       resources :properties do
         delete '/destroy_picture/:picture_id' => 'properties#unpublish_picture', as: 'destroy_picture'
         member do
@@ -16,12 +21,18 @@ Rails.application.routes.draw do
       end
       resources :details
       resources :categories
-      resources :realestates
+      resources :realestates do
+        member do
+          get 'publish'
+          get 'unpublish'
+        end
+      end
       resources :towns
       get '/' => 'dashboard#index', as: 'dashboard'
     end
 
     get 'public/index'
+    post '/create_agent', to: 'public#create_agent', as: 'create_agent'
     get '/:realestate_id/search', to: 'public#search', as: 'search'
     post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
 

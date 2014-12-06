@@ -1,23 +1,23 @@
 - if @realestate
-  = form_tag search_dirty_path(realestate_id: @realestate.id) do
-    .row
-      .large-6.columns
-        %label
-          Ref.:
+  #search-box
+    = form_tag search_dirty_path(realestate_id: @realestate.id) do
+      .row
+        .medium-2.columns
+          %label Ref.:
+        .medium-4.columns
           = text_field_tag :ref
-      .large-6.columns
-        %label
-          Town:
-          = select_tag :town_id, options_from_collection_for_select(Town.all, :id, :name), prompt: 'Select one...'
-    .row
-      .large-12.columns
-        %label
-          Categories:
-          = select_tag :category_ids, options_from_collection_for_select(Category.all, :id, :name), multiple: true
-    .row
-      .large-12.columns
-        %label
-          Details:
+        .medium-6.columns
+          = select_tag :town_id, options_from_collection_for_select(Town.all, :id, :name), prompt: 'Select Town'
+      .row
+        .medium-3.columns
+          %label Categories:
+        .medium-9.columns
+          = select_tag :category_ids, options_from_collection_for_select(Category.all, :id, :name), prompt: 'Select one...'
+      -# .row
+        .medium-3.columns
+          %label Details:
+        .medium-9.columns
           = select_tag :detail_ids, options_from_collection_for_select(Detail.all, :id, :name), multiple: true
-    .row
-      = submit_tag 'Search', class: 'button small'
+      .row
+        .medium-12.columns.text-right
+          = submit_tag 'Search', class: 'button'

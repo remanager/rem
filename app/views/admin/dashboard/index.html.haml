@@ -1,4 +1,21 @@
 %h1
   Dashboard
-  %small= current_user.role
-= t 'hello'
+  %small= current_user.role if current_user.admin?
+
+- if @pending_users.size > 0
+  .row#pending-users
+    %h3
+      Approval pending users
+      %small= "(#{ @pending_users.size })"
+    .row
+      .small-8.columns
+        %h5 User name - email
+      .small-4.columns.text-center
+        %h5 Actions
+    - @pending_users.each do |user|
+      .row{ id: user.id }
+        .small-8.columns= link_to "#{ user.name_complete } - #{ user.email }", edit_admin_user_path(id: user)
+        .small-2.columns.text-center= link_to 'Accept', approve_admin_user_path(id: user),
+          onclick: "admin.get_and_remove(this.href, '#{ user.id }'); return false;"
+        .small-2.columns.text-center= link_to 'Decline', ban_admin_user_path(id: user),
+          onclick: "admin.get_and_remove(this.href, '#{ user.id }'); return false;"

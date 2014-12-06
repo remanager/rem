@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123092411) do
+ActiveRecord::Schema.define(version: 20141130104605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20141123092411) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.boolean  "published",                    default: false
+    t.string   "phone",             limit: 15
+    t.string   "mobile",            limit: 15
   end
 
   add_index "realestates", ["permalink"], name: "index_realestates_on_permalink", unique: true, using: :btree
@@ -124,8 +127,13 @@ ActiveRecord::Schema.define(version: 20141123092411) do
     t.datetime "password_reset_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",                 default: 0
+    t.string   "name"
+    t.string   "surname"
+    t.string   "address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["status", "email"], name: "index_users_on_status_and_email", using: :btree
 
 end

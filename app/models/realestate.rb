@@ -8,6 +8,8 @@ class Realestate < ActiveRecord::Base
   alias_attribute :agent, :user
 
   validates_presence_of :name
+  validates :phone, length: { maximum: 15 }
+  validates :mobile, length: { maximum: 15 }
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
   after_create -> { update_attribute(:permalink, get_permalink(:id, :name)) }
 
@@ -17,6 +19,10 @@ class Realestate < ActiveRecord::Base
 
   def to_param
     permalink || id
+  end
+
+  def unpublished
+    !published
   end
 
   def search(args = {})

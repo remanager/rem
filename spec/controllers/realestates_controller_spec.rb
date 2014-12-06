@@ -56,9 +56,9 @@ describe Admin::RealestatesController do
         expect(assigns(:realestate)).to be_persisted
       end
 
-      it "redirects to the created realestate" do
+      it "redirects to the dashboard" do
         post :create, {realestate: valid_attributes}
-        expect(response).to redirect_to([:admin, Realestate.last])
+        expect(response).to redirect_to(admin_dashboard_path)
       end
     end
 
@@ -90,10 +90,10 @@ describe Admin::RealestatesController do
         expect(assigns(:realestate)).to eq(realestate)
       end
 
-      it "redirects to the realestate" do
+      it "redirects to the dashboard" do
         realestate = create :realestate
         put :update, {id: realestate.to_param, realestate: valid_attributes}
-        expect(response).to redirect_to([:admin, realestate])
+        expect(response).to redirect_to(admin_dashboard_path)
       end
     end
 

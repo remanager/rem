@@ -28,7 +28,7 @@ class Admin::RealestatesController < AdminController
 
     respond_to do |format|
       if @realestate.save
-        format.html { redirect_to [:admin, @realestate], notice: 'Realestate was successfully created.' }
+        format.html { redirect_to admin_dashboard_path, notice: 'Realestate was successfully created.' }
         format.json { render :show, status: :created, location: @realestate }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::RealestatesController < AdminController
   def update
     respond_to do |format|
       if @realestate.update(realestate_params)
-        format.html { redirect_to [:admin, @realestate], notice: 'Realestate was successfully updated.' }
+        format.html { redirect_to admin_dashboard_path, notice: 'Realestate was successfully updated.' }
         format.json { render :show, status: :ok, location: @realestate }
       else
         format.html { render :edit }
@@ -61,15 +61,25 @@ class Admin::RealestatesController < AdminController
     end
   end
 
+  def publish
+    current_realestate.update_attribute(:published, true)
+    redirect_to admin_dashboard_path, notice: 'Realestate published!'
+  end
+
+  def unpublish
+    current_realestate.update_attribute(:published, false)
+    redirect_to admin_dashboard_path, alert: 'Realestate unpublished!'
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_realestate
-    @realestate = Realestate.find(params[:id])
+    @realestate = current_realestate || Realestate.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def realestate_params
-    params.require(:realestate).permit(:name, :description, :address, :user_id, :logo)
+    params.require(:realestate).permit(:name, :email, :description, :address, :phone, :mobile, :user_id, :logo)
   end
 
   def current_resource

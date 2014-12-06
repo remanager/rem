@@ -1,4 +1,5 @@
 - flash.each do |name, msg|
   - if msg.is_a? String
-    %div{ class: "flash #{name}" }
-      %p= msg
+    %div{ data: { alert: '' }, class: "alert-box round #{ name.to_s }" }
+      %div= msg
+      %a{ href: '#', class: 'close' } &times;

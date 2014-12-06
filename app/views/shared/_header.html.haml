@@ -1,7 +1,11 @@
 .row
   .large-7.columns.text-center
     %header.main
-      %h1#logo= @realestate ? @realestate.name : 'REM'
+      %h1#logo
+        - if @realestate.logo
+          = link_to image_tag(@realestate.logo.url), realestate_path
+        - else
+          = @realestate ? @realestate.name : 'REM'
 
   .large-5.columns
     = render 'shared/search'

@@ -1,9 +1,21 @@
 class PublicController < ApplicationController
-  before_filter :set_realestate, except: :index
+  before_filter :set_realestate, except: [:index, :create_agent]
 
   def index
-    @realestates = Realestate.all
-    render_404 unless @realestates
+    @user = User.new
+  end
+
+  def create_agent
+    @user = User.new(user_params)
+    @user.role = :agent
+
+    if @user.save
+      flash.now[:notice] = "You will receive an email on #{ @user.email } when you've got accepted"
+      @user = User.new
+    else
+      flash.now[:alert] = 'Some errors happened.'
+    end
+    render :index
   end
 
   def show
@@ -49,5 +61,9 @@ class PublicController < ApplicationController
       hash[key] = params[key] if params[key].present?
       hash
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :surname, :address)
   end
 end

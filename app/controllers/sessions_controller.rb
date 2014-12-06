@@ -5,10 +5,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
 
-    if !user
-      flash[:notice] = 'Invalid email or password.'
-      return render('new', notice: 'Invalid email or password.')
-    end
+    return redirect_to login_path, alert: 'Invalid email or password.' if !user
+    return redirect_to login_path, alert: 'You user, is still approval pending.' if user.status == User::STATUS_PENDING
+
     if params[:remember_me]
       cookies.permanent[:auth_token] = user.auth_token
     else

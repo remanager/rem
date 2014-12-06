@@ -24,17 +24,62 @@
 #logo {
   margin: 0;
   padding: 5px 0;
-  background: #000;
-  color: #fff;
-  font-size: 2rem;
+  color: blue;
+  font-size: 4rem;
   font-weight: bold;
 }
 
+#search-box {
+  margin-top: 12px;
+  background-color: beige;
+  padding: 20px 20px 0 20px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+#contact-box {
+  margin-top: 20px;
+  background-color: #dddddd;
+  padding: 20px 20px 0 20px;
+}
+
+navbar {
+  ul {
+    display: inline;
+    background-color: #007095;
+  }
+  li {
+    display: inline;
+  }
+  a {
+    padding: 10px 20px;
+    background-color: #008cba;
+    color: white;
+    font-weight: 300;
+    &:hover {
+      background-color: #007095;
+      color: white;
+    }
+  }
+}
+
 #login-box {
-  width: 350px;
+  max-width: 350px;
   margin: 0 auto;
   background-color: beige;
   padding: 20px 20px 0 20px;
+}
+
+#pending-users {
+  background-color: beige;
+  padding: 20px;
+  h5 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+  .row {
+    margin-bottom: 1.2rem;
+  }
 }
 
 .property {
