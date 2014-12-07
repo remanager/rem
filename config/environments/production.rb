@@ -88,8 +88,8 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'd2bit.net',
-    user_name:            Rails.application.secrets[:mail][:username],
-    password:             Rails.application.secrets[:mail][:password],
+    user_name:            Rails.application.secrets[:mail_username],
+    password:             Rails.application.secrets[:mail_password],
     authentication:       'plain',
     enable_starttls_auto: true  }
 
