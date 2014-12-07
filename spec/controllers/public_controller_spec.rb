@@ -48,4 +48,29 @@ describe PublicController do
       end
     end
   end
+
+  describe 'POST add_contact' do
+    let!(:realestate) { FactoryGirl.create(:realestate) }
+
+    context 'comment to a realestate' do
+      it 'adds a comment' do
+        expect do
+          post :add_comment, realestate_id: realestate, comment: { email: 'tyrion@gmail.com', text: 'soy un enano' }
+        end.to change(Comment, :count).by(1)
+        expect(realestate.reload.comments.first.email).to eq 'tyrion@gmail.com'
+      end
+    end
+
+    context 'comment to a property' do
+      let!(:property) { FactoryGirl.create(:property, realestate: realestate) }
+
+      it 'adds a comment' do
+        expect do
+          post :add_comment, realestate_id: realestate, property_id: property, comment: {
+            email: 'aria_stark@gmail.com', text: 'soy una bailarina del agua' }
+        end.to change(Comment, :count).by(1)
+        expect(property.reload.comments.first.email).to eq 'aria_stark@gmail.com'
+      end
+    end
+  end
 end
