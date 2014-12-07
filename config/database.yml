@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: rem_production
-  username: rem
-  password: <%= ENV['REM_DATABASE_PASSWORD'] %>
+  database: rem
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
