@@ -18,11 +18,6 @@ Rails.application.routes.draw do
         member do
           get 'publish'
         end
-        resources :comments do
-          member do
-            get 'publish'
-          end
-        end
       end
       resources :details
       resources :categories
@@ -31,13 +26,15 @@ Rails.application.routes.draw do
           get 'publish'
           get 'unpublish'
         end
-        resources :comments do
-          member do
-            get 'publish'
-          end
-        end
       end
       resources :towns
+      resources :comments do
+        member do
+          get 'publish'
+          get 'unpublish'
+          get 'seen'
+        end
+      end
       get '/' => 'dashboard#index', as: 'dashboard'
     end
 

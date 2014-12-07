@@ -1,47 +1,41 @@
 class Admin::CommentsController < ApplicationController
-  before_filter :set_comment, only: [:edit, :update, :destroy, :publish]
+  before_filter :set_comment, only: [:destroy, :seen, :publish, :unpublish]
 
-  def new
-    @comment = Comment.new
-  end
-
-  def create
-    @comment = Comment.save(params_comment)
-    return render('new') unless @comment.save
-    get_redirection
-  end
-
-  def edit
-  end
-
-  def update
-    return render('edit') unless @comment.update_attributes(params_comment)
-    get_redirection
+  def index
+    @comments = (current_realestate ? current_realestate.comments : Comment).order(:realestate_id, :property_id)
   end
 
   def destroy
     @comment.destroy
-    get_redirection
+    respond_to do |format|
+      format.html { redirect_to admin_comments_path }
+    end
+  end
+
+  def seen
+    @comment.update_attribute(:published, false)
+    respond_to do |format|
+      format.html { redirect_to admin_comments_path }
+    end
   end
 
   def publish
     @comment.publish
-    get_redirection
+    respond_to do |format|
+      format.html { redirect_to admin_comments_path }
+    end
+  end
+
+  def unpublish
+    @comment.publish(false)
+    respond_to do |format|
+      format.html { redirect_to admin_comments_path }
+    end
   end
 
   private
 
-  def params_comment
-    params.require(:comment).permit(:property_id, :realestate_id, :email, :text)
-  end
-
   def set_comment
-    @comment = Comment.find(:id)
-  end
-
-  def get_redirection
-    return redirect_to edit_admin_property(params[:property_id]) if params[:property_id]
-    return redirect_to edit_admin_realestate(params[:realestate_id]) if params[:realestate_id]
-    redirect_to admin_dashboard
+    @comment = Comment.find(params[:id])
   end
 end
