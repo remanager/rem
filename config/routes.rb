@@ -18,6 +18,11 @@ Rails.application.routes.draw do
         member do
           get 'publish'
         end
+        resources :comments do
+          member do
+            get 'publish'
+          end
+        end
       end
       resources :details
       resources :categories
@@ -25,6 +30,11 @@ Rails.application.routes.draw do
         member do
           get 'publish'
           get 'unpublish'
+        end
+        resources :comments do
+          member do
+            get 'publish'
+          end
         end
       end
       resources :towns
@@ -36,6 +46,7 @@ Rails.application.routes.draw do
     get '/:realestate_id/search', to: 'public#search', as: 'search'
     post '/:realestate_id/search', to: 'public#search_dirty', as: 'search_dirty'
 
+    post '/:realestate_id/(:property_id)/comment', to: 'public#add_comment', as: 'add_comment'
     get '/:realestate_id', to: 'public#show', as: 'realestate'
     get '/:realestate_id/categories/:id', to: 'public#categories_show', as: 'category'
     get '/:realestate_id/categories', to: 'public#categories_index', as: 'categories'
