@@ -7,7 +7,7 @@
         .small-8.columns
           %h3= link_to realestate.name, edit_admin_realestate_path(realestate)
           %p= realestate.description if realestate.description.present?
-          %p= link_to realestate.agent, edit_admin_user_path(realestate.agent)
+          %p= link_to realestate.agent, edit_admin_user_path(realestate.agent) if realestate.agent
         .small-4.columns
           = link_to '', edit_admin_realestate_path(realestate), class: 'general foundicon-edit'
           = link_to '', [:admin, realestate], method: :delete, data: { confirm: t('common.destroy?') }, class: 'general foundicon-trash'

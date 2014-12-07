@@ -47,6 +47,7 @@ class PublicController < ApplicationController
     @comment.property = @property
     @comment.save
     return render :property if @property
+    @properties = @realestate.properties
     render :show
   end
 

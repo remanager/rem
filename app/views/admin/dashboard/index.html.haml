@@ -7,15 +7,35 @@
     %h3
       Approval pending users
       %small= "(#{ @pending_users.size })"
+      Approval pending users
     .row
       .small-8.columns
         %h5 User name - email
       .small-4.columns.text-center
         %h5 Actions
     - @pending_users.each do |user|
-      .row{ id: user.id }
+      .row{ id: "user_#{ user.id }" }
         .small-8.columns= link_to "#{ user.name_complete } - #{ user.email }", edit_admin_user_path(id: user)
         .small-2.columns.text-center= link_to 'Accept', approve_admin_user_path(id: user),
-          onclick: "admin.get_and_remove(this.href, '#{ user.id }'); return false;"
+          onclick: "admin.get_and_remove(this.href, 'user_#{ user.id }'); return false;"
         .small-2.columns.text-center= link_to 'Decline', ban_admin_user_path(id: user),
-          onclick: "admin.get_and_remove(this.href, '#{ user.id }'); return false;"
+          onclick: "admin.get_and_remove(this.href, 'user_#{ user.id }'); return false;"
+
+- if @pending_comments.size > 0
+  .row#pending-comments
+    %h3
+      Comments pending to see
+      %small= "(#{ @pending_comments.size })"
+    .row
+      .small-3.columns
+        %h5 Email
+      .small-6.columns
+        %h5 Comment
+      .small-3.columns.text-center
+        %h5 Actions
+    - @pending_comments.each do |comment|
+      .row{ id: "comment_#{ comment.id }" }
+        .small-3.columns= comment.email
+        .small-6.columns= comment.text
+        .small-3.columns.text-center= link_to 'Mark as seen', seen_admin_comment_path(id: comment),
+          onclick: "admin.get_and_remove(this.href, 'comment_#{ comment.id }'); return false;"

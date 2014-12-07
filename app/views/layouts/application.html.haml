@@ -19,10 +19,12 @@
     .row
       .large-12.columns
         = yield
-    .row
-      .medium-12.columns
-        #contactModal.reveal-modal{ data: { reveal: '' }}
-          = render 'public/contact', action: add_comment_path
-          %a.close-reveal-modal &#215;
+
+    - if @realestate
+      .row
+        .medium-12.columns
+          #contactModal.reveal-modal{ data: { reveal: '' }}
+            = render 'public/contact', action: add_comment_path
+            %a.close-reveal-modal &#215;
 
     = javascript_include_tag 'application'
