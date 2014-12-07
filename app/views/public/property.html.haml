@@ -59,19 +59,4 @@
               .small-10.columns.left= detail.name
 
   #contact-box.medium-8.columns
-    .row
-      .medium-12.columns
-        %h4 Contact
-    .row
-      .small-3.columns
-        Email
-      .small-9.columns
-        = text_field_tag :email
-    .row
-      .small-3.columns
-        Comment
-      .small-9.columns
-        = text_area_tag :comment
-    .row
-      .small-12.columns.text-right
-        .button.sucess Send
+    = render 'contact', action: add_comment_path(property_id: @property)
