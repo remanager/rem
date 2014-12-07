@@ -1,8 +1,13 @@
 class UserMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'mailer.rem@gmail.com'
 
   def password_reset(user)
     @user = user
-    mail to: user.email, subject: 'Password reset'
+    mail to: user.email, subject: 'REM - Password reset.'
+  end
+
+  def approved(user)
+    @user = user
+    mail to: user.email, subject: 'REM - Your user have been approved!'
   end
 end

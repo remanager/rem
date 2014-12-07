@@ -20,11 +20,11 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
@@ -81,4 +81,22 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # mailer conf
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'd2bit.net',
+    user_name:            Rails.application.secrets[:mail][:username],
+    password:             Rails.application.secrets[:mail][:password],
+    authentication:       'plain',
+    enable_starttls_auto: true  }
+
+  Rem::Application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+    email_prefix: 'EXCEPTION NOT - ',
+    sender_address: %("notifier" <mailer.rem@gmail.com>),
+    exception_recipients: %w(burretfresket@gmail.com)
+  }
 end

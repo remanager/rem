@@ -16,6 +16,11 @@ gem 'haml-rails'
 gem 'paperclip', '~> 4.2'
 gem 'foundation-rails'
 
+group :production do
+  gem 'unicorn'
+  gem 'exception_notification'
+end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
@@ -24,7 +29,11 @@ end
 group :development do
   gem 'ruby_gntp'
   gem 'rails-erd'
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
   gem 'xray-rails' # Ctrl+Shift+X
+  gem 'bullet'
+  gem 'mailcatcher'
 end
 
 group :development, :test do
