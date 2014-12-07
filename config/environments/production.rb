@@ -97,6 +97,6 @@ Rails.application.configure do
     email: {
     email_prefix: 'EXCEPTION NOT - ',
     sender_address: %("notifier" <mailer.rem@gmail.com>),
-    exception_recipents: %w(burretfresket@gmail.com)
+    exception_recipients: %w(burretfresket@gmail.com)
   }
 end
