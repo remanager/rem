@@ -16,6 +16,11 @@ gem 'haml-rails'
 gem 'paperclip', '~> 4.2'
 gem 'foundation-rails'
 
+group :production do
+  gem 'unicorn'
+  gem 'exception_notification'
+end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'

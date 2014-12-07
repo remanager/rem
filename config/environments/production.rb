@@ -92,4 +92,11 @@ Rails.application.configure do
     password:             Rails.application.secrets[:mail][:password],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+  Rem::Application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+    email_prefix: 'EXCEPTION NOT - ',
+    sender_address: %("notifier" <mailer.rem@gmail.com>),
+    exception_recipents: %w(burretfresket@gmail.com)
+  }
 end
