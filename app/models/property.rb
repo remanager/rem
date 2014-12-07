@@ -9,6 +9,7 @@ class Property < ActiveRecord::Base
   has_many :categories, through: :properties_categories
   has_many :properties_details, class_name: 'PropertiesDetails'
   has_many :details, through: :properties_details
+  has_many :comments
 
   alias_attribute :owner, :user
 

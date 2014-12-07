@@ -3,6 +3,7 @@ class Realestate < ActiveRecord::Base
 
   belongs_to :user
   has_many :properties
+  has_many :comments
   has_many :categories, -> { distinct }, through: :properties
   has_attached_file :logo, styles: { thumb: '100>' }
   alias_attribute :agent, :user
