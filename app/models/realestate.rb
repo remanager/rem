@@ -2,6 +2,7 @@ class Realestate < ActiveRecord::Base
   include ApplicationHelper
 
   belongs_to :user
+  has_many :users, through: :properties
   has_many :properties
   has_many :comments
   has_many :categories, -> { distinct }, through: :properties
