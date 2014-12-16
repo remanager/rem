@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130104605) do
+ActiveRecord::Schema.define(version: 20141207115439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20141130104605) do
   end
 
   add_index "categories", ["permalink"], name: "index_categories_on_permalink", unique: true, using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "realestate_id"
+    t.integer  "property_id"
+    t.string   "text",          limit: 2000
+    t.string   "email"
+    t.boolean  "published",                  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["realestate_id", "property_id", "published"], name: "index_comments_on_realestate_id_and_property_id_and_published", using: :btree
 
   create_table "details", force: true do |t|
     t.string   "name"

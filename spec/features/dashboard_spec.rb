@@ -12,6 +12,7 @@ feature 'dashboard' do
 
   scenario 'agent user' do
     agent = create :user_agent_with_realestate
+    agent.realestate.update_attribute(:published, true)
     sign_in_as agent
     expect(current_path).to end_with(admin_dashboard_path)
     expect(page).to have_css 'h1', text: 'Dashboard'

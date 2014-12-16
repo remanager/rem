@@ -2,7 +2,9 @@ class Realestate < ActiveRecord::Base
   include ApplicationHelper
 
   belongs_to :user
+  has_many :users, through: :properties
   has_many :properties
+  has_many :comments
   has_many :categories, -> { distinct }, through: :properties
   has_attached_file :logo, styles: { thumb: '100>' }
   alias_attribute :agent, :user

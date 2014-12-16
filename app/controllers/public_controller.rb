@@ -20,10 +20,12 @@ class PublicController < ApplicationController
 
   def show
     @properties = @realestate.properties.includes(:details, :categories, :pictures)
+    @comment = @realestate.comments.build
   end
 
   def property
     @property = @realestate.properties.find(params[:id])
+    @comment = @property.comments.build
   end
 
   def categories_index
@@ -35,6 +37,17 @@ class PublicController < ApplicationController
     @properties = @category.properties.where(realestate: @realestate)
     @title = "Properties on #{ @category.name }"
 
+    render :show
+  end
+
+  def add_comment
+    @comment = Comment.new(params_comment)
+    @comment.realestate = @realestate
+    @property = Property.find(params[:property_id]) if params[:property_id]
+    @comment.property = @property
+    @comment.save
+    return render :property if @property
+    @properties = @realestate.properties
     render :show
   end
 
@@ -65,5 +78,9 @@ class PublicController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name, :surname, :address)
+  end
+
+  def params_comment
+    params.require(:comment).permit(:email, :text)
   end
 end

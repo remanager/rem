@@ -1,0 +1,24 @@
+%h1= t '.title'
+
+- if @comments.size > 0
+  .row#comments
+    %h3
+      Comments
+      %small= "(#{ @comments.size })"
+    .row
+      .small-3.columns
+        %h5 Email
+      .small-6.columns
+        %h5 Comment
+      .small-3.columns.text-center
+        %h5 Actions
+    - @comments.each do |comment|
+      .row{ id: "comment_#{ comment.id }" }
+        .small-3.columns= comment.email
+        .small-6.columns= comment.text
+        .small-3.columns.text-center
+          - if comment.published?
+            = link_to 'Unpublish', unpublish_admin_comment_path(id: comment), class: 'button tiny alert'
+          - else
+            = link_to 'Publish', publish_admin_comment_path(id: comment), class: 'button tiny success'
+          = link_to 'Delete', admin_comment_path(id: comment), method: :delete, class: 'button tiny alert'
